@@ -6,6 +6,7 @@
             #-}
 import Prelude hiding (print)
 import Control.Lens
+import Control.Monad.Extra
 
 --------------------------------------------------------------------------------
 
@@ -63,12 +64,12 @@ instance Str Integer where
 -}
 
 fib(n :: Integer) = do
-    let fibrec(a, b) =
-            if a < n then do
-                print(a, end .~ " ")
-                fibrec(b, a + b)
-            else
-                print()
-    fibrec(0, 1)
+    flip loopM (0, 1) $ \(a, b) -> do
+        if (a < n) then do
+            print(a, end .~ " ")
+            return $ Left (b, a + b)
+        else
+            return $ Right ()
+    print()
 
 main = fib(1000)
