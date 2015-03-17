@@ -8,13 +8,9 @@
             , UndecidableInstances
             #-}
 import Prelude hiding (print)
-import qualified Prelude
 import Control.Lens
-import Control.Lens.TH (makeLenses)
 
 --------------------------------------------------------------------------------
-
-data PrintOption = End String -- TODO remove and use 'end' field
 
 data PrintOptions = PrintOptions {_end :: String}
 makeLenses ''PrintOptions
@@ -27,9 +23,9 @@ print = printImpl $ PrintArgState [] PrintOptions{_end = "\n"}
 class PrintArg a where
     modifyPrintState :: a -> PrintArgState -> PrintArgState
 
--- instance PrintArg (PrintOption -> a, a) where
---     modifyPrintState (End _end) (PrintArgState strs opts) =
---         PrintArgState strs opts{_end}
+instance PrintArg (PrintOptions -> PrintOptions) where
+    modifyPrintState optModifier (PrintArgState strs opts) =
+        PrintArgState strs (optModifier opts)
 
 instance Str a => PrintArg a where
     modifyPrintState a (PrintArgState strs opts) =
@@ -56,9 +52,6 @@ instance Str () where
 instance Str Integer where
     str = show
 
-(.=) :: a -> b -> (a, b)
-(.=) = (,)
-
 --------------------------------------------------------------------------------
 
 {- # Python 3: Fibonacci series up to n
@@ -73,13 +66,12 @@ instance Str Integer where
 -}
 
 fib(n :: Integer) = do
-    let fibrec :: (Integer, Integer, Integer) -> IO ()
-        fibrec(n, a, b) = do
+    let fibrec(a, b) = do
             if a < n then do
-                print(a, end) -- TODO end=" "
-                fibrec(n, b, a + b)
+                print(a, end .~ " ")
+                fibrec(b, a + b)
             else
                 print()
-    fibrec(n, 0, 1)
+    fibrec(0, 1)
 
 main = fib(1000)
