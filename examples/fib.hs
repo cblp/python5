@@ -4,11 +4,62 @@
             , OverlappingInstances
             , RecordWildCards
             , ScopedTypeVariables
+            , TemplateHaskell
             , UndecidableInstances
             #-}
 import Prelude hiding (print)
 import qualified Prelude
-import Data.Functor.Identity
+import Control.Lens
+import Control.Lens.TH (makeLenses)
+
+--------------------------------------------------------------------------------
+
+data PrintOption = End String -- TODO remove and use 'end' field
+
+data PrintOptions = PrintOptions {_end :: String}
+makeLenses ''PrintOptions
+
+data PrintArgState = PrintArgState [String] PrintOptions
+
+print :: PrintArgs a => a -> IO ()
+print = printImpl $ PrintArgState [] PrintOptions{_end = "\n"}
+
+class PrintArg a where
+    modifyPrintState :: a -> PrintArgState -> PrintArgState
+
+-- instance PrintArg (PrintOption -> a, a) where
+--     modifyPrintState (End _end) (PrintArgState strs opts) =
+--         PrintArgState strs opts{_end}
+
+instance Str a => PrintArg a where
+    modifyPrintState a (PrintArgState strs opts) =
+        PrintArgState (strs ++ [str a]) opts
+
+class PrintArgs a where
+    printImpl :: PrintArgState -> a -> IO ()
+
+instance PrintArgs () where
+    printImpl (PrintArgState strs PrintOptions{..}) () =
+        putStr $ concat strs ++ _end
+
+instance PrintArg a => PrintArgs a where
+    printImpl state a = printImpl (modifyPrintState a state) ()
+
+instance (PrintArg a, PrintArgs b) => PrintArgs (a, b) where
+    printImpl state (a, b) = printImpl (modifyPrintState a state) b
+
+class Str a where
+    str :: a -> String
+
+instance Str () where
+    str () = ""
+instance Str Integer where
+    str = show
+
+(.=) :: a -> b -> (a, b)
+(.=) = (,)
+
+--------------------------------------------------------------------------------
 
 {- # Python 3: Fibonacci series up to n
 >>> def fib(n):
@@ -22,53 +73,13 @@ import Data.Functor.Identity
 -}
 
 fib(n :: Integer) = do
-    let fibrec(n, a, b) = do
+    let fibrec :: (Integer, Integer, Integer) -> IO ()
+        fibrec(n, a, b) = do
             if a < n then do
-                print(a, End " ")
+                print(a, end) -- TODO end=" "
                 fibrec(n, b, a + b)
             else
                 print()
     fibrec(n, 0, 1)
 
 main = fib(1000)
-
---------------------------------------------------------------------------------
-
-data PrintOption = End String -- TODO remove and use 'end' field
-data PrintOptions = PrintOptions {end :: String}
-data PrintArgState = PrintArgState [String] PrintOptions
-
-print :: PrintArgs a => a -> IO ()
-print = printImpl $ PrintArgState [] PrintOptions{end = "\n"}
-
-class PrintArg a where
-    modifyPrintState :: a -> PrintArgState -> PrintArgState
-
-instance PrintArg PrintOption where
-    modifyPrintState (End end) (PrintArgState strs opts) =
-        PrintArgState strs opts{end}
-
-instance Str a => PrintArg a where
-    modifyPrintState a (PrintArgState strs opts) =
-        PrintArgState (strs ++ [str a]) opts
-
-class PrintArgs a where
-    printImpl :: PrintArgState -> a -> IO ()
-
-instance PrintArgs () where
-    printImpl (PrintArgState strs PrintOptions{..}) () =
-        putStr $ concat strs ++ end
-
-instance PrintArg a => PrintArgs (Identity a) where
-    printImpl state (Identity a) = printImpl (modifyPrintState a state) ()
-
-instance (PrintArg a, PrintArgs (Identity b)) => PrintArgs (a, b) where
-    printImpl state (a, b) = printImpl (modifyPrintState a state) (Identity b)
-
-class Str a where
-    str :: a -> String
-
-instance Str () where
-    str () = ""
-instance Str Integer where
-    str = show
