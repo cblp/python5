@@ -1,8 +1,5 @@
-{-# LANGUAGE  FlexibleContexts
-            , FlexibleInstances
-            , NamedFieldPuns
+{-# LANGUAGE  FlexibleInstances
             , OverlappingInstances
-            , RecordWildCards
             , ScopedTypeVariables
             , TemplateHaskell
             , UndecidableInstances
@@ -35,8 +32,8 @@ class PrintArgs a where
     printImpl :: PrintArgState -> a -> IO ()
 
 instance PrintArgs () where
-    printImpl (PrintArgState strs PrintOptions{..}) () =
-        putStr $ concat strs ++ _end
+    printImpl (PrintArgState strs opts) () =
+        putStr $ concat strs ++ (opts ^. end)
 
 instance PrintArg a => PrintArgs a where
     printImpl state a = printImpl (modifyPrintState a state) ()
@@ -66,7 +63,7 @@ instance Str Integer where
 -}
 
 fib(n :: Integer) = do
-    let fibrec(a, b) = do
+    let fibrec(a, b) =
             if a < n then do
                 print(a, end .~ " ")
                 fibrec(b, a + b)
