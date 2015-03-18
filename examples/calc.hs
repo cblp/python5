@@ -16,13 +16,3 @@
     >>> 17 // 3  # floor division
     5
 -}
-
-main = do
-    print(1 / 2)
-    -- 0.5
-    print(2 ^ 3)
-    -- 8
-    print(17 / 3) -- classic division returns a float
-    -- 5.666666666666667
-    print(17 `div` 3) -- floor division
-    -- 5

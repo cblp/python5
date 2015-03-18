@@ -1,9 +1,5 @@
-input :: String -> IO String
-input prompt = do
-    putStr prompt
-    getLine
-
---------------------------------------------------------------------------------
+{-# LANGUAGE NoImplicitPrelude #-}
+import Python5.Builtin
 
 {-
     Quick & Easy to Learn
