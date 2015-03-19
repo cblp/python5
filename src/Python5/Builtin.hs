@@ -20,7 +20,7 @@ import            Python5.Builtin.Print   ( print, end )
 import            Python5.Collections.ABC ( Iterable(iter) )
 
 (*=) :: Prelude.Num num => IORef num -> num -> IO ()
-v *= x = modifyIORef v (Prelude.id Lens.*~ x)
+v *= x = modifyIORef v $ Prelude.id Lens.*~ x
 
 (//) :: Prelude.RealFrac a => a -> a -> a
 x // y = Prelude.fromInteger $ Prelude.floor (x / y)
