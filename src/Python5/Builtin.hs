@@ -1,18 +1,26 @@
-module            Python5.Builtin         ( ($), (**), (+), (/), (//), (<)
+module            Python5.Builtin         ( ($), (**), (*=), (+), (/), (//), (<)
                                           , Integer, String
                                           , abs
                                           , all
+                                          , for
                                           , input
                                           , print, end
-                                          )
-    where
+                                          , var
+                                          ) where
 
 import qualified  Prelude
 import            Prelude                 ( ($), (**), (+), (.), (/), (<)
                                           , Bool, IO, Integer, String
                                           )
+import qualified  Control.Lens            as Lens
+import            Data.IORef              ( IORef )
+import            Python5.Builtin.Control ( for )
+import            Python5.Builtin.Extra   ( var, runVarState )
 import            Python5.Builtin.Print   ( print, end )
 import            Python5.Collections.ABC ( Iterable(iter) )
+
+(*=) :: Prelude.Num num => IORef num -> num -> IO ()
+v *= x = runVarState v $ Prelude.id Lens.*= x
 
 (//) :: Prelude.RealFrac a => a -> a -> a
 x // y = Prelude.fromInteger $ Prelude.floor (x / y)
