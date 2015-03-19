@@ -2,6 +2,7 @@ module            Python5.Builtin         ( ($), (**), (*=), (+), (/), (//), (<)
                                           , Integer, String
                                           , abs
                                           , all
+                                          , complex
                                           , for
                                           , input
                                           , print, end
@@ -10,9 +11,12 @@ module            Python5.Builtin         ( ($), (**), (*=), (+), (/), (//), (<)
 
 import qualified  Prelude
 import            Prelude                 ( ($), (**), (+), (.), (/), (<)
-                                          , Bool, IO, Integer, String
+                                          , Bool, Double, IO, Integer, String
                                           , id
                                           )
+
+import qualified  Data.Complex            as Complex
+import            Data.Complex            ( Complex )
 import            Control.Lens            ( (*~) )
 import            Data.IORef              ( IORef, modifyIORef )
 import            Python5.Builtin.Control ( for )
@@ -26,11 +30,16 @@ v *= x = modifyIORef v $ id *~ x
 (//) :: Prelude.RealFrac a => a -> a -> a
 x // y = Prelude.fromInteger $ Prelude.floor (x / y)
 
-abs :: Prelude.Num a => a -> a
-abs = Prelude.abs
+-- class Prelude.Num => Abs a where abs :: a -> Double
+-- instance Complex
+abs :: Prelude.Num a => a -> Double
+abs = Prelude.realToFrac . Prelude.abs
 
 all :: Iterable iterable => iterable Bool -> Bool
 all = Prelude.and . iter
+
+complex :: (Double, Double) -> Complex Double
+complex(a, b) = a Complex.:+ b
 
 input :: String -> IO String
 input prompt = do
