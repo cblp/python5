@@ -7,6 +7,7 @@ module            Python5.Builtin         ( ($), (**), (*=), (+), (/), (//), (<)
                                           , complex
                                           , for
                                           , input
+                                          , int
                                           , print, end
                                           , var
                                           ) where
@@ -45,3 +46,6 @@ input :: String -> IO String
 input prompt = do
     Prelude.putStr prompt
     Prelude.getLine
+
+int :: Integer -> Integer
+int = id

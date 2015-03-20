@@ -1,6 +1,6 @@
 {-# LANGUAGE NoImplicitPrelude #-}
 
-import Prelude          ( Double, Integer )
+import Prelude          ( Double )
 import Python5.Builtin
 import Test.Hspec
 
@@ -8,10 +8,10 @@ main :: Proc
 main = hspec $ do
     describe "__builtin__.abs" $ do
         it "returns the absolute value of a number" $ do
-            abs(1 :: Integer) `shouldBe` 1
-            abs(-2 :: Integer) `shouldBe` 2
+            abs(int(1)) `shouldBe` 1
+            abs(int(-2)) `shouldBe` 2
         it "The argument may be an integer or a floating point number" $ do
-            abs(3 :: Integer) `shouldBe` 3
+            abs(int(3)) `shouldBe` 3
             abs(-4 :: Double) `shouldBe` 4
         it "If the argument is a complex number, its magnitude is returned" $ do
             abs(complex(3, 4)) `shouldBe` (5 :: Double)
