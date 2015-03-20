@@ -19,6 +19,7 @@ import qualified  Data.Complex            as Complex
 import            Data.Complex            ( Complex )
 import            Control.Lens            ( (*~) )
 import            Data.IORef              ( IORef, modifyIORef )
+import            Python5.Builtin.Abs     ( abs )
 import            Python5.Builtin.Control ( for )
 import            Python5.Builtin.Extra   ( var )
 import            Python5.Builtin.Print   ( print, end )
@@ -29,11 +30,6 @@ v *= x = modifyIORef v $ id *~ x
 
 (//) :: Prelude.RealFrac a => a -> a -> a
 x // y = Prelude.fromInteger $ Prelude.floor (x / y)
-
--- class Prelude.Num => Abs a where abs :: a -> Double
--- instance Complex
-abs :: Prelude.Num a => a -> Double
-abs = Prelude.realToFrac . Prelude.abs
 
 all :: Iterable iterable => iterable Bool -> Bool
 all = Prelude.and . iter
