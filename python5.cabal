@@ -25,7 +25,7 @@ test-suite tests
                     , hspec >= 1.11.0 && < 1.12
                     , python5
     default-language: Haskell2010
-    ghc-options:      -Wall
+    ghc-options:      -Wall -Werror
     hs-source-dirs:   tests
     main-is:          Main.hs
     type:             exitcode-stdio-1.0
