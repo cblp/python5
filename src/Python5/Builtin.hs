@@ -5,6 +5,7 @@ module            Python5.Builtin         ( ($), (**), (*=), (+), (/), (//), (<)
                                           , abs
                                           , all
                                           , complex
+                                          , float
                                           , for
                                           , input
                                           , int
@@ -41,6 +42,9 @@ all = Prelude.and . iter
 
 complex :: (Double, Double) -> Complex Double
 complex(a, b) = a Complex.:+ b
+
+float :: Double -> Double
+float = id
 
 input :: String -> IO String
 input prompt = do

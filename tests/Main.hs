@@ -1,6 +1,5 @@
 {-# LANGUAGE NoImplicitPrelude #-}
 
-import Prelude          ( Double )
 import Python5.Builtin
 import Test.Hspec
 
@@ -12,9 +11,9 @@ main = hspec $ do
             abs(int(-2)) `shouldBe` 2
         it "The argument may be an integer or a floating point number" $ do
             abs(int(3)) `shouldBe` 3
-            abs(-4 :: Double) `shouldBe` 4
+            abs(float(-4)) `shouldBe` 4
         it "If the argument is a complex number, its magnitude is returned" $ do
-            abs(complex(3, 4)) `shouldBe` (5 :: Double)
+            abs(complex(3, 4)) `shouldBe` float(5)
 
     describe "__builtin__.all" $ do
         it "returns True if all elements of the iterable are true" $ do
