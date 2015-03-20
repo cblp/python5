@@ -27,5 +27,5 @@ test-suite tests
     default-language: Haskell2010
     ghc-options:      -Wall
     hs-source-dirs:   tests
-    main-is:          TestsMain.hs
+    main-is:          Main.hs
     type:             exitcode-stdio-1.0
