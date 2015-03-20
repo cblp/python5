@@ -1,5 +1,7 @@
 module            Python5.Builtin         ( ($), (**), (*=), (+), (/), (//), (<)
-                                          , Integer, String
+                                          , Bool(False, True)
+                                          , Proc
+                                          , String
                                           , abs
                                           , all
                                           , complex
@@ -24,6 +26,8 @@ import            Python5.Builtin.Control ( for )
 import            Python5.Builtin.Extra   ( var )
 import            Python5.Builtin.Print   ( print, end )
 import            Python5.Collections.ABC ( Iterable(iter) )
+
+type Proc = IO ()
 
 (*=) :: Prelude.Num num => IORef num -> num -> IO ()
 v *= x = modifyIORef v $ id *~ x
