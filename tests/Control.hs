@@ -20,8 +20,7 @@
 
 module Control where
 
-import Prelude ( (>>=) )
-
+import Prelude ( ($), (>>=) )
 import Python5.Builtin
 import Test.Hspec
 
