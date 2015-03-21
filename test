@@ -1,1 +1,1 @@
-cabal build --ghc-option=-Werror && cabal test
+cabal test --ghc-option=-Werror
