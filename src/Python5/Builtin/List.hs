@@ -16,17 +16,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -}
 
-import Test.Hspec
+module Python5.Builtin.List where
 
--- tests
-import qualified Builtin
-import qualified Control
-import qualified Operator
-import qualified Types
-
-main :: IO ()
-main = hspec $ do
-    Builtin.spec
-    Control.spec
-    Operator.spec
-    Types.spec
+list :: [a] -> [a]
+list = id

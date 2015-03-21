@@ -21,6 +21,9 @@ module Python5.Operator where
 (**) :: Integer -> Integer -> Integer
 (**) = (^)
 
+(.) :: a -> (a -> b) -> b
+object.methodCall = methodCall object
+
 (//) :: Prelude.Integral a => a -> a -> a
 (//) = div
 -- TODO Prelude.fromInteger $ Prelude.floor (x / y)

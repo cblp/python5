@@ -16,17 +16,20 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -}
 
+{-# LANGUAGE NoImplicitPrelude #-}
+
+module Types where
+
+import Python5.Builtin
 import Test.Hspec
 
--- tests
-import qualified Builtin
-import qualified Control
-import qualified Operator
-import qualified Types
-
-main :: IO ()
-main = hspec $ do
-    Builtin.spec
-    Control.spec
-    Operator.spec
-    Types.spec
+spec :: Spec
+spec =
+    describe "list operations" $ do
+        let fruits = ["Banana", "Apple", "Lime"]
+        it "list comprehensions" $ do
+            let loud_fruits = [fruit.upper() | fruit <- fruits]
+            loud_fruits `shouldBe` ["BANANA", "APPLE", "LIME"]
+        it "enumerate" $ do
+            list(enumerate(fruits))
+                `shouldBe` [(0, "Banana"), (1, "Apple"), (2, "Lime")]

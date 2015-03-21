@@ -1,18 +1,5 @@
 module Main (main) where
 
-import Data.Char as Char
-
-string_upper :: String -> String
-string_upper = map Char.toUpper
-
-list :: [a] -> [a]
-list = id
-
-enumerate :: [a] -> [(Integer, a)]
-enumerate = zip [0 :: Integer ..]
-
---------------------------------------------------------------------------------
-
 {-
     Compound Data Types
 

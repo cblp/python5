@@ -20,6 +20,8 @@
 
 module Python5.Builtin.Str where
 
+import Data.Char as Char
+
 class Str a where
     str :: a -> String
 
@@ -34,3 +36,6 @@ instance Str Integer where
 
 instance Str String where
     str = id
+
+upper :: () -> String -> String
+upper() = map Char.toUpper
