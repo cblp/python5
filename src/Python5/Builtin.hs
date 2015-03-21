@@ -44,8 +44,6 @@ import            Prelude                 ( ($), (+), (/), (<)
 import            Control.Arrow           ( (>>>) )
 import qualified  Data.Complex            as Complex
 import            Data.Complex            ( Complex )
-import            Control.Lens            ( (*~) )
-import            Data.IORef              ( IORef, modifyIORef )
 import            Python5.Builtin.Abs     ( abs )
 import            Python5.Builtin.Control ( for )
 import            Python5.Builtin.Extra   ( var, get )
@@ -53,12 +51,9 @@ import            Python5.Builtin.List    ( list )
 import            Python5.Builtin.Print   ( print, end )
 import            Python5.Builtin.Str     ( upper )
 import            Python5.Collections.ABC ( Iterable(iter) )
-import            Python5.Operator        ( (**), (.), (//) )
+import            Python5.Operator        ( (**), (*=), (.), (//) )
 
 type Proc = IO ()
-
-(*=) :: Prelude.Num num => IORef num -> num -> IO ()
-v *= x = modifyIORef v $ id *~ x
 
 all :: Iterable iterable => iterable Bool -> Bool
 all = iter >>> Prelude.and
