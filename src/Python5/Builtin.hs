@@ -65,7 +65,7 @@ complex :: (Double, Double) -> Complex Double
 complex(a, b) = a Complex.:+ b
 
 enumerate :: [a] -> [(Integer, a)]
-enumerate = Prelude.zip [0 :: Integer ..]
+enumerate = Prelude.zip [0..]
 
 float :: Double -> Double
 float = id
