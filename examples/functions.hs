@@ -4,11 +4,6 @@ module Main (main) where
 
 import Python5.Builtin
 
-import Control.Lens
-import Control.Monad.Extra
-
---------------------------------------------------------------------------------
-
 {-
     Functions Defined
 

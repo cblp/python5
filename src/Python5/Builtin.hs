@@ -16,9 +16,10 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -}
 
-module            Python5.Builtin         ( ($), (**), (*=), (+), (.), (/), (//)
-                                          , (<)
+module            Python5.Builtin         ( ($), (**), (*=), (+), (++), (.), (/)
+                                          , (//), (<)
                                           , Bool(False, True)
+                                          , Int
                                           , Proc
                                           , String
                                           , abs
@@ -36,7 +37,7 @@ module            Python5.Builtin         ( ($), (**), (*=), (+), (.), (/), (//)
                                           ) where
 
 import qualified  Prelude
-import            Prelude                 ( ($), (+), (/), (<)
+import            Prelude                 ( ($), (+), (++), (/), (<)
                                           , Bool, Double, IO, Integer, String
                                           , id
                                           )
@@ -52,6 +53,8 @@ import            Python5.Builtin.Print   ( print, end )
 import            Python5.Builtin.Str     ( upper )
 import            Python5.Collections.ABC ( Iterable(iter) )
 import            Python5.Operator        ( (**), (*=), (.), (//) )
+
+type Int = Prelude.Integer
 
 type Proc = IO ()
 
