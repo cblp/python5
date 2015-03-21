@@ -16,13 +16,21 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -}
 
+{-# LANGUAGE NoImplicitPrelude #-}
+
+module Operator where
+
+import Python5.Builtin
 import Test.Hspec
 
--- tests
-import qualified Builtin
-import qualified Operator
-
-main :: IO ()
-main = hspec $ do
-    Builtin.spec
-    Operator.spec
+spec :: Spec
+spec = do
+    describe "(/)" $ do
+        it "(/)" $ do
+            1 / 2 `shouldBe` float(0.5)
+    describe "(//)" $ do
+        it "(//)" $ do
+            17 // 3 `shouldBe` int(5)
+    describe "(**)" $ do
+        it "(**)" $ do
+            2 ** 3 `shouldBe` int(8)

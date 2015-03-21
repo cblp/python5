@@ -16,13 +16,11 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -}
 
-import Test.Hspec
+module Python5.Operator where
 
--- tests
-import qualified Builtin
-import qualified Operator
+(**) :: Integer -> Integer -> Integer
+(**) = (^)
 
-main :: IO ()
-main = hspec $ do
-    Builtin.spec
-    Operator.spec
+(//) :: Prelude.Integral a => a -> a -> a
+(//) = div
+-- TODO Prelude.fromInteger $ Prelude.floor (x / y)
