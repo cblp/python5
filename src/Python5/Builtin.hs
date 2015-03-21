@@ -28,7 +28,7 @@ module            Python5.Builtin         ( ($), (**), (*=), (+), (/), (//), (<)
                                           , input
                                           , int
                                           , print, end
-                                          , var
+                                          , var, get
                                           ) where
 
 import qualified  Prelude
@@ -43,7 +43,7 @@ import            Control.Lens            ( (*~) )
 import            Data.IORef              ( IORef, modifyIORef )
 import            Python5.Builtin.Abs     ( abs )
 import            Python5.Builtin.Control ( for )
-import            Python5.Builtin.Extra   ( var )
+import            Python5.Builtin.Extra   ( var, get )
 import            Python5.Builtin.Print   ( print, end )
 import            Python5.Collections.ABC ( Iterable(iter) )
 import            Python5.Operator        ( (**), (//) )

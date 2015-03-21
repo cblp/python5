@@ -16,15 +16,21 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -}
 
+{-# LANGUAGE NoImplicitPrelude #-}
+
+module Control where
+
+import Prelude ( (>>=) )
+
+import Python5.Builtin
 import Test.Hspec
 
--- tests
-import qualified Builtin
-import qualified Control
-import qualified Operator
-
-main :: IO ()
-main = hspec $ do
-    Builtin.spec
-    Control.spec
-    Operator.spec
+spec :: Spec
+spec =
+    describe "for" $
+        it "mutates var in for" $ do
+            let numbers = [2, 4, 6, 8]
+            product <- var 1
+            for numbers $ \number ->
+                product *= number
+            get product >>= shouldBe (int(384))

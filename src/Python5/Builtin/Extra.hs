@@ -18,7 +18,10 @@
 
 module Python5.Builtin.Extra where
 
-import Data.IORef           ( IORef, newIORef )
+import Data.IORef           ( IORef, newIORef, readIORef )
 
 var :: a -> IO (IORef a)
 var = newIORef
+
+get :: IORef a -> IO a
+get = readIORef
