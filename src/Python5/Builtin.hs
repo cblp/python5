@@ -27,7 +27,7 @@ module            Python5.Builtin         ( ($), (**), (*=), (+), (++), (.), (/)
                                           , complex
                                           , enumerate
                                           , float
-                                          , for
+                                          , for, by
                                           , input
                                           , int
                                           , list
@@ -46,7 +46,7 @@ import            Control.Arrow           ( (>>>) )
 import qualified  Data.Complex            as Complex
 import            Data.Complex            ( Complex )
 import            Python5.Builtin.Abs     ( abs )
-import            Python5.Builtin.Control ( for )
+import            Python5.Builtin.Control ( for, by )
 import            Python5.Builtin.Extra   ( var, get )
 import            Python5.Builtin.List    ( list )
 import            Python5.Builtin.Print   ( print, end )

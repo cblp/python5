@@ -22,3 +22,6 @@ import Control.Monad ( forM_ )
 
 for :: Monad m => [a] -> (a -> m b) -> m ()
 for = forM_
+
+by :: (a -> b) -> a -> b
+by = (Prelude.$)

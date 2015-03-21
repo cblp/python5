@@ -31,6 +31,6 @@ spec =
         it "mutates var in for" $ do
             let numbers = [2, 4, 6, 8]
             product <- var 1
-            for numbers $ \number ->
+            for numbers `by` \number ->
                 product *= number
             get product >>= shouldBe (int(384))
