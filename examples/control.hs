@@ -19,9 +19,10 @@ import Python5.Builtin
 
 main = do
     -- For loop on a list
-    let numbers = [2, 4, 6, 8 :: Integer]
-    product <- var 1
-    for numbers $ \number ->
+    let numbers = [2, 4, 6, 8]
+    product <- var(int(1))
+    for numbers `by` \number -> do
+        print("Current sub-product is", product)
         product *= number
     print("The product is:", product)
     -- The product is: 384
