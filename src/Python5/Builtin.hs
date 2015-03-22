@@ -31,7 +31,7 @@ module            Python5.Builtin         ( (**), (*=), (+), (++), (.), (.~)
                                           , input
                                           , int
                                           , list
-                                          , print, end, file
+                                          , print, end, file, sep
                                           , format, upper -- from str
                                           , var, get
                                           ) where
@@ -50,7 +50,7 @@ import            Python5.Builtin.Abs     ( abs )
 import            Python5.Builtin.Control ( for, by )
 import            Python5.Builtin.Extra   ( var, get )
 import            Python5.Builtin.List    ( list )
-import            Python5.Builtin.Print   ( print, end, file )
+import            Python5.Builtin.Print   ( print, end, file, sep )
 import            Python5.Builtin.Str     ( format, upper )
 import            Python5.Collections.ABC ( Iterable(iter) )
 import            Python5.Operator        ( (**), (*=), (.), (//) )

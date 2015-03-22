@@ -23,10 +23,11 @@
             , UndecidableInstances
             #-}
 
-module Python5.Builtin.Print  ( print, end, file ) where
+module Python5.Builtin.Print  ( print, end, file, sep ) where
 
 import Control.Lens           ( Setter', lens, makeLenses )
 import Data.IORef             ( IORef, readIORef )
+import Data.List              ( intercalate )
 import Prelude                hiding ( print )
 import Python5.Builtin.Str    ( Str(str) )
 import Python5.IO             ( FileLike(write), ToFileLike(toFileLike) )
@@ -34,6 +35,7 @@ import System.IO              ( stdout )
 
 data PrintOptions = PrintOptions  { _end    :: String
                                   , __file  :: FileLike
+                                  , _sep    :: String
                                   }
 makeLenses ''PrintOptions
 
@@ -49,6 +51,7 @@ print x = do
         state = PrintArgState []
                               PrintOptions  { _end    = "\n"
                                             , __file  = stdoutRef
+                                            , _sep    = " "
                                             }
     printImpl state x
 
@@ -73,7 +76,7 @@ class PrintArgs a where
 
 instance PrintArgs () where
     printImpl (PrintArgState strs PrintOptions{..}) () =
-        write __file (concat strs ++ _end)
+        write __file $ intercalate _sep strs ++ _end
 
 instance PrintArg a => PrintArgs a where
     printImpl state a = do
