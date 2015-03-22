@@ -16,21 +16,29 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -}
 
+{-# LANGUAGE NoImplicitPrelude #-}
+
+module IO where
+
+import Prelude          ( ($), (>>=), Eq, Show, flip )
+import Python5.Builtin
+import Python5.IO       as IO
 import Test.Hspec
 
--- tests
-import qualified Builtin
-import qualified Control
-import qualified Functions
-import qualified IO
-import qualified Operator
-import qualified Types
+spec :: Spec
+spec =
+    describe "IO" $ do
+        it "Simple output (with Unicode)" $ do
+            buffer <- IO.stringIO()
+            print("Hello, I'm Python5!", file .~ buffer)
+            buffer.getvalue() >>= shouldBe' "Hello, I'm Python5!\n"
 
-main :: IO ()
-main = hspec $ do
-    Builtin.spec
-    Control.spec
-    Functions.spec
-    IO.spec
-    Operator.spec
-    Types.spec
+        it "Input" $ do
+            buffer <- IO.stringIO()
+            -- name <- input("What is your name?\n")
+            let name = "Python5"
+            print("Hi, {}.".format(name), file .~ buffer)
+            buffer.getvalue() >>= shouldBe' "Hi, Python5.\n"
+
+shouldBe' :: (Eq a, Show a) => a -> a -> Expectation
+shouldBe' = flip shouldBe

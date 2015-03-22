@@ -20,6 +20,8 @@ library
                     , MissingH  >= 1.3.0  && < 1.4
     default-language: Haskell2010
     exposed-modules:  Python5.Builtin
+                      Python5.Builtin.Print
+                      Python5.Builtin.Str
                       Python5.IO
     ghc-options:      -Wall
     hs-source-dirs:   src
