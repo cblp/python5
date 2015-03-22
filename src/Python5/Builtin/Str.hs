@@ -20,7 +20,8 @@
 
 module Python5.Builtin.Str where
 
-import Data.Char as Char
+import Data.Char        as Char
+import Data.List.Utils  as List
 
 class Str a where
     str :: a -> String
@@ -36,6 +37,10 @@ instance Str Integer where
 
 instance Str String where
     str = id
+
+-- | "hello {} world".format("cruel") == "hello cruel world"
+format :: String -> String -> String
+format = List.replace "{}"
 
 upper :: () -> String -> String
 upper() = map Char.toUpper
