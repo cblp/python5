@@ -17,10 +17,7 @@
 -}
 
 {-# LANGUAGE  FlexibleInstances
-            , ImpredicativeTypes
-            , NoImplicitPrelude
             , OverlappingInstances
-            , RankNTypes
             , RecordWildCards
             , TemplateHaskell
             , UndecidableInstances
@@ -30,10 +27,7 @@ module Python5.Builtin.Print  ( print, end, file ) where
 
 import Control.Lens           ( Setter', lens, makeLenses )
 import Data.IORef             ( IORef, readIORef )
-import Prelude                ( ($), (++)
-                              , IO, String
-                              , concat, error, return
-                              )
+import Prelude                hiding ( print )
 import Python5.Builtin.Str    ( Str(str) )
 import Python5.IO             ( FileLike(write), ToFileLike(toFileLike) )
 import System.IO              ( stdout )
