@@ -26,12 +26,12 @@ import Test.Hspec
 
 spec :: Spec
 spec = do
-    describe "(/)" $ do
-        it "(/)" $ do
+    describe "(/)" $
+        it "(/)" $
             1 / 2 `shouldBe` float(0.5)
-    describe "(//)" $ do
-        it "(//)" $ do
+    describe "(//)" $
+        it "(//)" $
             17 // 3 `shouldBe` int(5)
-    describe "(**)" $ do
-        it "(**)" $ do
+    describe "(**)" $
+        it "(**)" $
             2 ** 3 `shouldBe` int(8)

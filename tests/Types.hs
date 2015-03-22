@@ -31,6 +31,6 @@ spec =
         it "list comprehensions" $ do
             let loud_fruits = [fruit.upper() | fruit <- fruits]
             loud_fruits `shouldBe` ["BANANA", "APPLE", "LIME"]
-        it "enumerate" $ do
+        it "enumerate" $
             list(enumerate(fruits))
                 `shouldBe` [(0, "Banana"), (1, "Apple"), (2, "Lime")]
