@@ -17,27 +17,46 @@
 -}
 
 {-# LANGUAGE  FlexibleInstances
+            , ImpredicativeTypes
             , NoImplicitPrelude
             , OverlappingInstances
+            , RankNTypes
+            , RecordWildCards
             , TemplateHaskell
             , UndecidableInstances
             #-}
 
-module Python5.Builtin.Print  ( end, print ) where
+module Python5.Builtin.Print  ( print, end, file ) where
 
-import Prelude                ( ($), (++), IO, String, concat, putStr, return )
-
-import Control.Lens
+import Control.Lens           ( Setter', lens, makeLenses )
 import Data.IORef             ( IORef, readIORef )
+import Prelude                ( ($), (++)
+                              , IO, String
+                              , concat, error, return
+                              )
 import Python5.Builtin.Str    ( Str(str) )
+import Python5.IO             ( FileLike(write), ToFileLike(toFileLike) )
+import System.IO              ( stdout )
 
-data PrintOptions = PrintOptions {_end :: String}
+data PrintOptions = PrintOptions  { _end    :: String
+                                  , __file  :: FileLike
+                                  }
 makeLenses ''PrintOptions
+
+file :: ToFileLike a => Setter' PrintOptions a
+file = lens (error "`file` is write-only lens")
+            (\opts a -> opts{__file = toFileLike a})
 
 data PrintArgState = PrintArgState [String] PrintOptions
 
 print :: PrintArgs a => a -> IO ()
-print = printImpl $ PrintArgState [] PrintOptions{_end = "\n"}
+print x = do
+    let stdoutRef = toFileLike stdout
+        state = PrintArgState []
+                              PrintOptions  { _end    = "\n"
+                                            , __file  = stdoutRef
+                                            }
+    printImpl state x
 
 class PrintArg a where
     modifyPrintState :: a -> PrintArgState -> IO PrintArgState
@@ -59,8 +78,8 @@ class PrintArgs a where
     printImpl :: PrintArgState -> a -> IO ()
 
 instance PrintArgs () where
-    printImpl (PrintArgState strs opts) () =
-        putStr $ concat strs ++ (opts ^. end)
+    printImpl (PrintArgState strs PrintOptions{..}) () =
+        write __file (concat strs ++ _end)
 
 instance PrintArg a => PrintArgs a where
     printImpl state a = do
