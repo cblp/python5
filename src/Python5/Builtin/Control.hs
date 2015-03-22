@@ -24,4 +24,7 @@ for :: Monad m => [a] -> (a -> m b) -> m ()
 for = forM_
 
 by :: (a -> b) -> a -> b
-by = (Prelude.$)
+by = ($)
+
+pass :: Monad m => m ()
+pass = return ()
