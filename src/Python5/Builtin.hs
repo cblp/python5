@@ -16,8 +16,8 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -}
 
-module            Python5.Builtin         ( (**), (*=), (+), (++), (.), (/)
-                                          , (//), (<)
+module            Python5.Builtin         ( (**), (*=), (+), (++), (.), (.~)
+                                          , (/), (//), (<)
                                           , Bool(False, True)
                                           , Int
                                           , Proc
@@ -43,6 +43,7 @@ import            Prelude                 ( (+), (++), (/), (<)
                                           )
 
 import            Control.Arrow           ( (>>>) )
+import            Control.Lens            ( (.~) )
 import qualified  Data.Complex            as Complex
 import            Data.Complex            ( Complex )
 import            Python5.Builtin.Abs     ( abs )
