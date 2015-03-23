@@ -23,6 +23,7 @@ library
                       Python5.Builtin.Print
                       Python5.Builtin.Str
                       Python5.IO
+                      Python5.Operator
     ghc-options:      -Wall
     hs-source-dirs:   src
 
