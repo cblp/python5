@@ -18,14 +18,13 @@
 
 module Python5.Operator where
 
-import Control.Lens ( (*~) )
 import Data.IORef   ( IORef, modifyIORef )
 
 (**) :: Integer -> Integer -> Integer
 (**) = (^)
 
 (*=) :: Prelude.Num num => IORef num -> num -> IO ()
-v *= x = modifyIORef v $ id *~ x
+v *= x = modifyIORef v (* x)
 
 (.) :: a -> (a -> b) -> b
 object.methodCall = methodCall object
