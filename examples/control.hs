@@ -1,4 +1,3 @@
-{-# LANGUAGE NoImplicitPrelude #-}
 import Python5.Builtin
 
 {-
@@ -22,7 +21,6 @@ main = do
     let numbers = [2, 4, 6, 8]
     product <- var(int(1))
     for numbers `by` \number -> do
-        print("Current sub-product is", product)
         product *= number
     print("The product is:", product)
     -- The product is: 384

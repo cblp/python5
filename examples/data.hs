@@ -1,5 +1,3 @@
-module Main (main) where
-
 {-
     Compound Data Types
 
@@ -18,9 +16,11 @@ module Main (main) where
     [(0, 'Banana'), (1, 'Apple'), (2, 'Lime')]
 -}
 
+import Python5.Builtin
+
 main = do
     let fruits = ["Banana", "Apple", "Lime"]
-    let loud_fruits = [string_upper fruit | fruit <- fruits]
+    let loud_fruits = [fruit.upper() | fruit <- fruits]
     print(loud_fruits)
     -- ["BANANA", "APPLE", "LIME"]
 

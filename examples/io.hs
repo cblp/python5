@@ -16,7 +16,7 @@ main = do
 
     -- Input, assignment
     name <- input("What is your name?\n")
-    print("Hi, ", name, ".")
+    print("Hi, {}.".format(name))
     -- What is your name?
     -- Python5
     -- Hi, Python5.

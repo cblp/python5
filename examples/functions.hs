@@ -1,9 +1,3 @@
-{-# LANGUAGE NoImplicitPrelude, ScopedTypeVariables #-}
-
-module Main (main) where
-
-import Python5.Builtin
-
 {-
     Functions Defined
 
@@ -22,7 +16,9 @@ import Python5.Builtin
     0 1 1 2 3 5 8 13 21 34 55 89 144 233 377 610 987
 -}
 
-fib(n :: Integer) = do
+import Python5.Builtin
+
+fib(n :: Int) = do
     let fibrec(a, b) =
             when (a < n) $ do
                 print(a, end .~ " ")
