@@ -16,3 +16,11 @@
     >>> 17 // 3  # floor division
     5
 -}
+
+import Python5.Builtin
+
+main = do
+    print(float(1 / 2))
+    print(2 ** 3)
+    print(17 / 3)
+    print(17 // 3)

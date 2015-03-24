@@ -1,2 +1,2 @@
 #!/bin/bash
-runhaskell "$@"
+runhaskell -XExtendedDefaultRules -XNoImplicitPrelude "$@"

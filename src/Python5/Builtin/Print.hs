@@ -62,13 +62,13 @@ instance PrintArg (PrintOptions -> PrintOptions) where
     modifyPrintState optModifier (PrintArgState strs opts) =
         return $ PrintArgState strs (optModifier opts)
 
-instance Str a => PrintArg a where
-    modifyPrintState a (PrintArgState strs opts) =
-        return $ PrintArgState (strs ++ [str a]) opts
-
 instance Str a => PrintArg (IORef a) where
     modifyPrintState ref (PrintArgState strs opts) = do
         a <- readIORef ref
+        return $ PrintArgState (strs ++ [str a]) opts
+
+instance Str a => PrintArg a where
+    modifyPrintState a (PrintArgState strs opts) =
         return $ PrintArgState (strs ++ [str a]) opts
 
 class PrintArgs a where
@@ -77,11 +77,6 @@ class PrintArgs a where
 instance PrintArgs () where
     printImpl (PrintArgState strs PrintOptions{..}) () =
         write __file $ intercalate _sep strs ++ _end
-
-instance PrintArg a => PrintArgs a where
-    printImpl state a = do
-        state' <- modifyPrintState a state
-        printImpl state' ()
 
 instance (PrintArg a, PrintArgs b) => PrintArgs (a, b) where
     printImpl state (a, b) = do
@@ -92,3 +87,8 @@ instance (PrintArg a, PrintArgs (b, c)) => PrintArgs (a, b, c) where
     printImpl state (a, b, c) = do
         state' <- modifyPrintState a state
         printImpl state' (b, c)
+
+instance PrintArg a => PrintArgs a where
+    printImpl state a = do
+        state' <- modifyPrintState a state
+        printImpl state' ()
