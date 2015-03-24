@@ -23,12 +23,12 @@ import Data.IORef   ( IORef, modifyIORef )
 (**) :: Integer -> Integer -> Integer
 (**) = (^)
 
-(*=) :: Prelude.Num num => IORef num -> num -> IO ()
+(*=) :: Num num => IORef num -> num -> IO ()
 v *= x = modifyIORef v (* x)
 
 (.) :: a -> (a -> b) -> b
 object.methodCall = methodCall object
 
-(//) :: Prelude.Integral a => a -> a -> a
+(//) :: Integral a => a -> a -> a
 (//) = div
 -- TODO Prelude.fromInteger $ Prelude.floor (x / y)
