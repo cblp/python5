@@ -21,13 +21,22 @@
 module Python5.Builtin.Str where
 
 import Data.Char        as Char
-import Data.List.Utils  as List
+import Data.List        ( intercalate )
+import Data.List.Utils  ( replace )
 
 class Str a where
     str :: a -> String
 
+    -- hack for different Str for String and [a], stolen from GHC.Show
+    strList :: [a] -> String
+    strList xs = "[" ++ intercalate ", " (map str xs) ++ "]"
+
 instance Str () where
     str () = ""
+
+instance Str Char where
+    str = show
+    strList = id
 
 instance Str Double where
     str = show
@@ -35,12 +44,15 @@ instance Str Double where
 instance Str Integer where
     str = show
 
-instance Str String where
-    str = id
+instance Str a => Str [a] where
+    str = strList
+
+instance (Str a1, Str a2) => Str (a1, a2) where
+    str (a1, a2) = "(" ++ intercalate ", " [str a1, str a2] ++ ")"
 
 -- | "hello {} world".format("cruel") == "hello cruel world"
 format :: String -> String -> String
-format = List.replace "{}"
+format = replace "{}"
 
 upper :: () -> String -> String
 upper() = map Char.toUpper
