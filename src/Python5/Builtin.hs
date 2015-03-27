@@ -17,7 +17,7 @@
 -}
 
 module            Python5.Builtin         ( ($), (**), (*=), (+), (++), (.)
-                                          , (.~), (/), (//), (<)
+                                          , (.~), (/), (//), (<), (=:)
                                           , Action
                                           , Bool(False, True)
                                           , Int
@@ -50,7 +50,7 @@ import qualified  Data.Complex            as Complex
 import            Data.Complex            ( Complex )
 import            Python5.Builtin.Abs     ( abs )
 import            Python5.Builtin.Control ( for, by, pass )
-import            Python5.Builtin.Extra   ( var, get )
+import            Python5.Builtin.Extra   ( (=:), var, get ) -- TODO replace get with RValue?
 import            Python5.Builtin.List    ( list )
 import            Python5.Builtin.Print   ( print, end, file, sep )
 import            Python5.Builtin.Str     ( format, upper )

@@ -16,9 +16,54 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -}
 
+{-# LANGUAGE TypeFamilies #-}
+
 module Python5.Builtin.Extra where
 
-import Data.IORef           ( IORef, newIORef, readIORef )
+import Data.IORef ( IORef, newIORef, readIORef, writeIORef )
+
+class RValue rvalue where
+    type RValueData rvalue :: *
+    readRValue :: rvalue -> IO (RValueData rvalue)
+
+instance RValue (IO a) where
+    type RValueData (IO a) = a
+    readRValue = Prelude.id
+
+instance RValue (IORef a) where
+    type RValueData (IORef a) = a
+    readRValue = readIORef
+
+instance (RValue ra, RValue rb) => RValue (ra, rb) where
+    type RValueData (ra, rb) = (RValueData ra, RValueData rb)
+    readRValue (ra, rb) = do  a <- readRValue ra
+                              b <- readRValue rb
+                              return (a, b)
+
+instance RValue Int where
+    type RValueData Int = Int
+    readRValue = return
+
+class LValue lvalue where
+    type LValueData lvalue :: *
+    writeLValue :: (LValueData lvalue ~ a) => lvalue -> a -> IO ()
+
+(=:) :: ( LValue lvalue
+        , RValue rvalue
+        , RValueData rvalue ~ LValueData lvalue
+        ) =>
+    lvalue -> rvalue -> IO ()
+v =: rx = do  x <- readRValue rx
+              writeLValue v x
+
+instance LValue (IORef a) where
+    type LValueData (IORef a) = a
+    writeLValue = writeIORef
+
+instance (LValue la, LValue lb) => LValue (la, lb) where
+    type LValueData (la, lb) = (LValueData la, LValueData lb)
+    writeLValue (la, lb) (a, b) = do  writeLValue la a
+                                      writeLValue lb b
 
 var :: a -> IO (IORef a)
 var = newIORef
