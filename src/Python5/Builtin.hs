@@ -29,13 +29,14 @@ module            Python5.Builtin         ( ($), (**), (*=), (+), (++), (.)
                                           , enumerate
                                           , float
                                           , for, by
+                                          , format, upper -- from str
                                           , input
                                           , int
                                           , list
                                           , pass
                                           , print, end, file, sep
-                                          , format, upper -- from str
                                           , var, get
+                                          , while
                                           ) where
 
 import qualified  Prelude
@@ -49,7 +50,7 @@ import            Control.Lens            ( (.~) )
 import qualified  Data.Complex            as Complex
 import            Data.Complex            ( Complex )
 import            Python5.Builtin.Abs     ( abs )
-import            Python5.Builtin.Control ( for, by, pass )
+import            Python5.Builtin.Control ( for, by, pass, while )
 import            Python5.Builtin.Extra   ( (=:), var, get ) -- TODO replace get with RValue?
 import            Python5.Builtin.List    ( list )
 import            Python5.Builtin.Print   ( print, end, file, sep )

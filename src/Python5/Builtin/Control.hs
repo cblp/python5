@@ -16,9 +16,12 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -}
 
+{-# LANGUAGE TypeFamilies #-}
+
 module Python5.Builtin.Control where
 
-import Control.Monad ( forM_ )
+import Control.Monad          ( forM_ )
+import Python5.Builtin.Extra  ( RValue(readRValue), RValueData )
 
 for :: Monad m => [a] -> (a -> m b) -> m ()
 for = forM_
@@ -28,3 +31,13 @@ by = ($)
 
 pass :: Monad m => m ()
 pass = return ()
+
+while ::  (RValue cond, RValueData cond ~ Bool) =>
+          cond -> IO () -> IO ()
+while cond proc = do
+    cond_val <- readRValue cond
+    if cond_val then do
+        proc
+        while cond proc
+    else
+        pass
