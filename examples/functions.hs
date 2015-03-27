@@ -18,12 +18,14 @@
 
 import Python5.Builtin
 
-fib(n :: Int) = do
-    let fibrec(a, b) =
-            when (a < n) $ do
-                print(a, end .~ " ")
-                fibrec(b, a + b)
-    fibrec(0, 1)
+fib :: Int -> Proc
+fib(n) = do
+    a <- var(int(0))
+    b <- var(int(1))
+    while (a < n) $ do
+        print(a, end .~ " ")
+        (a, b) =: (b, a + b)
     print()
 
+main :: Proc
 main = fib(1000)
