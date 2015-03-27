@@ -18,6 +18,7 @@
 
 module            Python5.Builtin         ( ($), (**), (*=), (+), (++), (.)
                                           , (.~), (/), (//), (<)
+                                          , Action
                                           , Bool(False, True)
                                           , Int
                                           , Proc
@@ -58,7 +59,8 @@ import            Python5.Operator        ( (**), (*=), (.), (//) )
 
 type Int = Prelude.Integer
 
-type Proc = IO ()
+type Action = IO
+type Proc = Action ()
 
 all :: Iterable iterable => iterable Bool -> Bool
 all = iter >>> Prelude.and
