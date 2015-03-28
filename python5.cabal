@@ -31,11 +31,25 @@ library
                       Python5.Builtin.Str
 
 test-suite tests
-    build-depends:    base  >= 4.6    && < 4.8
-                    , hspec >= 1.11.0 && < 1.12
+    build-depends:    base
+                    , hspec >= 1.11 && < 1.12
                     , python5
     default-language: Haskell2010
     ghc-options:      -Wall -Werror
     hs-source-dirs:   tests
     main-is:          Main.hs
+    type:             exitcode-stdio-1.0
+
+test-suite examples
+    build-depends:    base
+                    , directory     >= 1.2.1  && < 1.3
+                    , filepath      >= 1.3    && < 1.4
+                    , hspec
+                    , lens
+                    , process       >= 1.2.3  && < 1.3
+                    , transformers  >= 0.3    && < 0.4
+    default-language: Haskell2010
+    ghc-options:      -Wall -Werror
+    hs-source-dirs:   examples
+    main-is:          Test.hs
     type:             exitcode-stdio-1.0
