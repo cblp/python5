@@ -21,6 +21,7 @@
 module IO where
 
 import Local.Test.Prelude
+import Prelude    ( ($) )
 import Python5.Builtin
 import Python5.IO as IO
 import Test.Hspec

@@ -21,6 +21,7 @@
 module Functions where
 
 import Local.Test.Prelude
+import Prelude    ( ($) )
 import Python5.Builtin
 import Python5.IO as IO
 import Test.Hspec
@@ -33,7 +34,7 @@ spec =
             let fib(n :: Integer) = do
                     a <- var(0)
                     b <- var(1)
-                    while (a < n) $ do
+                    while (a < n)? do
                         print(a, end .~ " ", file .~ buffer)
                         (a, b) =: (b, a + b)
                     print(file .~ buffer)
