@@ -18,14 +18,12 @@
 
 import Python5.Builtin
 
-fib :: Int -> Proc
-fib(n) = do
-    a <- var(int(0))
-    b <- var(int(1))
+fib(n :: Integer) = do
+    a <- var(0)
+    b <- var(1)
     while (a < n) $ do
         print(a, end .~ " ")
         (a, b) =: (b, a + b)
     print()
 
-main :: Proc
 main = fib(1000)
