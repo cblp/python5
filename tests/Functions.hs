@@ -20,25 +20,23 @@
 
 module Functions where
 
-import Prelude ( ($) )
+import Local.Test.Prelude
 import Python5.Builtin
+import Python5.IO as IO
 import Test.Hspec
 
 spec :: Spec
 spec =
     describe "functions" $
-        it "declaration of recursive function" $
-            let
-            fib(n :: Int) =
-                let
-                fibrec(a, b) =
-                    if a < n then
-                        [a] ++ fibrec(b, a + b)
-                    else
-                        []
-                in
-                fibrec(0, 1)
-            in
+        it "declaration of a function with mutables" $ do
+            buffer <- IO.stringIO()
+            let fib(n :: Integer) = do
+                    a <- var(0)
+                    b <- var(1)
+                    while (a < n) $ do
+                        print(a, end .~ " ", file .~ buffer)
+                        (a, b) =: (b, a + b)
+                    print(file .~ buffer)
             fib(1000)
-                `shouldBe`  [ 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233
-                            , 377, 610, 987 ]
+            buffer.getvalue() >>=
+                shouldBe' "0 1 1 2 3 5 8 13 21 34 55 89 144 233 377 610 987 \n"

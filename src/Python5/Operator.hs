@@ -16,9 +16,12 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -}
 
+{-# LANGUAGE FlexibleContexts, TypeFamilies #-}
+
 module Python5.Operator where
 
-import Data.IORef   ( IORef, modifyIORef )
+import Data.IORef             ( IORef, modifyIORef )
+import Python5.Builtin.Extra  ( RValue(readRValue), RValueData )
 
 (**) :: Integer -> Integer -> Integer
 (**) = (^)
@@ -32,3 +35,26 @@ object.methodCall = methodCall object
 (//) :: Integral a => a -> a -> a
 (//) = div
 -- TODO Prelude.fromInteger $ Prelude.floor (x / y)
+
+(+) ::  ( RValue rn1
+        , RValue rn2
+        , RValueData rn1 ~ n
+        , RValueData rn2 ~ n
+        , Prelude.Num n
+        ) =>
+    rn1 -> rn2 -> IO n
+ra + rb = do
+    a <- readRValue ra
+    b <- readRValue rb
+    return (a Prelude.+ b)
+
+(<) ::  ( RValue rord1
+        , RValue rord2
+        , RValueData rord1 ~ RValueData rord2
+        , Prelude.Ord (RValueData rord1)
+        ) =>
+    rord1 -> rord2 -> IO Bool
+ra < rb = do
+    a <- readRValue ra
+    b <- readRValue rb
+    return (a Prelude.< b)

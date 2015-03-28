@@ -20,7 +20,7 @@ module            Python5.Builtin         ( ($), (**), (*=), (+), (++), (.)
                                           , (.~), (/), (//), (<), (=:)
                                           , Action
                                           , Bool(False, True)
-                                          , Int
+                                          , Integer
                                           , Proc
                                           , String
                                           , abs
@@ -40,7 +40,7 @@ module            Python5.Builtin         ( ($), (**), (*=), (+), (++), (.)
                                           ) where
 
 import qualified  Prelude
-import            Prelude                 ( ($), (+), (++), (/), (<)
+import            Prelude                 ( ($), (++), (/)
                                           , Bool, Double, IO, Integer, String
                                           , id
                                           )
@@ -56,9 +56,7 @@ import            Python5.Builtin.List    ( list )
 import            Python5.Builtin.Print   ( print, end, file, sep )
 import            Python5.Builtin.Str     ( format, upper )
 import            Python5.Collections.ABC ( Iterable(iter) )
-import            Python5.Operator        ( (**), (*=), (.), (//) )
-
-type Int = Prelude.Integer
+import            Python5.Operator        ( (**), (*=), (+), (.), (//), (<) )
 
 type Action = IO
 type Proc = Action ()

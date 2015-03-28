@@ -40,8 +40,8 @@ instance (RValue ra, RValue rb) => RValue (ra, rb) where
                               b <- readRValue rb
                               return (a, b)
 
-instance RValue Int where
-    type RValueData Int = Int
+instance RValue Integer where
+    type RValueData Integer = Integer
     readRValue = return
 
 class LValue lvalue where

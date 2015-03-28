@@ -20,9 +20,9 @@
 
 module IO where
 
-import Prelude          ( ($), (>>=), Eq, Show, flip )
+import Local.Test.Prelude
 import Python5.Builtin
-import Python5.IO       as IO
+import Python5.IO as IO
 import Test.Hspec
 
 spec :: Spec
@@ -39,6 +39,3 @@ spec =
             let name = "Python5"
             print("Hi, {}.".format(name), file .~ buffer)
             buffer.getvalue() >>= shouldBe' "Hi, Python5.\n"
-
-shouldBe' :: (Eq a, Show a) => a -> a -> Expectation
-shouldBe' = flip shouldBe

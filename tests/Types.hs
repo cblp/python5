@@ -20,7 +20,6 @@
 
 module Types where
 
-import Prelude ( ($) )
 import Python5.Builtin
 import Test.Hspec
 
