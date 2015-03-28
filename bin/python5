@@ -6,7 +6,7 @@ if [[ ! -z "${PYTHON5_LOCALTEST:-}" ]]; then
     package_db_opt="-package-db=dist/package.conf.inplace"
 fi
 
-exts="-XExtendedDefaultRules -XNoImplicitPrelude"
+exts="-XExtendedDefaultRules -XNoImplicitPrelude -XScopedTypeVariables"
 opts="$exts ${package_db_opt:-}"
 
 runhaskell $opts "$@"
