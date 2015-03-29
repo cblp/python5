@@ -19,7 +19,7 @@ import Python5.Builtin
 main = do
     -- For loop on a list
     let numbers = [2, 4, 6, 8]
-    product <- var(int(1))
+    product <- var 1
     for numbers `by` \number -> do
         product *= number
     print("The product is:", product)

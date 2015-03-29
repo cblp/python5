@@ -19,8 +19,8 @@
 import Python5.Builtin
 
 fib(n :: Integer) = do
-    a <- var(0)
-    b <- var(1)
+    a <- var 0
+    b <- var 1
     while (a < n)? do
         print(a, end .~ " ")
         (a, b) =: (b, a + b)
