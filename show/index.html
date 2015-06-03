@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="en">
+
+<!--
+    Название
+Опыт перехода на Haskell с императивного языка.
+Сравнение функциональных подходов в Haskell и Python.
+
+    Целевая аудитория
+Изучающие функциональное программирование;
+разработчики на Haskell и Python.
+
+    Тезисы:
+Будущее программирования и функциональные языки.
+Лёгкость обучения функциональному языку при императивном бэкграунде.
+Функциональные аналоги императивных управляющих структур.
+Преимущества функционального подхода.
+Эффективная обработка ошибок.
+
+    Обращение к программному комитету
+
+    Коротко о вас
+Разработчик в Яндексе, функциональный энтузиаст, преподаватель ФП в лицее
+
+    Коротко о вашей компании
+Вообще, я работаю в Яндексе, но в этот раз хочу выступить от своего имени.
+-->
+
+    <head>
+        <meta charset="utf-8">
+
+        <title>The New Python</title>
+
+        <meta name="description" content="">
+        <meta name="author" content="Yuriy Syrovetskiy">
+
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+        <link rel="stylesheet" href="css/reveal.css">
+        <link rel="stylesheet" href="css/theme/black.css" id="theme">
+
+        <!-- Code syntax highlighting -->
+        <link rel="stylesheet" href="lib/css/zenburn.css">
+
+        <!-- Printing and PDF exports -->
+        <script>
+            var link = document.createElement( 'link' );
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+            document.getElementsByTagName( 'head' )[0].appendChild( link );
+        </script>
+
+        <!--[if lt IE 9]>
+        <script src="lib/js/html5shiv.js"></script>
+        <![endif]-->
+    </head>
+
+    <body>
+
+        <div class="reveal">
+
+            <!-- Any section element inside of this container is displayed as a slide -->
+            <div class="slides">
+                <section>
+                    <h1>Now is <br> better than never</h1>
+                    <p>Yuriy Syrovetskiy, <a href="http://cblp.su">cblp.su</a></p>
+                </section>
+
+                <section>
+                    <h1>Python <span class="fragment" style="font-size: 130%">5</span></h1>
+                </section>
+
+                <section>
+                    <h2>Compatibility</h2>
+                    <p>With respect to tradition</p>
+                    <p class="fragment">No compatibility with previous versions
+                    	for the sake of progress</p>
+                </section>
+
+                <section>
+                    <h2>Example (Python 3)</h2>
+                    <pre><code>
+    def main():
+        print("Hello world")
+
+    if __name__ == "__main__":
+        main()
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2><code>main</code> is always an entry point</h2>
+                    <pre><code>
+    def main():
+        print("Hello world")
+
+
+
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2>No extra <code>def</code></h2>
+                    <pre><code>
+    main() =
+        print("Hello world")
+
+
+
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2>No extra parentheses</h2>
+                    <pre><code>
+    main =
+        print("Hello world")
+
+
+
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2><code>for</code> loop (Python 3)</h2>
+                    <pre><code>
+    numbers = [2, 4, 6, 8]
+    product = 1
+    for number in numbers:
+        product *= number
+    print("The product is", product)
+                    </code></pre>
+                    <pre><code>
+    The product is 384
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2><code>for</code> loop (Python 5)</h2>
+                    <pre><code>
+    let numbers = [2, 4, 6, 8]
+    product &lt;- var(int(1))
+    for numbers `by` \number ->
+        product *= number
+    print("The product is", product)
+                    </code></pre>
+                    <pre><code>
+    The product is 384
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2>Let's add some code in the loop body</h2>
+                    <pre><code>
+    let numbers = [2, 4, 6, 8]
+    product &lt;- var(int(1))
+    for numbers `by` \number -> do
+        print("Current sub-product is", product)
+        product *= number
+    print("The product is", product)
+                    </code></pre>
+                    <pre><code>
+    Current sub-product is 1
+    Current sub-product is 2
+    Current sub-product is 8
+    Current sub-product is 48
+    The product is 384
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2>Yes!</h2>
+                    <p>Multi-line lambdas!</p>
+                </section>
+
+                <section>
+                    <h2>Module system (1)</h2>
+                    <pre><code>
+    package1/
+        namespace2/
+            module3/
+                __init__.py
+                module4.py
+            module5/
+                __init__.py
+                module6.py
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2>Module system (2)</h2>
+                    <pre><code>
+    package1/
+        namespace2/
+            __init__.py  # fiction
+            module3/
+                __init__.py
+                module4.py
+            module5/
+                __init__.py
+                module6.py
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2>New module system (1)</h2>
+                    <pre><code>
+    package1/
+        module2/
+            module3/
+                __init__.py
+                module4.py
+            module5/
+                __init__.py
+                module6.py
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2>New module system (2)</h2>
+                    <pre><code>
+    package1/
+        module2/
+            module3.hs
+            module3/
+                module4.hs
+            module5.hs
+            module5/
+                module6.hs
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2>Tools: interpreter</h2>
+                    <pre><code>
+    $ ls
+    hello.hs
+    $ python5 hello.hs
+    Hello world!
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2>Tools: compiler</h2>
+                    <pre><code>
+    $ ls
+    hello.hs
+    $ py5compile hello.hs
+    $ ls
+    hello  hello.hs
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2>Static typing</h2>
+                    <p>Find errors before errors find you!</p>
+                </section>
+
+                <section>
+                    <h2>C Preprocessor (<code>-XCPP</code>)</h2>
+                    <pre><code>
+    #ifdef _DEBUG
+        debug(x) = print(x, file .~ stderr)
+    #else
+        debug(_) = pass
+    #endiff
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2>Thanks!</h2>
+                    <p>Yuriy Syrovetskiy, <a href="http://cblp.su">cblp.su</a></p>
+                    <p><a href="https://github.com/cblp/python5">github.com/cblp/python5</a></p>
+                </section>
+
+            </div>
+
+        </div>
+
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.js"></script>
+
+        <script>
+
+            // Full list of configuration options available at:
+            // https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                controls: true,
+                progress: true,
+                history: true,
+                center: true,
+
+                transition: 'fade', // none/fade/slide/convex/concave/zoom
+
+                // Optional reveal.js plugins
+                dependencies: [
+                    { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                    { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+                    { src: 'plugin/zoom-js/zoom.js', async: true },
+                    { src: 'plugin/notes/notes.js', async: true }
+                ]
+            });
+
+        </script>
+
+    </body>
+</html>
