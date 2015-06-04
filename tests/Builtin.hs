@@ -20,7 +20,7 @@
 
 module Builtin where
 
-import Prelude ( ($), Eq, IO, Show )
+import Prelude ( ($), IO, Show )
 import Python5.Builtin
 import Test.Hspec
 

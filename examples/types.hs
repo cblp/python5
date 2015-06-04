@@ -1,8 +1,11 @@
-import Data.Maybe ( fromJust )
 import Python5.Builtin
-import Python5.Collections.ABC ( Iterator )
 
-import Prelude (Either(Left, Right)) -- TODO remove
+import Control.Exception        ( SomeException, displayException )
+import Data.Maybe               ( fromJust )
+import Python5.Collections.ABC  ( Iterator )
+import Python5.Sys              ( print_exception )
+
+import Prelude (Either(Left, Right), show) -- TODO remove
 
 data Item = Item {is_good :: Bool}
     deriving Eq
@@ -18,7 +21,7 @@ next_item it = do
 
 check_next_item(items) = do
     item <- next_item items
---     when (not (item.is_good))?
+--     when (item.is_good.not)?
     when (item == Nothing `or` item.fromJust.is_good.not)?
 --         create_error()
         raise(create_error())
@@ -26,4 +29,7 @@ check_next_item(items) = do
 main = do
     items <- iter([Item{is_good = True}])
     check_next_item(items)
-    check_next_item(items)
+    do
+        check_next_item(items)
+    `except` \e ->
+        print_exception(e)

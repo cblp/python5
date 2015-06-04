@@ -34,6 +34,7 @@ module            Python5.Builtin             ( (**), (*=), (+), (++), (.), (.~)
                                               , and, or
                                               , complex
                                               , enumerate
+                                              , except
                                               , float
                                               , for, by
                                               , format, upper -- from str
@@ -53,10 +54,9 @@ module            Python5.Builtin             ( (**), (*=), (+), (++), (.), (.~)
                                               ) where
 
 import qualified  Prelude
-import            Prelude                     ( (++), (/), (==), (>>=)
+import            Prelude                     ( (++), (/), (==)
                                               , Bool(False, True)
                                               , Double
-                                              , Either(Left, Right)
                                               , Eq
                                               , IO
                                               , Integer
@@ -67,6 +67,7 @@ import            Prelude                     ( (++), (/), (==), (>>=)
                                               , return
                                               )
 
+import            Control.Exception           ( Exception, catch )
 import            Control.Lens                ( (.~) )
 import            Control.Monad               ( when )
 import qualified  Data.Complex                as Complex
@@ -100,6 +101,7 @@ all coll = do
     for coll `by` \i ->
         when (not i)?
             res =: False
+            -- TODO break
     get res
 
 complex :: (Double, Double) -> Complex Double
@@ -107,6 +109,9 @@ complex(a, b) = a Complex.:+ b
 
 enumerate :: [a] -> [(Integer, a)]
 enumerate = Prelude.zip [0..]
+
+except :: Exception e => IO a -> (e -> IO a) -> IO a
+except = catch
 
 float :: Double -> Double
 float = id

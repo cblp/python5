@@ -23,6 +23,7 @@ library
                       Python5.Collections.ABC
                       Python5.IO
                       Python5.Operator
+                      Python5.Sys
     ghc-options:      -Wall -fno-warn-deprecated-flags
     hs-source-dirs:   src
     other-modules:    Python5.Builtin.Control

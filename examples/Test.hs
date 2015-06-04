@@ -42,6 +42,7 @@ expectedOutput =
                           , "[(0, Banana), (1, Apple), (2, Lime)]" ] )
     , ("functions.hs", "0 1 1 2 3 5 8 13 21 34 55 89 144 233 377 610 987 \n")
     , ("io.hs", "Hello, I'm Python5!\nWhat is your name?\nHi, TEST INPUT.\n")
+    , ("types.hs", "ValueError ()\n")
     ]
 
 main :: IO ()
