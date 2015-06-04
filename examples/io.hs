@@ -1,4 +1,3 @@
-{-# LANGUAGE NoImplicitPrelude #-}
 import Python5.Builtin
 
 {-

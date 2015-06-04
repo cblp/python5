@@ -3,11 +3,12 @@ set -eu
 set -o pipefail
 
 if [[ ! -z "${PYTHON5_LOCALTEST:-}" ]]; then
-    if [[ -d .cabal-sandbox ]]; then
-        package_db_opt="-package-db=$(echo .cabal-sandbox/*-ghc-*-packages.conf.d)"
-    else
+#     if [[ -f dist/package.conf.inplace ]]; then
         package_db_opt="-package-db=dist/package.conf.inplace"
-    fi
+#     else
+#         packages_conf_d="$(echo .cabal-sandbox/*-ghc-*-packages.conf.d)"
+#         package_db_opt="-package-db=$packages_conf_d"
+#     fi
 fi
 
 exts="-XExtendedDefaultRules -XNoImplicitPrelude -XScopedTypeVariables"

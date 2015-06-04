@@ -20,14 +20,24 @@
 
 module Python5.Builtin.Control where
 
-import Control.Monad          ( forM_ )
-import Python5.Builtin.Extra  ( RValue(readRValue), RValueData )
+import Python5.Builtin.Extra    ( RValue(readRValue), RValueData )
+import Python5.Collections.ABC  ( Iterable(iter), StopIteration(..), next )
 
-for :: Monad m => [a] -> (a -> m b) -> m ()
-for = forM_
+for :: Iterable iterator iterable => iterable a -> (a -> IO ()) -> IO ()
+for iterable action = do
+    iterator <- iter iterable
+    loop iterator
+  where
+    loop iterator = do
+        iteratorState <- next iterator
+        case iteratorState of
+            Left StopIteration -> pass
+            Right x -> do
+                action x
+                loop iterator
 
 by :: (a -> b) -> a -> b
-by = ($)
+by = id
 
 pass :: Monad m => m ()
 pass = return ()

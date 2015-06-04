@@ -16,23 +16,39 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -}
 
-{-# LANGUAGE MultiParamTypeClasses #-}
+{-# LANGUAGE FlexibleContexts, FlexibleInstances, FunctionalDependencies, KindSignatures, LambdaCase, MultiParamTypeClasses, TypeFamilies, TypeSynonymInstances #-}
 
 module Python5.Collections.ABC where
 
-class Iterable iterable where
-    iter :: iterable item -> [item]
+import Data.IORef ( IORef, newIORef, readIORef, writeIORef )
+
+--------------------------------------------------------------------------------
+-- Iterator concept
+
+class Iterator iterator where
+    next :: iterator a -> IO (Either StopIteration a)
+
+newtype IOListRef a = IOListRef (IORef [a])
+
+instance Iterator IOListRef where
+    next (IOListRef it) = do
+        readIORef it >>= \case
+            []    -> return $ Left StopIteration
+            x:xs  -> do writeIORef it xs
+                        return $ Right x
+
+--------------------------------------------------------------------------------
+-- Iterable concept
+
+class Iterator iterator => Iterable iterator iterable | iterable -> iterator
+  where
+    iter :: iterable a -> IO (iterator a)
+
+instance Iterable IOListRef [] where
+    iter xs = IOListRef `fmap` newIORef xs
 
 -- TODO instance Has__getitem__ => Iterable
 
-instance Iterable [] where
-    iter xs = xs
-
-class Iterator iterator where
-    next :: iterator item -> Either StopIteration (item, iterator item)
-
-instance Iterator [] where
-    next []     = Left StopIteration
-    next (x:xs) = Right (x, xs)
+--------------------------------------------------------------------------------
 
 data StopIteration = StopIteration -- TODO find proper place

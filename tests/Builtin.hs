@@ -20,7 +20,7 @@
 
 module Builtin where
 
-import Prelude ( ($) )
+import Prelude ( ($), Eq, IO, Show )
 import Python5.Builtin
 import Test.Hspec
 
@@ -38,9 +38,14 @@ spec = do
 
     describe "__builtin__.all" $ do
         it "returns True if all elements of the iterable are true" $ do
-            all [True] `shouldBe` True
-            all [False] `shouldBe` False
-            all [True, True, True] `shouldBe` True
-            all [True, True, False] `shouldBe` False
+            all [True] `shouldEvaluateTo` True
+            all [False] `shouldEvaluateTo` False
+            all [True, True, True] `shouldEvaluateTo` True
+            all [True, True, False] `shouldEvaluateTo` False
         it "returns True if the iterable is empty" $
-            all [] `shouldBe` True
+            all [] `shouldEvaluateTo` True
+
+shouldEvaluateTo :: (Eq a, Show a) => IO a -> a -> IO ()
+action `shouldEvaluateTo` valueExpected = do
+    valueGot <- action
+    valueGot `shouldBe` valueExpected
