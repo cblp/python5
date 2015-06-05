@@ -16,26 +16,28 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -}
 
-{-# LANGUAGE FlexibleContexts, FlexibleInstances, FunctionalDependencies, KindSignatures, LambdaCase, MultiParamTypeClasses, TypeFamilies, TypeSynonymInstances #-}
+{-# LANGUAGE DeriveDataTypeable, FlexibleContexts, FlexibleInstances, FunctionalDependencies, KindSignatures, LambdaCase, MultiParamTypeClasses, TypeFamilies, TypeSynonymInstances #-}
 
 module Python5.Collections.ABC where
 
-import Data.IORef ( IORef, newIORef, readIORef, writeIORef )
+import Control.Exception  ( Exception, throwIO )
+import Data.IORef         ( IORef, newIORef, readIORef, writeIORef )
+import Data.Typeable      ( Typeable )
 
 --------------------------------------------------------------------------------
 -- Iterator concept
 
 class Iterator iterator where
-    next :: iterator a -> IO (Either StopIteration a)
+    next :: iterator a -> IO a -- or throws StopIteration
 
 newtype IOListRef a = IOListRef (IORef [a])
 
 instance Iterator IOListRef where
     next (IOListRef it) = do
         readIORef it >>= \case
-            []    -> return $ Left StopIteration
+            []    -> throwIO StopIteration
             x:xs  -> do writeIORef it xs
-                        return $ Right x
+                        return x
 
 --------------------------------------------------------------------------------
 -- Iterable concept
@@ -52,3 +54,6 @@ instance Iterable IOListRef [] where
 --------------------------------------------------------------------------------
 
 data StopIteration = StopIteration -- TODO find proper place
+    deriving (Show, Typeable)
+
+instance Exception StopIteration

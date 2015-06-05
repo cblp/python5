@@ -34,7 +34,7 @@ module            Python5.Builtin             ( (**), (*=), (+), (++), (.), (.~)
                                               , and, or
                                               , complex
                                               , enumerate
-                                              , except
+                                              , except, safe_except
                                               , float
                                               , for, by
                                               , format, upper -- from str
@@ -67,14 +67,16 @@ import            Prelude                     ( (++), (/), (==)
                                               , return
                                               )
 
-import            Control.Exception           ( Exception, catch )
 import            Control.Lens                ( (.~) )
 import            Control.Monad               ( when )
 import qualified  Data.Complex                as Complex
 import            Data.Complex                ( Complex )
 import            Python5.Builtin.Abs         ( abs )
 import            Python5.Builtin.Control     ( for, by, pass, while )
-import            Python5.Builtin.Exceptions  ( ValueError(..), raise )
+import            Python5.Builtin.Exceptions  ( ValueError(..)
+                                              , except, safe_except
+                                              , raise
+                                              )
 import            Python5.Builtin.Extra       ( (=:), var, get )
                                                 -- TODO replace get with RValue?
 import            Python5.Builtin.List        ( list )
@@ -109,9 +111,6 @@ complex(a, b) = a Complex.:+ b
 
 enumerate :: [a] -> [(Integer, a)]
 enumerate = Prelude.zip [0..]
-
-except :: Exception e => IO a -> (e -> IO a) -> IO a
-except = catch
 
 float :: Double -> Double
 float = id

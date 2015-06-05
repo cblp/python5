@@ -20,7 +20,7 @@
 
 module Python5.Builtin.Exceptions where
 
-import Control.Exception  ( Exception, throwIO )
+import Control.Exception  ( Exception, catch, throwIO )
 import Data.Typeable      ( Typeable )
 
 data ValueError = forall a. Show a => ValueError a
@@ -30,7 +30,11 @@ deriving instance Show ValueError
 
 instance Exception ValueError
 
--- instance Show ValueError where
-
 raise :: Exception e => e -> IO a
 raise = throwIO
+
+except :: Exception e => IO a -> (e -> IO a) -> IO a
+except = catch
+
+safe_except :: IO (Either e a) -> (e -> IO a) -> IO a
+safe_except action handler = action >>= either handler return

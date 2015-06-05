@@ -1,23 +1,25 @@
 import Python5.Builtin
 
+-- TODO hide unused
 import Control.Exception        ( SomeException )
 import Data.Maybe               ( fromJust )
 import Python5.Collections.ABC  ( Iterator )
 import Python5.Sys              ( print_exception )
 
-import Prelude (Either(Left, Right), show) -- TODO remove
+import Prelude                  ( undefined )
 
 data Item = Item {is_good :: Bool}
     deriving Eq
 
 create_error() = ValueError()
 
-next_item :: Iterator it => it a -> Action (Maybe a)
-next_item it = do
-    ex <- next it
-    return ? case ex of
-        Left StopIteration -> Nothing
-        Right x -> Just x
+next_item :: Iterator it => it a -> Action (Maybe a) -- TODO hide
+next_item it =
+    do
+        x <- next it
+        return (Just x)
+    `except` \StopIteration ->
+        return Nothing
 
 check_next_item(items) = do
     item <- next_item items
