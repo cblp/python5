@@ -16,7 +16,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -}
 
-{-# LANGUAGE DeriveDataTypeable, ExistentialQuantification, StandaloneDeriving #-}
+{-# LANGUAGE ExistentialQuantification, StandaloneDeriving #-}
 
 module Python5.Builtin.Exceptions where
 
