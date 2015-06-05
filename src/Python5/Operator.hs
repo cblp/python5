@@ -58,3 +58,11 @@ ra < rb = do
     a <- readRValue ra
     b <- readRValue rb
     return (a Prelude.< b)
+
+and :: Bool -> Bool -> Bool
+and = (Prelude.&&)
+infixr 3 `and`
+
+or :: Bool -> Bool -> Bool
+or = (Prelude.||)
+infixr 2 `or`

@@ -16,23 +16,44 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -}
 
-{-# LANGUAGE MultiParamTypeClasses #-}
+{-# LANGUAGE DeriveDataTypeable, FlexibleContexts, FlexibleInstances, FunctionalDependencies, KindSignatures, LambdaCase, MultiParamTypeClasses, TypeFamilies, TypeSynonymInstances #-}
 
 module Python5.Collections.ABC where
 
-class Iterable iterable where
-    iter :: iterable item -> [item]
+import Control.Exception  ( Exception, throwIO )
+import Data.IORef         ( IORef, newIORef, readIORef, writeIORef )
+import Data.Typeable      ( Typeable )
+
+--------------------------------------------------------------------------------
+-- Iterator concept
+
+class Iterator iterator where
+    next :: iterator a -> IO a -- or throws StopIteration
+
+newtype IOListRef a = IOListRef (IORef [a])
+
+instance Iterator IOListRef where
+    next (IOListRef it) = do
+        readIORef it >>= \case
+            []    -> throwIO StopIteration
+            x:xs  -> do writeIORef it xs
+                        return x
+
+--------------------------------------------------------------------------------
+-- Iterable concept
+
+class Iterator iterator => Iterable iterator iterable | iterable -> iterator
+  where
+    iter :: iterable a -> IO (iterator a)
+
+instance Iterable IOListRef [] where
+    iter xs = IOListRef `fmap` newIORef xs
 
 -- TODO instance Has__getitem__ => Iterable
 
-instance Iterable [] where
-    iter xs = xs
-
-class Iterator iterator where
-    next :: iterator item -> Either StopIteration (item, iterator item)
-
-instance Iterator [] where
-    next []     = Left StopIteration
-    next (x:xs) = Right (x, xs)
+--------------------------------------------------------------------------------
 
 data StopIteration = StopIteration -- TODO find proper place
+    deriving (Show, Typeable)
+
+instance Exception StopIteration

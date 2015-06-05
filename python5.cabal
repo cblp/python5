@@ -20,11 +20,14 @@ library
                     , MissingH  >= 1.2.1  && < 1.4
     default-language: Haskell2010
     exposed-modules:  Python5.Builtin
+                      Python5.Collections.ABC
                       Python5.IO
                       Python5.Operator
+                      Python5.Sys
     ghc-options:      -Wall -fno-warn-deprecated-flags
     hs-source-dirs:   src
     other-modules:    Python5.Builtin.Control
+                      Python5.Builtin.Exceptions
                       Python5.Builtin.Extra
                       Python5.Builtin.List
                       Python5.Builtin.Print
