@@ -1,19 +1,13 @@
 import Python5.Builtin
 
--- TODO hide unused
-import Control.Exception        ( SomeException )
-import Data.Maybe               ( fromJust )
-import Python5.Collections.ABC  ( Iterator )
-import Python5.Sys              ( print_exception )
-
-import Prelude                  ( undefined )
+import Data.Maybe   ( fromJust )
+import Python5.Sys  ( print_exception )
 
 data Item = Item {is_good :: Bool}
     deriving Eq
 
 create_error() = ValueError()
 
-next_item :: Iterator it => it a -> Action (Maybe a) -- TODO hide
 next_item it =
     do
         x <- next it
