@@ -1,6 +1,6 @@
 import Python5.Builtin
 
-import Control.Exception        ( SomeException, displayException )
+import Control.Exception        ( SomeException )
 import Data.Maybe               ( fromJust )
 import Python5.Collections.ABC  ( Iterator )
 import Python5.Sys              ( print_exception )
