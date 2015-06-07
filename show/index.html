@@ -174,7 +174,7 @@ Haskell для питонистов.
                     <h2><code>for</code> loop (Python 5)</h2>
                     <pre><code>
     let numbers = [2, 4, 6, 8]
-    product &lt;- var(int(1))
+    product &lt;- var 1
     for numbers `by` \number ->
         product *= number
     print("The product is", product)
@@ -188,7 +188,7 @@ Haskell для питонистов.
                     <h2>Let's add some code in the loop body</h2>
                     <pre><code>
     let numbers = [2, 4, 6, 8]
-    product &lt;- var(int(1))
+    product &lt;- var 1
     for numbers `by` \number -> do
         print("Current sub-product is", product)
         product *= number
@@ -270,6 +270,7 @@ Haskell для питонистов.
                     <pre><code>
     $ ls
     hello.hs
+
     $ python5 hello.hs
     Hello world!
                     </code></pre>
@@ -280,7 +281,9 @@ Haskell для питонистов.
                     <pre><code>
     $ ls
     hello.hs
+
     $ py5compile hello.hs
+
     $ ls
     hello  hello.hs
                     </code></pre>
