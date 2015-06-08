@@ -12,7 +12,13 @@ if [[ ! -z "${PYTHON5_LOCALTEST:-}" ]]; then
     fi
 fi
 
-exts="-XExtendedDefaultRules -XNoImplicitPrelude -XScopedTypeVariables"
-opts="$exts ${package_db_opt:-}"
+exts=(
+    -XExtendedDefaultRules
+    -XFlexibleContexts
+    -XNoImplicitPrelude
+    -XScopedTypeVariables
+)
+
+opts="${exts[@]} ${package_db_opt:-}"
 
 runhaskell $opts "$@"

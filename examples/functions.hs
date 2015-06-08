@@ -18,7 +18,7 @@
 
 import Python5.Builtin
 
-fib(n :: Integer) = do
+fib(n) = do
     a <- var 0
     b <- var 1
     while (a < n)? do
@@ -26,4 +26,4 @@ fib(n :: Integer) = do
         (a, b) =: (b, a + b)
     print()
 
-main = fib(1000)
+main = fib(int(1000))

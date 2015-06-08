@@ -20,7 +20,6 @@
 
 import Control.Arrow      ( (>>>) )
 import Control.Monad      ( forM_ )
-import Data.Functor       ( (<$>) )
 import Data.List          ( delete, isSuffixOf )
 import System.Directory   ( getCurrentDirectory, getDirectoryContents )
 import System.Environment ( getEnvironment )
