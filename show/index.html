@@ -43,11 +43,11 @@ Haskell для питонистов.
         <link rel="stylesheet" href="css/theme/black.css" id="theme">
 
         <style type="text/css">
-            body {
+            /*body {
                 -webkit-font-feature-settings: "liga" 1;
                 font-feature-settings: "liga" 1;
                 text-rendering: optimizeLegibility;
-            }
+            }*/
             code {
                 font-family: Hasklig !important;
             }
@@ -210,8 +210,12 @@ main = performIO $ Event</code><code>  { name    = RuHaskell.Meetup 2015 Summer<
                 </section>
 
                 <section>
-                    <h2>Да!</h2>
-                    <p>Многострочные лямбды!</p>
+                    <h2>Да! Многострочные лямбды!</h2>
+                    <pre><code>
+    for numbers `by` \number -> do
+        print("Current sub-product is", product)
+        product *= number
+                    </code></pre>
                 </section>
 
                 <section>
@@ -306,9 +310,35 @@ main = performIO $ Event</code><code>  { name    = RuHaskell.Meetup 2015 Summer<
                     </code></pre>
                 </section>
 
+                <section  data-background="#aa0000"
+                          data-background-transition="zoom">
+                    <h2>  AttributeError:
+                          'NoneType' object has no attribute 'attribute'
+                    </h2>
+                </section>
+
                 <section>
                     <h2>Статическая типизация</h2>
                     <p>Найди ошибку до того, как ошибка найдёт тебя!</p>
+                </section>
+
+                <section>
+                    <pre><code class="haskell">
+    >>> [1, 2]
+    [1, 2]
+                    </code></pre>
+                    <pre class="fragment"><code class="haskell">
+    >>> [1, 2.0]
+    [1.0, 2.0]
+                    </code></pre>
+                    <pre class="fragment"><code class="haskell">
+    >>> ['1', "2"]
+    Couldn't match expected type ‘Char’ with actual type ‘String’
+                    </code></pre>
+                    <pre class="fragment"><code class="haskell">
+    >>> ('1', "2")
+    ('1', "2")
+                    </code></pre>
                 </section>
 
                 <section>
@@ -318,7 +348,7 @@ main = performIO $ Event</code><code>  { name    = RuHaskell.Meetup 2015 Summer<
         debug(x) = print(x, file:=stderr)
     #else
         debug(_) = pass
-    #endiff
+    #endif
                     </code></pre>
                 </section>
 
