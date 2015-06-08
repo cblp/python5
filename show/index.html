@@ -29,7 +29,7 @@ Haskell для питонистов.
     <head>
         <meta charset="utf-8">
 
-        <title>The New Python</title>
+        <title></title>
 
         <meta name="description" content="">
         <meta name="author" content="Yuriy Syrovetskiy">
@@ -80,13 +80,23 @@ Haskell для питонистов.
                     <style type="text/css">
                         pre.event-logo {
                             box-shadow: none;
-                            font-size: 110%;
+                            font-size: 80%;
                         }
                         pre.event-logo code {
                             background: transparent;
                         }
                     </style>
-                    <pre class="event-logo"><code>unsafePerformIO . event $</code><code class="haskell">    RuHaskell.Meetup 2015 Summer</code></pre>
+                    <pre class="event-logo"><code>
+main = performIO $ Event
+  { name      = RuHaskell.Meetup 2015 Summer
+  , date      = fromGregorian 2015 06 21
+  , venue     = "Москва, Льва Толстого, 16,"
+                ++ " Яндекс, Экстрополис"
+  , url       = "" -- TODO
+  , hashtag   = "#ruhaskell"
+  , sponsors  = []
+  }
+                    </code></pre>
                 </section>
 
                 <section>
