@@ -90,8 +90,9 @@ Haskell для питонистов.
 main = performIO $ Event
   { name      = RuHaskell.Meetup 2015 Summer
   , date      = fromGregorian 2015 06 21
-  , venue     = "Москва, Льва Толстого, 16,"
-                ++ " Яндекс, Экстрополис"
+  , venue     = [ "Москва"
+                , "Льва Толстого, 16"
+                , "Яндекс", "Экстрополис" ]
   , url       = "" -- TODO
   , hashtag   = "#ruhaskell"
   , sponsors  = []
