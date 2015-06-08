@@ -36,6 +36,8 @@ object.methodCall = methodCall object
 (//) = div
 -- TODO Prelude.fromInteger $ Prelude.floor (x / y)
 
+data Pair k v = k := v
+
 (+) ::  ( RValue rn1
         , RValue rn2
         , RValueData rn1 ~ n

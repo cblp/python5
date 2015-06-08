@@ -20,28 +20,33 @@
             , OverlappingInstances
             , RecordWildCards
             , TemplateHaskell
+            , TypeFamilies
             , UndecidableInstances
             #-}
 
 module Python5.Builtin.Print  ( print, end, file, sep ) where
 
-import Control.Lens           ( Setter', lens, makeLenses )
 import Data.IORef             ( IORef, readIORef )
 import Data.List              ( intercalate )
 import Prelude                hiding ( print )
 import Python5.Builtin.Str    ( Str(str) )
 import Python5.IO             ( FileLike(write), ToFileLike(toFileLike) )
+import Python5.Operator       ( Pair((:=)) )
 import System.IO              ( stdout )
 
 data PrintOptions = PrintOptions  { _end    :: String
-                                  , __file  :: FileLike
+                                  , _file  :: FileLike
                                   , _sep    :: String
                                   }
-makeLenses ''PrintOptions
 
-file :: ToFileLike a => Setter' PrintOptions a
-file = lens (error "`file` is write-only lens")
-            (\opts a -> opts{__file = toFileLike a})
+end :: String -> PrintOptions -> PrintOptions
+end e opts = opts{_end = e}
+
+file :: ToFileLike a => a -> PrintOptions -> PrintOptions
+file a opts = opts{_file = toFileLike a}
+
+sep :: String -> PrintOptions -> PrintOptions
+sep e opts = opts{_sep = e}
 
 data PrintArgState = PrintArgState [String] PrintOptions
 
@@ -49,18 +54,18 @@ print :: PrintArgs a => a -> IO ()
 print x = do
     let stdoutRef = toFileLike stdout
         state = PrintArgState []
-                              PrintOptions  { _end    = "\n"
-                                            , __file  = stdoutRef
-                                            , _sep    = " "
+                              PrintOptions  { _end  = "\n"
+                                            , _file = stdoutRef
+                                            , _sep  = " "
                                             }
     printImpl state x
 
 class PrintArg a where
     modifyPrintState :: a -> PrintArgState -> IO PrintArgState
 
-instance PrintArg (PrintOptions -> PrintOptions) where
-    modifyPrintState optModifier (PrintArgState strs opts) =
-        return $ PrintArgState strs (optModifier opts)
+instance (f ~ (a -> PrintOptions -> PrintOptions)) => PrintArg (Pair f a) where
+    modifyPrintState (optSetter := value) (PrintArgState strs opts) =
+        return $ PrintArgState strs (optSetter value opts)
 
 instance Str a => PrintArg (IORef a) where
     modifyPrintState ref (PrintArgState strs opts) = do
@@ -76,7 +81,7 @@ class PrintArgs a where
 
 instance PrintArgs () where
     printImpl (PrintArgState strs PrintOptions{..}) () =
-        write __file $ intercalate _sep strs ++ _end
+        write _file $ intercalate _sep strs ++ _end
 
 instance (PrintArg a, PrintArgs b) => PrintArgs (a, b) where
     printImpl state (a, b) = do

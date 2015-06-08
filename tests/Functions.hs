@@ -35,9 +35,9 @@ spec =
                     a <- var(0)
                     b <- var(1)
                     while (a < n)? do
-                        print(a, end .~ " ", file .~ buffer)
+                        print(a, end:=" ", file:=buffer)
                         (a, b) =: (b, a + b)
-                    print(file .~ buffer)
+                    print(file:=buffer)
             fib(1000)
             buffer.getvalue() >>=
                 shouldBe' "0 1 1 2 3 5 8 13 21 34 55 89 144 233 377 610 987 \n"

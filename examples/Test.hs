@@ -19,8 +19,8 @@
 {-# LANGUAGE NamedFieldPuns #-}
 
 import Control.Arrow      ( (>>>) )
-import Control.Lens       ( (<&>) )
 import Control.Monad      ( forM_ )
+import Data.Functor       ( (<$>) )
 import Data.List          ( delete, isSuffixOf )
 import System.Directory   ( getCurrentDirectory, getDirectoryContents )
 import System.Environment ( getEnvironment )
@@ -47,9 +47,9 @@ expectedOutput =
 
 main :: IO ()
 main = do
-    examples <- getDirectoryContents examplesDir
-                <&> ( filter (".hs" `isSuffixOf`)
-                      >>> delete "Test.hs" )
+    examples <- ( filter (".hs" `isSuffixOf`)
+                  >>> delete "Test.hs" )
+                <$> getDirectoryContents examplesDir
     hspec $
         describe "examples" $
             forM_ examples $ \ex ->

@@ -18,13 +18,14 @@
 
 {-# LANGUAGE LambdaCase #-}
 
-module            Python5.Builtin             ( (**), (*=), (+), (++), (.), (.~)
+module            Python5.Builtin             ( (**), (*=), (+), (++), (.)
                                               , (/), (//), (<), (=:), (==), (?)
                                               , Action
                                               , Bool(False, True)
                                               , Eq
                                               , Integer
                                               , Maybe(Just, Nothing)
+                                              , Pair((:=))
                                               , Proc
                                               , StopIteration(..)
                                               , String
@@ -67,7 +68,6 @@ import            Prelude                     ( (++), (/), (==)
                                               , return
                                               )
 
-import            Control.Lens                ( (.~) )
 import            Control.Monad               ( when )
 import qualified  Data.Complex                as Complex
 import            Data.Complex                ( Complex )
@@ -87,6 +87,7 @@ import            Python5.Collections.ABC     ( Iterable(iter)
                                               , StopIteration(..)
                                               )
 import            Python5.Operator            ( (**), (*=), (+), (.), (//), (<)
+                                              , Pair((:=))
                                               , and, or
                                               )
 

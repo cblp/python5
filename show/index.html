@@ -324,7 +324,7 @@ main = performIO $ Event
                     <h2>C Preprocessor (`<code>-XCPP</code>`)</h2>
                     <pre><code>
     #ifdef _DEBUG
-        debug(x) = print(x, file .~ stderr)
+        debug(x) = print(x, file:=stderr)
     #else
         debug(_) = pass
     #endiff

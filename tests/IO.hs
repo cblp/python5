@@ -31,12 +31,12 @@ spec =
     describe "IO" $ do
         it "Simple output (with Unicode)" $ do
             buffer <- IO.stringIO()
-            print("Hello, I'm Python5!", file .~ buffer)
+            print("Hello, I'm Python5!", file:=buffer)
             buffer.getvalue() >>= shouldBe' "Hello, I'm Python5!\n"
 
         it "Input" $ do
             buffer <- IO.stringIO()
             -- name <- input("What is your name?\n")
             let name = "Python5"
-            print("Hi, {}.".format(name), file .~ buffer)
+            print("Hi, {}.".format(name), file:=buffer)
             buffer.getvalue() >>= shouldBe' "Hi, Python5.\n"
