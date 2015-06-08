@@ -172,7 +172,7 @@ main = performIO $ Event
                 </section>
 
                 <section>
-                    <h2><code>for</code> loop (Python 3)</h2>
+                    <h2>Цикл `<code>for</code>` (Python 3)</h2>
                     <pre><code>
     numbers = [2, 4, 6, 8]
     product = 1
@@ -186,7 +186,7 @@ main = performIO $ Event
                 </section>
 
                 <section>
-                    <h2><code>for</code> loop (Python 5)</h2>
+                    <h2>Цикл `<code>for</code>` (Python 5)</h2>
                     <pre><code>
     let numbers = [2, 4, 6, 8]
     product &lt;- var 1
@@ -200,7 +200,7 @@ main = performIO $ Event
                 </section>
 
                 <section>
-                    <h2>Let's add some code in the loop body</h2>
+                    <h2>Добавим немного кода в тело цикла</h2>
                     <pre><code>
     let numbers = [2, 4, 6, 8]
     product &lt;- var 1
@@ -219,64 +219,75 @@ main = performIO $ Event
                 </section>
 
                 <section>
-                    <h2>Yes!</h2>
-                    <p>Multi-line lambdas!</p>
+                    <h2>Да!</h2>
+                    <p>Многострочные лямбды!</p>
                 </section>
 
                 <section>
-                    <h2>Module system (1)</h2>
+                    <h2>Модульная система (1)</h2>
                     <pre><code>
     package1/
+
         namespace2/
+
             module3/
                 __init__.py
-                module4.py
+                module3_4.py
+
             module5/
                 __init__.py
-                module6.py
+                module5_6.py
                     </code></pre>
                 </section>
 
                 <section>
-                    <h2>Module system (2)</h2>
+                    <h2>Модульная система (2)</h2>
                     <pre><code>
     package1/
+
         namespace2/
             __init__.py  # fiction
             module3/
                 __init__.py
-                module4.py
+                module3_4.py
+
             module5/
                 __init__.py
-                module6.py
+                module5_6.py
                     </code></pre>
                 </section>
 
                 <section>
-                    <h2>New module system (1)</h2>
+                    <h2>Новая модульная система (1)</h2>
                     <pre><code>
     package1/
+
         module2/
+
             module3/
                 __init__.py
-                module4.py
+                module3_4.py
+
             module5/
                 __init__.py
-                module6.py
+                module5_6.py
                     </code></pre>
                 </section>
 
                 <section>
-                    <h2>New module system (2)</h2>
+                    <h2>Новая модульная система (2)</h2>
                     <pre><code>
     package1/
+
         module2/
+
             module3.hs
             module3/
-                module4.hs
+                module3_4.hs
+
             module5.hs
             module5/
-                module6.hs
+                module5_6.hs
                     </code></pre>
                 </section>
 
