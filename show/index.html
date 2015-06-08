@@ -51,6 +51,9 @@ Haskell для питонистов.
             code {
                 font-family: Hasklig !important;
             }
+            h1, h2, h3, h4, h5, h6 {
+                text-transform: none !important;
+            }
         </style>
 
         <!-- Code syntax highlighting -->
@@ -80,7 +83,7 @@ Haskell для питонистов.
                     <style type="text/css">
                         pre.event-logo {
                             box-shadow: none;
-                            font-size: 80%;
+                            font-size: 75%;
                         }
                         pre.event-logo code {
                             background: transparent;
@@ -124,7 +127,7 @@ main = performIO $ Event
                 </section>
 
                 <section>
-                    <h2>Example (Python 3)</h2>
+                    <h2>Пример (Python 3)</h2>
                     <pre><code>
     def main():
         print("Hello world")
@@ -135,7 +138,8 @@ main = performIO $ Event
                 </section>
 
                 <section>
-                    <h2><code>main</code> is always an entry point</h2>
+                    <h2>  Всегда начинаем с
+                          `<code>main</code>` </h2>
                     <pre><code>
     def main():
         print("Hello world")
@@ -146,7 +150,7 @@ main = performIO $ Event
                 </section>
 
                 <section>
-                    <h2>No extra <code>def</code></h2>
+                    <h2>Убираем лишний `<code>def</code>`</h2>
                     <pre><code>
     main() =
         print("Hello world")
@@ -157,7 +161,7 @@ main = performIO $ Event
                 </section>
 
                 <section>
-                    <h2>No extra parentheses</h2>
+                    <h2>...и лишние скобки</h2>
                     <pre><code>
     main =
         print("Hello world")
