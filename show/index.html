@@ -83,36 +83,26 @@ Haskell для питонистов.
                     <style type="text/css">
                         pre.event-logo {
                             box-shadow: none;
-                            font-size: 75%;
+                            font-size: 85%;
                         }
-                        pre.event-logo code {
+                        pre.event-logo code.not-main {
                             background: transparent;
                         }
                     </style>
-                    <pre class="event-logo"><code>
-main = performIO $ Event
-  { name      = RuHaskell.Meetup 2015 Summer
-  , date      = fromGregorian 2015 06 21
-  , venue     = [ "Москва"
-                , "Льва Толстого, 16"
-                , "Яндекс", "Экстрополис" ]
-  , url       = "" -- TODO
-  , hashtag   = "#ruhaskell"
-  , sponsors  = []
+                    <pre class="event-logo haskell"><code class="not-main">
+main = performIO $ Event</code><code>  { name    = RuHaskell.Meetup 2015 Summer</code><code class="not-main">  , date    = fromGregorian 2015 06 21
+  , venue   = [ "Москва"
+              , "Льва Толстого, 16"
+              , "Яндекс", "Экстрополис" ]
+  , url     = "" -- TODO
+  , hashtag = "#ruhaskell"
   }
                     </code></pre>
                 </section>
 
                 <section>
-                    <h1>Now is <br> better than never</h1>
-                    <p> Yuriy Syrovetskiy
-                        <br>
-                        <a href="http://cblp.su">cblp.su</a>
-                        &middot;
-                        <a href="https://fb.me/cblp.su">fb.me/cblp.su</a>
-                        &middot;
-                        <a href="https://twitter.com/cblp_su">@cblp_su</a>
-                        </p>
+                    <h1>Now is <br> better <br> than never</h1>
+                    <p>Юрий Сыровецкий</p>
                 </section>
 
                 <section>
@@ -120,10 +110,12 @@ main = performIO $ Event
                 </section>
 
                 <section>
-                    <h2>Compatibility</h2>
-                    <p>With respect to tradition</p>
-                    <p class="fragment">No compatibility with previous versions
-                        for the sake of progress</p>
+                    <h2>Совместимость</h2>
+                    <p> Уважая традиции<span class="fragment">,
+                            <br> ломаем совместимость
+                            <br> во имя прогресса!
+                        </span>
+                    </p>
                 </section>
 
                 <section>
@@ -337,7 +329,7 @@ main = performIO $ Event
                             github.com/cblp/python5
                             </a>
                         </p>
-                    <p> Yuriy Syrovetskiy
+                    <p>Юрий Сыровецкий
                         <br>
                         <a href="http://cblp.su">cblp.su</a>
                         &middot;
