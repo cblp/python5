@@ -54,5 +54,5 @@ instance (Str a1, Str a2) => Str (a1, a2) where
 format :: String -> String -> String
 format = replace "{}"
 
-upper :: () -> String -> String
-upper() = map Char.toUpper
+upper :: String -> String
+upper = map Char.toUpper

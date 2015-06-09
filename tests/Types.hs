@@ -29,7 +29,7 @@ spec =
     describe "list operations" $ do
         let fruits = ["Banana", "Apple", "Lime"]
         it "list comprehensions" $ do
-            let loud_fruits = [fruit.upper() | fruit <- fruits]
+            let loud_fruits = [fruit.upper | fruit <- fruits]
             loud_fruits `shouldBe` ["BANANA", "APPLE", "LIME"]
         it "enumerate" $
             list(enumerate(fruits))

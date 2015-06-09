@@ -20,7 +20,7 @@ import Python5.Builtin
 
 main = do
     let fruits = ["Banana", "Apple", "Lime"]
-    let loud_fruits = [fruit.upper() | fruit <- fruits]
+    let loud_fruits = [fruit.upper | fruit <- fruits]
     print(loud_fruits)
     -- ["BANANA", "APPLE", "LIME"]
 
