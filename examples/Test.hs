@@ -46,9 +46,8 @@ expectedOutput =
 
 main :: IO ()
 main = do
-    examples <- ( filter (".hs" `isSuffixOf`)
-                  >>> delete "Test.hs" )
-                <$> getDirectoryContents examplesDir
+    examples <- fmap  (filter (".hs" `isSuffixOf`) >>> delete "Test.hs")
+                      (getDirectoryContents examplesDir)
     hspec $
         describe "examples" $
             forM_ examples $ \ex ->
