@@ -49,7 +49,7 @@ Haskell для питонистов.
                 text-rendering: optimizeLegibility;
             }*/
             code {
-                font-family: Hasklig !important;
+                font-family: Menlo !important;
             }
             h1, h2, h3, h4, h5, h6 {
                 text-transform: none !important;
@@ -89,14 +89,16 @@ Haskell для питонистов.
                             background: transparent;
                         }
                     </style>
-                    <pre class="event-logo haskell"><code class="not-main">
-main = performIO $ Event</code><code>  { name    = RuHaskell.Meetup 2015 Summer</code><code class="not-main">  , date    = fromGregorian 2015 06 21
-  , venue   = [ "Москва"
-              , "Льва Толстого, 16"
-              , "Яндекс", "Экстрополис" ]
-  , hashtag = "#ruhaskell"
-  }
-                    </code></pre>
+                    <pre class="event-logo haskell"><code class="not-main"
+>performIO Event</code><code
+>  { name     = RuHaskell.Meetup 2015 Summer</code><code class="not-main"
+>  , date     = fromGregorian 2015 06 21
+  , venue    = [ "Москва"
+               , "Льва Толстого, 16"
+               , "Яндекс", "Экстрополис" ]
+  , hashtag  = "#ruhaskell"
+  , sponsors = []
+  }</code></pre>
                 </section>
 
                 <section>
