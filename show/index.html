@@ -230,15 +230,15 @@ Haskell для питонистов.
                 <section>
                     <h2>Модульная система (1)</h2>
                     <pre><code>
-    package1/
+    namespace1/
 
-        namespace2/
+        package2/
 
-            module3/
+            package3/
                 __init__.py
                 module3_4.py
 
-            module5/
+            package5/
                 __init__.py
                 module5_6.py
                     </code></pre>
@@ -248,15 +248,15 @@ Haskell для питонистов.
                 <section>
                     <h2>Модульная система (2)</h2>
                     <pre><code>
-    package1/
-
-        namespace2/
+    namespace1/
+        __init__.py  # fiction
+        package2/
             __init__.py  # fiction
-            module3/
+            package3/
                 __init__.py
                 module3_4.py
 
-            module5/
+            package5/
                 __init__.py
                 module5_6.py
                     </code></pre>
@@ -342,6 +342,36 @@ Haskell для питонистов.
                 <section>
                     <h2>Статическая типизация</h2>
                     <p>Найди ошибку до того, как ошибка найдёт тебя!</p>
+                </section>
+
+                <section>
+                    <h2>Ненавязчивая статическая типизация</h2>
+                    <pre><code class="haskell">
+
+
+    distance((x1, y1), (x2, y2)) =
+        sqrt((x2 - x1) ^ 2 + (y2 - y1) ^ 2)
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2>Ненавязчивая статическая типизация</h2>
+                    <pre><code class="haskell">
+
+    distance :: ((Double, Double), (Double, Double)) -> Double
+    distance((x1, y1), (x2, y2)) =
+        sqrt((x2 - x1) ^ 2 + (y2 - y1) ^ 2)
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2>Ненавязчивая статическая типизация</h2>
+                    <pre><code class="haskell">
+    type Point = (Double, Double)
+    distance :: (Point, Point) -> Double
+    distance((x1, y1), (x2, y2)) =
+        sqrt((x2 - x1) ^ 2 + (y2 - y1) ^ 2)
+                    </code></pre>
                 </section>
 
                 <section>
