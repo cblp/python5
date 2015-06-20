@@ -84,6 +84,7 @@ Haskell для питонистов.
                         pre.event-logo {
                             box-shadow: none;
                             font-size: 85%;
+                            line-height: 135%;
                         }
                         pre.event-logo code.not-main {
                             background: transparent;
@@ -96,6 +97,8 @@ Haskell для питонистов.
   , venue    = [ "Москва"
                , "Льва Толстого, 16"
                , "Яндекс", "Экстрополис" ]
+  , site     = "ruhaskell.org"
+  , chat     = "gitter.im/ruHaskell/meetup"
   , hashtag  = "#ruhaskell"
   , sponsors = []
   }</code></pre>
@@ -239,6 +242,7 @@ Haskell для питонистов.
                 __init__.py
                 module5_6.py
                     </code></pre>
+                    <p>&nbsp;</p>
                 </section>
 
                 <section>
@@ -256,6 +260,7 @@ Haskell для питонистов.
                 __init__.py
                 module5_6.py
                     </code></pre>
+                    <p>&nbsp;</p>
                 </section>
 
                 <section>
@@ -273,6 +278,7 @@ Haskell для питонистов.
                 __init__.py
                 module5_6.py
                     </code></pre>
+                    <p>&nbsp;</p>
                 </section>
 
                 <section>
@@ -320,8 +326,16 @@ Haskell для питонистов.
 
                 <section  data-background="#aa0000"
                           data-background-transition="zoom">
-                    <h2>  AttributeError:
-                          'NoneType' object has no attribute 'attribute'
+                    <h2>
+                        AttributeError:
+                        'NoneType' object has no attribute 'attribute'
+                    </h2>
+                    <h2 class="fragment">
+                        TypeError:
+                        can only concatenate list (not "tuple") to list
+                    </h2>
+                    <h2 class="fragment">
+                        500 Internal Server Error
                     </h2>
                 </section>
 
@@ -341,11 +355,30 @@ Haskell для питонистов.
                     </code></pre>
                     <pre class="fragment"><code class="haskell">
     >>> ['1', "2"]
-    Couldn't match expected type ‘Char’ with actual type ‘String’
+    Error: Couldn't match expected type ‘Char’
+                       with actual type ‘String’
                     </code></pre>
                     <pre class="fragment"><code class="haskell">
     >>> ('1', "2")
     ('1', "2")
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2>Связывание имён (Python 3)</h2>
+                    <pre><code>
+    >>> adders = [lambda x: x + i for i in range(3)]
+    >>> [f(0) for f in adders]
+    [2, 2, 2]
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2>Связывание имён (Python 5)</h2>
+                    <pre><code>
+    >>> let adders = [\ x -> x + i | i &lt;- range(3)]
+    >>> [f(0) | f &lt;- adders]
+    [0, 1, 2]
                     </code></pre>
                 </section>
 
@@ -367,7 +400,8 @@ Haskell для питонистов.
                             github.com/cblp/python5
                         </a>
                     </p>
-                    <p> Юрий Сыровецкий
+                    <p>
+                        Юрий Сыровецкий
                         <br>
                         <a href="http://cblp.su">cblp.su</a>
                         &middot;
