@@ -36,7 +36,7 @@ library
 
 test-suite tests
     build-depends:    base
-                    , hspec >= 1.11 && < 1.12
+                    , hspec >= 1.11 && < 2.2
                     , python5
     default-language: Haskell2010
     ghc-options:      -Wall -Werror
