@@ -15,10 +15,10 @@ source-repository head
     location: https://github.com/cblp/python5
 
 library
-    build-depends:      base      >= 4.6    && < 4.9
-                      , MissingH  >= 1.2.1  && < 1.4
+    build-depends:      base
+                      , MissingH
     default-extensions: DeriveDataTypeable
-                      , LambdaCase
+                        LambdaCase
     default-language:   Haskell2010
     exposed-modules:    Python5.Builtin
                         Python5.Collections.ABC
@@ -27,7 +27,8 @@ library
                         Python5.Sys
     ghc-options:        -Wall -fno-warn-deprecated-flags
     hs-source-dirs:     src
-    other-modules:      Python5.Builtin.Control
+    other-modules:      Python5.Builtin.Abs
+                        Python5.Builtin.Control
                         Python5.Builtin.Exceptions
                         Python5.Builtin.Extra
                         Python5.Builtin.List
@@ -36,21 +37,28 @@ library
 
 test-suite tests
     build-depends:    base
-                    , hspec >= 1.11 && < 2.2
+                    , hspec
                     , python5
     default-language: Haskell2010
     ghc-options:      -Wall -Werror
     hs-source-dirs:   tests
     main-is:          Main.hs
+    other-modules:    Builtin
+                      Control
+                      Functions
+                      IO
+                      Local.Test.Prelude
+                      Operator
+                      Types
     type:             exitcode-stdio-1.0
 
 test-suite examples
     build-depends:    base
-                    , directory     >= 1.2    && < 1.3
-                    , filepath      >= 1.3    && < 1.5
+                    , directory
+                    , filepath
                     , hspec
-                    , process       >= 1.2.3  && < 1.3
-                    , transformers  >= 0.3    && < 0.5
+                    , process
+                    , transformers
     default-language: Haskell2010
     ghc-options:      -Wall -Werror
     hs-source-dirs:   examples

@@ -1,1 +1,1 @@
-cabal test --ghc-option=-Werror
+stack test --ghc-options=-Werror
