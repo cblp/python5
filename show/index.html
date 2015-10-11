@@ -3,7 +3,7 @@
 
 <!--
     Название
-Haskell для питонистов.
+Haskell для питониста.
 Сравнение функциональных подходов в Haskell и Python.
 
     Целевая аудитория
@@ -17,13 +17,8 @@ Haskell для питонистов.
 Преимущества функционального подхода.
 Эффективная обработка ошибок.
 
-    Обращение к программному комитету
-
     Коротко о вас
-Разработчик в Яндексе, функциональный энтузиаст, преподаватель ФП в лицее
-
-    Коротко о вашей компании
-Вообще, я работаю в Яндексе, но в этот раз хочу выступить от своего имени.
+Разработчик в Яндексе, функциональный энтузиаст, преподаватель ФП в школе.
 -->
 
     <head>
@@ -54,6 +49,14 @@ Haskell для питонистов.
             h1, h2, h3, h4, h5, h6 {
                 text-transform: none !important;
             }
+            hr {
+                border-color: transparent;
+            }
+            pre {
+                box-shadow:     none  !important;
+                margin-top:     0     !important;
+                margin-bottom:  0     !important;
+            }
         </style>
 
         <!-- Code syntax highlighting -->
@@ -79,31 +82,6 @@ Haskell для питонистов.
 
             <!-- Any section element inside of this container is displayed as a slide -->
             <div class="slides">
-                <section>
-                    <style type="text/css">
-                        pre.event-logo {
-                            box-shadow: none;
-                            font-size: 85%;
-                            line-height: 135%;
-                        }
-                        pre.event-logo code.not-main {
-                            background: transparent;
-                        }
-                    </style>
-                    <pre class="event-logo haskell"><code class="not-main"
->performIO Event</code><code
->  { name     = RuHaskell.Meetup 2015 Summer</code><code class="not-main"
->  , date     = fromGregorian 2015 06 21
-  , venue    = [ "Москва"
-               , "Льва Толстого, 16"
-               , "Яндекс", "Экстрополис" ]
-  , site     = "ruhaskell.org"
-  , chat     = "gitter.im/ruHaskell/meetup"
-  , hashtag  = "#ruhaskell"
-  , sponsors = []
-  }</code></pre>
-                </section>
-
                 <section>
                     <h1>Now is <br> better <br> than never</h1>
                     <p>Юрий Сыровецкий</p>
@@ -137,9 +115,7 @@ Haskell для питонистов.
                 </section>
 
                 <section>
-                    <h2>  Всегда начинаем с
-                          `<code>main</code>`
-                    </h2>
+                    <h2>Всегда начинаем с `<code>main</code>`</h2>
                     <pre><code>
     def main():
         print("Hello world")
@@ -180,6 +156,7 @@ Haskell для питонистов.
         product *= number
     print("The product is", product)
                     </code></pre>
+                    <hr>
                     <pre><code>
     The product is 384
                     </code></pre>
@@ -194,6 +171,7 @@ Haskell для питонистов.
         product *= number
     print("The product is", product)
                     </code></pre>
+                    <hr>
                     <pre><code>
     The product is 384
                     </code></pre>
@@ -209,6 +187,7 @@ Haskell для питонистов.
         product *= number
     print("The product is", product)
                     </code></pre>
+                    <hr>
                     <pre><code>
     Current sub-product is 1
     Current sub-product is 2
@@ -219,84 +198,12 @@ Haskell для питонистов.
                 </section>
 
                 <section>
-                    <h2>Да! Многострочные лямбды!</h2>
+                    <h2>Многострочные лямбды!</h2>
                     <pre><code>
     for numbers `by` \number -> do
         print("Current sub-product is", product)
         product *= number
                     </code></pre>
-                </section>
-
-                <section>
-                    <h2>Модульная система (1)</h2>
-                    <pre><code>
-    namespace1/
-
-        package2/
-
-            package3/
-                __init__.py
-                module3_4.py
-
-            package5/
-                __init__.py
-                module5_6.py
-                    </code></pre>
-                    <p>&nbsp;</p>
-                </section>
-
-                <section>
-                    <h2>Модульная система (2)</h2>
-                    <pre><code>
-    namespace1/
-        __init__.py  # fiction
-        package2/
-            __init__.py  # fiction
-            package3/
-                __init__.py
-                module3_4.py
-
-            package5/
-                __init__.py
-                module5_6.py
-                    </code></pre>
-                    <p>&nbsp;</p>
-                </section>
-
-                <section>
-                    <h2>Новая модульная система (1)</h2>
-                    <pre><code>
-    package1/
-
-        module2/
-
-            module3/
-                __init__.py
-                module3_4.py
-
-            module5/
-                __init__.py
-                module5_6.py
-                    </code></pre>
-                    <p>&nbsp;</p>
-                </section>
-
-                <section>
-                    <h2>Новая модульная система (2)</h2>
-                    <pre><code>
-    package1/
-
-        module2/
-
-            module3.hs
-            module3/
-                module3_4.hs
-
-            module5.hs
-            module5/
-                module5_6.hs
-                    </code></pre>
-                    <p class="fragment">hs = hacker's script</p>
                 </section>
 
                 <section>
@@ -395,21 +302,21 @@ Haskell для питонистов.
                 </section>
 
                 <section>
-                    <h2>Связывание имён (Python 3)</h2>
+                    <h2>Связывание имён</h2>
+                    <h3>Python 3</h3>
                     <pre><code>
     >>> adders = [lambda x: x + i for i in range(3)]
-    >>> [f(0) for f in adders]
-    [2, 2, 2]
+    >>> [f(0) for f in adders]</code></pre>
+                    <pre class="fragment"><code>    [2, 2, 2]
                     </code></pre>
-                </section>
-
-                <section>
-                    <h2>Связывание имён (Python 5)</h2>
-                    <pre><code>
+                    <div class="fragment">
+                        <h3>Python 5</h3>
+                        <pre><code>
     >>> let adders = [\ x -> x + i | i &lt;- range(3)]
     >>> [f(0) | f &lt;- adders]
     [0, 1, 2]
-                    </code></pre>
+                        </code></pre>
+                    </div>
                 </section>
 
                 <section>
