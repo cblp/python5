@@ -16,8 +16,6 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -}
 
-import Test.Hspec
-
 -- tests
 import qualified Builtin
 import qualified Control
@@ -25,12 +23,15 @@ import qualified Functions
 import qualified IO
 import qualified Operator
 import qualified Types
+-- global
+import Test.Tasty
 
 main :: IO ()
-main = hspec $ do
-    Builtin.spec
-    Control.spec
-    Functions.spec
-    IO.spec
-    Operator.spec
-    Types.spec
+main = defaultMain $ testGroup ""
+    [ Builtin.spec
+    , Control.spec
+    , Functions.spec
+    , IO.spec
+    , Operator.spec
+    , Types.spec
+    ]

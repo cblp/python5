@@ -20,16 +20,14 @@
 
 module Control where
 
-import Prelude ( ($), (>>=) )
+import Prelude ( ($) )
 import Python5.Builtin
-import Test.Hspec
+import Test.Tasty.HUnit.X
 
-spec :: Spec
-spec =
-    describe "for" $
-        it "mutates var in for" $ do
-            let numbers = [2, 4, 6, 8]
-            product <- var 1
-            for numbers `by` \number ->
-                product *= number
-            get product >>= shouldBe (int(384))
+spec :: TestTree
+spec = testCase "var mutates in for" $ do
+    let numbers = [2, 4, 6, 8]
+    product <- var 1
+    for numbers `by` \number ->
+        product *= number
+    get product `assertEval` int(384)

@@ -19,7 +19,6 @@
 {-# LANGUAGE NamedFieldPuns #-}
 
 import Control.Arrow      ( (>>>) )
-import Control.Monad      ( forM_ )
 import Data.List          ( delete, isSuffixOf )
 import System.Directory   ( getCurrentDirectory, getDirectoryContents )
 import System.Environment ( getEnvironment )
@@ -28,32 +27,33 @@ import System.Process     ( CreateProcess(env)
                           , proc
                           , readCreateProcess
                           )
-import Test.Hspec
+import Test.Tasty
+import Test.Tasty.HUnit
 
 examplesDir :: String
 examplesDir = "examples"
 
 expectedOutput :: [(String, String)]
 expectedOutput =
-    [ ("calc.hs", "0.5\n8\n5.666666666666667\n5\n")
-    , ("control.hs", "The product is: 384\n")
-    , ("data.hs", unlines [ "[BANANA, APPLE, LIME]"
-                          , "[(0, Banana), (1, Apple), (2, Lime)]" ] )
-    , ("functions.hs", "0 1 1 2 3 5 8 13 21 34 55 89 144 233 377 610 987 \n")
-    , ("io.hs", "Hello, I'm Python5!\nWhat is your name?\nHi, TEST INPUT.\n")
-    , ("types.hs", "ValueError ()\n")
+    [ "calc.hs" -: "0.5\n8\n5.666666666666667\n5\n"
+    , "control.hs" -: "The product is: 384\n"
+    , "data.hs" -: unlines  [ "[BANANA, APPLE, LIME]"
+                            , "[(0, Banana), (1, Apple), (2, Lime)]" ]
+    , "functions.hs" -: "0 1 1 2 3 5 8 13 21 34 55 89 144 233 377 610 987 \n"
+    , "io.hs" -: "Hello, I'm Python5!\nWhat is your name?\nHi, TEST INPUT.\n"
+    , "types.hs" -: "ValueError ()\n"
     ]
 
 main :: IO ()
 main = do
     examples <- fmap  (filter (".hs" `isSuffixOf`) >>> delete "Test.hs")
                       (getDirectoryContents examplesDir)
-    hspec $
-        describe "examples" $
-            forM_ examples $ \ex ->
-                it ex $ do
-                    result <- python5 (examplesDir </> ex) "TEST INPUT"
-                    Just result `shouldBe` lookup ex expectedOutput
+    defaultMain $
+        testGroup "examples"
+            [ testCase ex $ do
+                  result <- python5 (examplesDir </> ex) "TEST INPUT"
+                  Just result @?= lookup ex expectedOutput
+            | ex <- examples ]
 
 python5 :: String -> String -> IO String
 python5 scriptFile stdinContent = do
@@ -64,3 +64,6 @@ python5 scriptFile stdinContent = do
         env = Just $ curEnv ++ [("PYTHON5_LOCALTEST", "1")]
         processInfo = (proc cmd args){env}
     readCreateProcess processInfo stdinContent
+
+(-:) :: a -> b -> (a, b)
+(-:) = (,)

@@ -22,15 +22,15 @@ module Types where
 
 import Prelude ( ($) )
 import Python5.Builtin
-import Test.Hspec
+import Test.Tasty.HUnit.X
 
-spec :: Spec
-spec =
-    describe "list operations" $ do
-        let fruits = ["Banana", "Apple", "Lime"]
-        it "list comprehensions" $ do
-            let loud_fruits = [fruit.upper | fruit <- fruits]
-            loud_fruits `shouldBe` ["BANANA", "APPLE", "LIME"]
-        it "enumerate" $
-            list(enumerate(fruits))
-                `shouldBe` [(0, "Banana"), (1, "Apple"), (2, "Lime")]
+spec :: TestTree
+spec = testGroup "list operations" $
+    let fruits = ["Banana", "Apple", "Lime"]
+    in
+    [ testCase "list comprehensions" $ do
+          let loud_fruits = [fruit.upper | fruit <- fruits]
+          loud_fruits @?= ["BANANA", "APPLE", "LIME"]
+    , testCase "enumerate" $
+          list(enumerate(fruits)) @?= [(0, "Banana"), (1, "Apple"), (2, "Lime")]
+    ]

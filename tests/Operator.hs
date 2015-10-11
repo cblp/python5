@@ -22,16 +22,10 @@ module Operator where
 
 import Prelude ( ($) )
 import Python5.Builtin
-import Test.Hspec
+import Test.Tasty.HUnit.X
 
-spec :: Spec
-spec = do
-    describe "(/)" $
-        it "(/)" $
-            1 / 2 `shouldBe` float(0.5)
-    describe "(//)" $
-        it "(//)" $
-            17 // 3 `shouldBe` int(5)
-    describe "(**)" $
-        it "(**)" $
-            2 ** 3 `shouldBe` int(8)
+spec :: TestTree
+spec = testCase "operators" $ do
+    1 / 2     @?=   float(0.5)
+    17 // 3   @?=   int(5)
+    2 ** 3    @?=   int(8)

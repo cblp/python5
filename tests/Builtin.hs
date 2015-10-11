@@ -20,32 +20,29 @@
 
 module Builtin where
 
-import Prelude ( ($), IO, Show )
+import Prelude ( ($) )
 import Python5.Builtin
-import Test.Hspec
+import Test.Tasty.HUnit.X
 
-spec :: Spec
-spec = do
-    describe "__builtin__.abs" $ do
-        it "returns the absolute value of a number" $ do
-            abs(int(1)) `shouldBe` 1
-            abs(int(-2)) `shouldBe` 2
-        it "The argument may be an integer or a floating point number" $ do
-            abs(int(3)) `shouldBe` 3
-            abs(float(-4)) `shouldBe` 4
-        it "If the argument is a complex number, its magnitude is returned" $
-            abs(complex(3, 4)) `shouldBe` float(5)
-
-    describe "__builtin__.all" $ do
-        it "returns True if all elements of the iterable are true" $ do
-            all [True] `shouldEvaluateTo` True
-            all [False] `shouldEvaluateTo` False
-            all [True, True, True] `shouldEvaluateTo` True
-            all [True, True, False] `shouldEvaluateTo` False
-        it "returns True if the iterable is empty" $
-            all [] `shouldEvaluateTo` True
-
-shouldEvaluateTo :: (Eq a, Show a) => IO a -> a -> IO ()
-action `shouldEvaluateTo` valueExpected = do
-    valueGot <- action
-    valueGot `shouldBe` valueExpected
+spec :: TestTree
+spec = testGroup "Builtin"
+    [ testGroup "abs()"
+          [ testCase "returns the absolute value of a number" $ do
+                abs(int(1)) @?= 1
+                abs(int(-2)) @?= 2
+          , testCase "The argument may be an integer or a floating point number" $ do
+                abs(int(3)) @?= 3
+                abs(float(-4)) @?= 4
+          , testCase "If the argument is a complex number, its magnitude is returned" $
+                abs(complex(3, 4)) @?= float(5)
+          ]
+    , testGroup "all()"
+          [ testCase "True if all elements of the iterable are true" $ do
+                all [True] `assertEval` True
+                all [False] `assertEval` False
+                all [True, True, True] `assertEval` True
+                all [True, True, False] `assertEval` False
+          , testCase "True if the iterable is empty" $
+                all [] `assertEval` True
+          ]
+    ]

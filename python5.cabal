@@ -37,8 +37,9 @@ library
 
 test-suite tests
     build-depends:    base
-                    , hspec
                     , python5
+                    , tasty
+                    , tasty-hunit
     default-language: Haskell2010
     ghc-options:      -Wall -Werror
     hs-source-dirs:   tests
@@ -47,7 +48,6 @@ test-suite tests
                       Control
                       Functions
                       IO
-                      Local.Test.Prelude
                       Operator
                       Types
     type:             exitcode-stdio-1.0
@@ -56,8 +56,9 @@ test-suite examples
     build-depends:    base
                     , directory
                     , filepath
-                    , hspec
                     , process
+                    , tasty
+                    , tasty-hunit
                     , transformers
     default-language: Haskell2010
     ghc-options:      -Wall -Werror

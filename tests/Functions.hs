@@ -20,24 +20,21 @@
 
 module Functions where
 
-import Local.Test.Prelude
 import Prelude    ( ($) )
 import Python5.Builtin
 import Python5.IO as IO
-import Test.Hspec
+import Test.Tasty.HUnit.X
 
-spec :: Spec
-spec =
-    describe "functions" $
-        it "declaration of a function with mutables" $ do
-            buffer <- IO.stringIO()
-            let fib(n :: Integer) = do
-                    a <- var(0)
-                    b <- var(1)
-                    while (a < n)? do
-                        print(a, end:=" ", file:=buffer)
-                        (a, b) =: (b, a + b)
-                    print(file:=buffer)
-            fib(1000)
-            buffer.getvalue() >>=
-                shouldBe' "0 1 1 2 3 5 8 13 21 34 55 89 144 233 377 610 987 \n"
+spec :: TestTree
+spec = testCase "declaration of a function with mutables" $ do
+    buffer <- IO.stringIO()
+    let fib(n :: Integer) = do
+            a <- var(0)
+            b <- var(1)
+            while (a < n)? do
+                print(a, end:=" ", file:=buffer)
+                (a, b) =: (b, a + b)
+            print(file:=buffer)
+    fib(1000)
+    buffer.getvalue()
+        `assertEval` "0 1 1 2 3 5 8 13 21 34 55 89 144 233 377 610 987 \n"
