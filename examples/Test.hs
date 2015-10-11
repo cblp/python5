@@ -18,20 +18,19 @@
 
 {-# LANGUAGE NamedFieldPuns #-}
 
-import Control.Arrow      ( (>>>) )
 import Data.List          ( delete, isSuffixOf )
 import System.Directory   ( getCurrentDirectory, getDirectoryContents )
 import System.Environment ( getEnvironment )
 import System.FilePath    ( (</>) )
-import System.Process     ( CreateProcess(env)
-                          , proc
-                          , readCreateProcess
-                          )
-import Test.Tasty
-import Test.Tasty.HUnit
+import System.Process     ( CreateProcess(env), proc, readCreateProcess )
+import Test.Tasty         ( defaultMain, testGroup )
+import Test.Tasty.HUnit   ( (@?=), testCase )
 
 examplesDir :: String
 examplesDir = "examples"
+
+testInput :: String
+testInput = "TEST INPUT"
 
 expectedOutput :: [(String, String)]
 expectedOutput =
@@ -46,12 +45,13 @@ expectedOutput =
 
 main :: IO ()
 main = do
-    examples <- fmap  (filter (".hs" `isSuffixOf`) >>> delete "Test.hs")
-                      (getDirectoryContents examplesDir)
+    files <- getDirectoryContents examplesDir
+    let hsFiles = filter (".hs" `isSuffixOf`) files
+    let examples = delete "Test.hs" hsFiles
     defaultMain $
         testGroup "examples"
             [ testCase ex $ do
-                  result <- python5 (examplesDir </> ex) "TEST INPUT"
+                  result <- python5 (examplesDir </> ex) testInput
                   Just result @?= lookup ex expectedOutput
             | ex <- examples ]
 
@@ -61,7 +61,7 @@ python5 scriptFile stdinContent = do
     curEnv <- getEnvironment
     let cmd = cwd </> "bin" </> "python5"
         args = [scriptFile]
-        env = Just $ curEnv ++ [("PYTHON5_LOCALTEST", "1")]
+        env = Just $ curEnv ++ ["PYTHON5_LOCALTEST" -: "1"]
         processInfo = (proc cmd args){env}
     readCreateProcess processInfo stdinContent
 
