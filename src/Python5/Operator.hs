@@ -31,6 +31,7 @@ v *= x = modifyIORef v (* x)
 
 (.) :: a -> (a -> b) -> b
 object.methodCall = methodCall object
+infixl 9 .
 
 (//) :: Integral a => a -> a -> a
 (//) = div
@@ -49,6 +50,7 @@ ra + rb = do
     a <- readRValue ra
     b <- readRValue rb
     return (a Prelude.+ b)
+infixl 4 +
 
 (<) ::  ( RValue rord1
         , RValue rord2

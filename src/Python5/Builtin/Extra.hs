@@ -72,5 +72,5 @@ instance (LValue la, LValue lb) => LValue (la, lb) where
 var :: a -> IO (IORef a)
 var = newIORef
 
-get :: IORef a -> IO a
-get = readIORef
+val :: IORef a -> IO a
+val = readIORef

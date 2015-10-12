@@ -22,6 +22,8 @@ module            Python5.Builtin             ( (**), (*=), (+), (++), (.)
                                               , (/), (//), (<), (=:), (==), (?)
                                               , Action
                                               , Bool(False, True)
+                                              , Char
+                                              , Dict, dict, get, getdefault
                                               , Eq
                                               , Integer
                                               , Maybe(Just, Nothing)
@@ -49,7 +51,7 @@ module            Python5.Builtin             ( (**), (*=), (+), (++), (.)
                                               , print, end, file, sep
                                               , raise
                                               , return
-                                              , var, get
+                                              , var, val
                                               , when
                                               , while
                                               ) where
@@ -57,6 +59,7 @@ module            Python5.Builtin             ( (**), (*=), (+), (++), (.)
 import qualified  Prelude
 import            Prelude                     ( (++), (/), (==)
                                               , Bool(False, True)
+                                              , Char
                                               , Double
                                               , Eq
                                               , IO
@@ -68,17 +71,22 @@ import            Prelude                     ( (++), (/), (==)
                                               , return
                                               )
 
+import            Control.Category            ( (>>>) )
 import            Control.Monad               ( when )
 import qualified  Data.Complex                as Complex
 import            Data.Complex                ( Complex )
+import            Data.Hashable               ( Hashable )
+import qualified  Data.HashMap.Strict         as HashMap
+import            Data.HashMap.Strict         ( HashMap )
+import            Data.Maybe                  ( fromMaybe )
 import            Python5.Builtin.Abs         ( abs )
 import            Python5.Builtin.Control     ( for, by, pass, while )
 import            Python5.Builtin.Exceptions  ( ValueError(..)
                                               , except, safe_except
                                               , raise
                                               )
-import            Python5.Builtin.Extra       ( (=:), var, get )
-                                                -- TODO replace get with RValue?
+import            Python5.Builtin.Extra       ( (=:), var, val )
+                                                -- TODO replace val with RValue?
 import            Python5.Builtin.List        ( list )
 import            Python5.Builtin.Print       ( print, end, file, sep )
 import            Python5.Builtin.Str         ( format, upper )
@@ -94,6 +102,8 @@ import            Python5.Operator            ( (**), (*=), (+), (.), (//), (<)
 type Action = IO
 type Proc = Action ()
 
+type Dict = HashMap
+
 (?) :: (a -> b) -> a -> b
 f ? x = f x
 infixr 0 ?
@@ -105,10 +115,19 @@ all coll = do
         when (not i)?
             res =: False
             -- TODO break
-    get res
+    val res
 
 complex :: (Double, Double) -> Complex Double
 complex(a, b) = a Complex.:+ b
+
+dict :: (Eq k, Hashable k) => [Pair k v] -> Dict k v
+dict kvpairs = HashMap.fromList [(k, v) | k := v <- kvpairs]
+
+get :: (Eq k, Hashable k) => k -> Dict k v -> Maybe v
+get(k) = HashMap.lookup k
+
+getdefault :: (Eq k, Hashable k) => (k, v) -> Dict k v -> v
+getdefault(k, d) = HashMap.lookup k >>> fromMaybe d
 
 enumerate :: [a] -> [(Integer, a)]
 enumerate = Prelude.zip [0..]

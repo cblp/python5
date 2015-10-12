@@ -30,4 +30,4 @@ spec = testCase "var mutates in for" $ do
     product <- var 1
     for numbers `by` \number ->
         product *= number
-    get product `assertEval` int(384)
+    val product `assertEval` int(384)

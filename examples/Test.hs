@@ -19,6 +19,7 @@
 {-# LANGUAGE NamedFieldPuns #-}
 
 import Data.List          ( delete, isSuffixOf )
+import Python5.Builtin
 import System.Directory   ( getCurrentDirectory, getDirectoryContents )
 import System.Environment ( getEnvironment )
 import System.FilePath    ( (</>) )
@@ -32,15 +33,16 @@ examplesDir = "examples"
 testInput :: String
 testInput = "TEST INPUT"
 
-expectedOutput :: [(String, String)]
-expectedOutput =
-    [ "calc.hs" -: "0.5\n8\n5.666666666666667\n5\n"
-    , "control.hs" -: "The product is: 384\n"
-    , "data.hs" -: unlines  [ "[BANANA, APPLE, LIME]"
+expectedOutput :: Dict String String
+expectedOutput = dict
+    [ "calc.hs" := "0.5\n8\n5.666666666666667\n5\n"
+    , "control.hs" := "The product is: 384\n"
+    , "data.hs" := unlines  [ "[BANANA, APPLE, LIME]"
                             , "[(0, Banana), (1, Apple), (2, Lime)]" ]
-    , "functions.hs" -: "0 1 1 2 3 5 8 13 21 34 55 89 144 233 377 610 987 \n"
-    , "io.hs" -: "Hello, I'm Python5!\nWhat is your name?\nHi, TEST INPUT.\n"
-    , "types.hs" -: "ValueError ()\n"
+    , "dict.hs" := "3\n"
+    , "functions.hs" := "0 1 1 2 3 5 8 13 21 34 55 89 144 233 377 610 987 \n"
+    , "io.hs" := "Hello, I'm Python5!\nWhat is your name?\nHi, TEST INPUT.\n"
+    , "types.hs" := "ValueError ()\n"
     ]
 
 main :: IO ()
@@ -52,7 +54,7 @@ main = do
         testGroup "examples"
             [ testCase ex $ do
                   result <- python5 (examplesDir </> ex) testInput
-                  Just result @?= lookup ex expectedOutput
+                  Just result @?= get(ex) expectedOutput
             | ex <- examples ]
 
 python5 :: String -> String -> IO String
@@ -61,9 +63,6 @@ python5 scriptFile stdinContent = do
     curEnv <- getEnvironment
     let cmd = cwd </> "bin" </> "python5"
         args = [scriptFile]
-        env = Just $ curEnv ++ ["PYTHON5_LOCALTEST" -: "1"]
+        env = Just $ curEnv ++ [("PYTHON5_LOCALTEST", "1")]
         processInfo = (proc cmd args){env}
     readCreateProcess processInfo stdinContent
-
-(-:) :: a -> b -> (a, b)
-(-:) = (,)
