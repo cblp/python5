@@ -1,0 +1,18 @@
+- static typing: detect 500 errors (None, KeyError)
+  - пример в коде
+- Speed! But who cares about speed of Python?
+- Right `if` operator arguments order
+- pattern-matching
+- https://github.com/cosmologicon/pywat
+  - reversed(a) == reversed(a) ==> False
+    - компрехеншн = список
+- имена внутри comprehension
+- количество библиотек на hackage
+- inline-c, inline-asm(?)
+- Ускорение разработки
+- пример реальной программы — вебчик
+  - посмеяться: явные опечатки, скриншоты файрфокса
+- плавно добавлять фичи, и изменить синтаксис в самом конце
+- вставить главу про портирование из 5 в 3 — functools, itertools
+- простота параллелизма
+  - загрузить из интернета URL и обработать
