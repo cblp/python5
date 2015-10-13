@@ -17,8 +17,6 @@
     5
 -}
 
-import Python5.Builtin
-
 main = do
     print(1 / 2)
     print(2 ** 3)

@@ -1,6 +1,3 @@
-import Python5.Builtin
-
-import Data.Maybe   ( fromJust )
 import Python5.Sys  ( print_exception )
 
 data Item = Item {is_good :: Bool}

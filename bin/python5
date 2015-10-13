@@ -15,10 +15,9 @@ fi
 exts=(
     -XExtendedDefaultRules
     -XFlexibleContexts
-    -XNoImplicitPrelude
     -XScopedTypeVariables
 )
 
-opts="${exts[@]} ${package_db_opt:-}"
+opts="${exts[@]} ${package_db_opt:-} -hide-package=base -package=python5-prelude"
 
 runhaskell $opts "$@"

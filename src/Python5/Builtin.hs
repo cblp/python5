@@ -26,7 +26,7 @@ module            Python5.Builtin             ( (**), (*=), (+), (++), (.)
                                               , Dict, dict, get, getdefault
                                               , Eq
                                               , Integer
-                                              , Maybe(Just, Nothing)
+                                              , Maybe(Just, Nothing), fromJust
                                               , Pair((:=))
                                               , Proc
                                               , StopIteration(..)
@@ -66,7 +66,6 @@ import            Prelude                     ( (++), (/), (==)
                                               , Integer
                                               , Maybe(Just, Nothing)
                                               , String
-                                              , id
                                               , not
                                               , return
                                               )
@@ -78,7 +77,7 @@ import            Data.Complex                ( Complex )
 import            Data.Hashable               ( Hashable )
 import qualified  Data.HashMap.Strict         as HashMap
 import            Data.HashMap.Strict         ( HashMap )
-import            Data.Maybe                  ( fromMaybe )
+import            Data.Maybe                  ( fromJust, fromMaybe )
 import            Python5.Builtin.Abs         ( abs )
 import            Python5.Builtin.Control     ( for, by, pass, while )
 import            Python5.Builtin.Exceptions  ( ValueError(..)
@@ -133,7 +132,7 @@ enumerate :: [a] -> [(Integer, a)]
 enumerate = Prelude.zip [0..]
 
 float :: Double -> Double
-float = id
+float = Prelude.id
 
 input :: String -> IO String
 input prompt = do
@@ -141,4 +140,4 @@ input prompt = do
     Prelude.getLine
 
 int :: Integer -> Integer
-int = id
+int = Prelude.id

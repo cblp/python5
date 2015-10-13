@@ -16,8 +16,6 @@
     0 1 1 2 3 5 8 13 21 34 55 89 144 233 377 610 987
 -}
 
-import Python5.Builtin
-
 fib(n) = do
     a <- var 0
     b <- var 1

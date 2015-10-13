@@ -38,33 +38,34 @@ library
                         Python5.Builtin.Str
 
 test-suite tests
-    build-depends:    base
-                    , python5
-                    , tasty
-                    , tasty-hunit
-    default-language: Haskell2010
-    ghc-options:      -Wall -Werror
-    hs-source-dirs:   tests
-    main-is:          Main.hs
-    other-modules:    Builtin
-                      Control
-                      Functions
-                      IO
-                      Operator
-                      Types
-    type:             exitcode-stdio-1.0
+    build-depends:      base
+                      , python5
+                      , tasty
+                      , tasty-hunit
+    default-language:   Haskell2010
+    ghc-options:        -Wall -Werror
+    hs-source-dirs:     tests
+    main-is:            Main.hs
+    other-modules:      Builtin
+                        Control
+                        Functions
+                        IO
+                        Operator
+                        Test.Tasty.HUnit.X
+                        Types
+    type:               exitcode-stdio-1.0
 
 test-suite examples
-    build-depends:    base
-                    , directory
-                    , filepath
-                    , process
-                    , python5
-                    , tasty
-                    , tasty-hunit
-                    , transformers
-    default-language: Haskell2010
-    ghc-options:      -Wall -Werror
-    hs-source-dirs:   examples
-    main-is:          Test.hs
-    type:             exitcode-stdio-1.0
+    build-depends:      base
+                      , directory
+                      , filepath
+                      , process
+                      , python5
+                      , tasty
+                      , tasty-hunit
+                      , transformers
+    default-language:   Haskell2010
+    ghc-options:        -Wall -Werror
+    hs-source-dirs:     examples
+    main-is:            Test.hs
+    type:               exitcode-stdio-1.0

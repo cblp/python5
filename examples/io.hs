@@ -1,5 +1,3 @@
-import Python5.Builtin
-
 {-
     Quick & Easy to Learn
 

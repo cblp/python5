@@ -16,8 +16,6 @@
     [(0, 'Banana'), (1, 'Apple'), (2, 'Lime')]
 -}
 
-import Python5.Builtin
-
 main = do
     let fruits = ["Banana", "Apple", "Lime"]
     let loud_fruits = [fruit.upper | fruit <- fruits]

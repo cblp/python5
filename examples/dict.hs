@@ -1,5 +1,3 @@
-import Python5.Builtin
-
 main = do
     let animals = dict[ "dog" := 1,
                         "cat" := 2 ] :: Dict String Integer
