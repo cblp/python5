@@ -1,4 +1,5 @@
 resolver: lts-3.9
 packages:
-  - '.'
+  - python5
   - python5-prelude
+  - examples

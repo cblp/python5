@@ -28,7 +28,7 @@ import Test.Tasty         ( defaultMain, testGroup )
 import Test.Tasty.HUnit   ( (@?=), testCase )
 
 examplesDir :: String
-examplesDir = "examples"
+examplesDir = "."
 
 testInput :: String
 testInput = "TEST INPUT"
@@ -61,7 +61,7 @@ python5 :: String -> String -> IO String
 python5 scriptFile stdinContent = do
     cwd <- getCurrentDirectory
     curEnv <- getEnvironment
-    let cmd = cwd </> "bin" </> "python5"
+    let cmd = cwd </> ".." </> "bin" </> "python5"
         args = [scriptFile]
         env = Just $ curEnv ++ [("PYTHON5_LOCALTEST", "1")]
         processInfo = (proc cmd args){env}

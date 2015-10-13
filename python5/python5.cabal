@@ -3,7 +3,7 @@ version:        0.0.0.0
 synopsis:       Hypothetic Python 5 implementation
 description:    A Haskell library that implements basic Python 3 features.
 license:        GPL-3
-license-file:   LICENSE
+license-file:   ../LICENSE
 author:         Yuriy Syrovetskiy
 maintainer:     cblp@cblp.su
 category:       Language
@@ -53,19 +53,4 @@ test-suite tests
                         Operator
                         Test.Tasty.HUnit.X
                         Types
-    type:               exitcode-stdio-1.0
-
-test-suite examples
-    build-depends:      base
-                      , directory
-                      , filepath
-                      , process
-                      , python5
-                      , tasty
-                      , tasty-hunit
-                      , transformers
-    default-language:   Haskell2010
-    ghc-options:        -Wall -Werror
-    hs-source-dirs:     examples
-    main-is:            Test.hs
     type:               exitcode-stdio-1.0
