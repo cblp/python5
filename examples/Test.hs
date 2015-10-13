@@ -20,7 +20,7 @@
 
 import Data.List          ( delete, isSuffixOf )
 import Python5.Builtin
-import System.Directory   ( getCurrentDirectory, getDirectoryContents )
+import System.Directory   ( getDirectoryContents, setCurrentDirectory )
 import System.Environment ( getEnvironment )
 import System.FilePath    ( (</>) )
 import System.Process     ( CreateProcess(env), proc, readCreateProcess )
@@ -28,7 +28,7 @@ import Test.Tasty         ( defaultMain, testGroup )
 import Test.Tasty.HUnit   ( (@?=), testCase )
 
 examplesDir :: String
-examplesDir = "."
+examplesDir = "examples"
 
 testInput :: String
 testInput = "TEST INPUT"
@@ -47,6 +47,7 @@ expectedOutput = dict
 
 main :: IO ()
 main = do
+    setCurrentDirectory ".." -- to the project dir
     files <- getDirectoryContents examplesDir
     let hsFiles = filter (".hs" `isSuffixOf`) files
     let examples = delete "Test.hs" hsFiles
@@ -59,9 +60,8 @@ main = do
 
 python5 :: String -> String -> IO String
 python5 scriptFile stdinContent = do
-    cwd <- getCurrentDirectory
     curEnv <- getEnvironment
-    let cmd = cwd </> ".." </> "bin" </> "python5"
+    let cmd = "bin" </> "python5"
         args = [scriptFile]
         env = Just $ curEnv ++ [("PYTHON5_LOCALTEST", "1")]
         processInfo = (proc cmd args){env}
