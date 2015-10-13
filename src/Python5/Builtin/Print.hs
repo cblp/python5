@@ -19,7 +19,6 @@
 {-# LANGUAGE  FlexibleInstances
             , OverlappingInstances
             , RecordWildCards
-            , TemplateHaskell
             , TypeFamilies
             , UndecidableInstances
             #-}
