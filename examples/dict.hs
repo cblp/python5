@@ -1,7 +1,6 @@
 main = do
-    let animals :: Dict String Integer =
-            dict[ "dog" := 1,
-                  "cat" := 2 ]
+    let animals = dict[ "dog" := int(1),
+                        "cat" := 2 ]
 
     -- total <- animals.get("dog") + animals.get("cat")
     -- ^ error: Couldn't match type ‘Maybe Integer’ with ‘Integer’
