@@ -62,9 +62,9 @@ class PrintArg a where
     modifyPrintState :: a -> PrintArgState -> IO PrintArgState
 
 instance {-# OVERLAPPING #-}
-    (f ~ (a -> PrintOptions -> PrintOptions)) => PrintArg (Pair f a) where
-        modifyPrintState (optSetter := value) (PrintArgState strs opts) =
-            return $ PrintArgState strs (optSetter value opts)
+        (f ~ (a -> PrintOptions -> PrintOptions)) => PrintArg (Pair f a) where
+    modifyPrintState (optSetter := value) (PrintArgState strs opts) =
+        return $ PrintArgState strs (optSetter value opts)
 
 instance {-# OVERLAPPING #-} Str a => PrintArg (IORef a) where
     modifyPrintState ref (PrintArgState strs opts) = do
@@ -88,10 +88,10 @@ instance {-# OVERLAPPING #-} (PrintArg a, PrintArgs b) => PrintArgs (a, b) where
         printImpl state' b
 
 instance {-# OVERLAPPING #-}
-    (PrintArg a, PrintArgs (b, c)) => PrintArgs (a, b, c) where
-        printImpl state (a, b, c) = do
-            state' <- modifyPrintState a state
-            printImpl state' (b, c)
+        (PrintArg a, PrintArgs (b, c)) => PrintArgs (a, b, c) where
+    printImpl state (a, b, c) = do
+        state' <- modifyPrintState a state
+        printImpl state' (b, c)
 
 instance {-# OVERLAPPABLE #-} PrintArg a => PrintArgs a where
     printImpl state a = do
