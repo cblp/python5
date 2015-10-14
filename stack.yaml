@@ -3,3 +3,5 @@ packages:
   - python5
   - python5-prelude
   - examples
+ghc-options:
+  '*': -Wall -Werror
