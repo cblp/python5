@@ -1,2 +1,13 @@
 #!/bin/bash
-ghc -XExtendedDefaultRules -XNoImplicitPrelude "$@"
+set -eu
+set -o pipefail
+
+exts=(
+    -XExtendedDefaultRules
+    -XFlexibleContexts
+    -XScopedTypeVariables
+)
+
+opts="${exts[@]} -hide-package=base -package=python5-prelude"
+
+ghc $opts "$@"
