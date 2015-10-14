@@ -17,7 +17,6 @@
 -}
 
 {-# LANGUAGE  FlexibleInstances
-            , OverlappingInstances
             , RecordWildCards
             , TypeFamilies
             , UndecidableInstances
@@ -62,37 +61,39 @@ print x = do
 class PrintArg a where
     modifyPrintState :: a -> PrintArgState -> IO PrintArgState
 
-instance (f ~ (a -> PrintOptions -> PrintOptions)) => PrintArg (Pair f a) where
-    modifyPrintState (optSetter := value) (PrintArgState strs opts) =
-        return $ PrintArgState strs (optSetter value opts)
+instance {-# OVERLAPPING #-}
+    (f ~ (a -> PrintOptions -> PrintOptions)) => PrintArg (Pair f a) where
+        modifyPrintState (optSetter := value) (PrintArgState strs opts) =
+            return $ PrintArgState strs (optSetter value opts)
 
-instance Str a => PrintArg (IORef a) where
+instance {-# OVERLAPPING #-} Str a => PrintArg (IORef a) where
     modifyPrintState ref (PrintArgState strs opts) = do
         a <- readIORef ref
         return $ PrintArgState (strs ++ [str a]) opts
 
-instance Str a => PrintArg a where
+instance {-# OVERLAPPABLE #-} Str a => PrintArg a where
     modifyPrintState a (PrintArgState strs opts) =
         return $ PrintArgState (strs ++ [str a]) opts
 
 class PrintArgs a where
     printImpl :: PrintArgState -> a -> IO ()
 
-instance PrintArgs () where
+instance {-# OVERLAPPING #-} PrintArgs () where
     printImpl (PrintArgState strs PrintOptions{..}) () =
         write _file $ intercalate _sep strs ++ _end
 
-instance (PrintArg a, PrintArgs b) => PrintArgs (a, b) where
+instance {-# OVERLAPPING #-} (PrintArg a, PrintArgs b) => PrintArgs (a, b) where
     printImpl state (a, b) = do
         state' <- modifyPrintState a state
         printImpl state' b
 
-instance (PrintArg a, PrintArgs (b, c)) => PrintArgs (a, b, c) where
-    printImpl state (a, b, c) = do
-        state' <- modifyPrintState a state
-        printImpl state' (b, c)
+instance {-# OVERLAPPING #-}
+    (PrintArg a, PrintArgs (b, c)) => PrintArgs (a, b, c) where
+        printImpl state (a, b, c) = do
+            state' <- modifyPrintState a state
+            printImpl state' (b, c)
 
-instance PrintArg a => PrintArgs a where
+instance {-# OVERLAPPABLE #-} PrintArg a => PrintArgs a where
     printImpl state a = do
         state' <- modifyPrintState a state
         printImpl state' ()

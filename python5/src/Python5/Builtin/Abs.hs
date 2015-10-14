@@ -16,7 +16,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -}
 
-{-# LANGUAGE FlexibleInstances, OverlappingInstances, UndecidableInstances #-}
+{-# LANGUAGE FlexibleInstances, UndecidableInstances #-}
 
 module Python5.Builtin.Abs where
 
@@ -25,8 +25,8 @@ import Data.Complex
 class Abs a where
     abs :: a -> Double
 
-instance Real real => Abs real where
+instance {-# OVERLAPPABLE #-} Real real => Abs real where
     abs = realToFrac . Prelude.abs
 
-instance Abs (Complex Double) where
+instance {-# OVERLAPPING #-} Abs (Complex Double) where
     abs = realPart . Prelude.abs
