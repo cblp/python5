@@ -1,5 +1,3 @@
-- static typing: detect 500 errors (None, KeyError)
-  - пример в коде
 - Right `if` operator arguments order
 - pattern-matching
 - https://github.com/cosmologicon/pywat
@@ -8,7 +6,6 @@
 - имена внутри comprehension
 - количество библиотек на hackage
 - inline-c, а в него asm (проверить)
-- Ускорение разработки
 - пример реальной программы — вебчик
   - посмеяться: явные опечатки, скриншоты файрфокса
 - плавно добавлять фичи, и изменить синтаксис в самом конце
