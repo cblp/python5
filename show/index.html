@@ -44,10 +44,12 @@ Haskell для питониста.
                 text-rendering: optimizeLegibility;
             }*/
             code {
-                padding:      0           !important;
+                padding-top:    0 !important;
+                padding-bottom: 0 !important;
             }
             h1, h2, h3, h4, h5, h6 {
                 text-transform: none !important;
+                text-align:     center;
             }
             hr {
                 border-color: transparent;
@@ -56,6 +58,10 @@ Haskell для питониста.
                 box-shadow:     none  !important;
                 margin-top:     0     !important;
                 margin-bottom:  0     !important;
+            }
+            table {
+                margin: 0 !important;
+                width:  100%;
             }
         </style>
 
@@ -104,62 +110,86 @@ Haskell для питониста.
                 </section>
 
                 <section>
-                    <h2>Цикл `<code>for</code>` (Python 3)</h2>
-                    <pre><code>
-    numbers = [2, 4, 6, 8]
-    product = 1
-    for number in numbers:
-        product *= number
-    print("The product is", product)
-                    </code></pre>
-                    <hr>
-                    <pre><code>
-    The product is 384
-                    </code></pre>
-                </section>
-
-                <section>
-                    <h2>Цикл `<code>for</code>` (Python 5)</h2>
-                    <pre><code>
-    let numbers = [2, 4, 6, 8]
-    product &lt;- var 1
-    for numbers `by` \number ->
-        product *= number
-    print("The product is", product)
-                    </code></pre>
-                    <hr>
-                    <pre><code>
-    The product is 384
-                    </code></pre>
-                </section>
-
-                <section>
-                    <h2>Добавим немного кода в тело цикла</h2>
-                    <pre><code>
-    let numbers = [2, 4, 6, 8]
-    product &lt;- var 1
-    for numbers `by` \number -> do
-        print("Current sub-product is", product)
-        product *= number
-    print("The product is", product)
-                    </code></pre>
-                    <hr>
-                    <pre><code>
-    Current sub-product is 1
-    Current sub-product is 2
-    Current sub-product is 8
-    Current sub-product is 48
-    The product is 384
-                    </code></pre>
+                    <h2>Изменяемое и неизменяемое</h2>
+                    <table>
+                        <tr>
+                            <td>
+                                <h3>Python 3</h3>
+                                <pre><code>
+  numbers = [2, 4, 6, 8]
+  product = 1
+  for n in numbers:
+      product *= n
+  print(
+      "The product is",
+      product
+  )
+  </code></pre>
+                                <hr>
+                                <pre><code>
+  The product is 384
+  </code></pre>
+                            </td>
+                            <td class="fragment">
+                                <h3>Python 5</h3>
+                                <pre><code>
+  numbers = [2, 4, 6, 8]
+  product &lt;- 1
+  for numbers: n ->
+      product *= n
+  print(
+      "The product is",
+      product
+  )
+  </code></pre>
+                                <hr>
+                                <pre><code>
+  The product is 384
+  </code></pre>
+                            </td>
+                        </tr>
+                    </table>
                 </section>
 
                 <section>
                     <h2>Многострочные лямбды!</h2>
                     <pre><code>
-    for numbers `by` \number -> do
+    for numbers: n ->
         print("Current sub-product is", product)
-        product *= number
+        product *= n
                     </code></pre>
+                </section>
+
+                <section>
+                    <table>
+                        <tr>
+                            <td>
+                                <h3>Python 3</h3>
+                                <pre><code>
+  >>> adders = [
+  ...     lambda x: x + i
+  ...     for i in range(3)
+  ... ]
+
+  >>> [f(0) for f in adders]
+  </code><code class="fragment">  [2, 2, 2]
+  </code></pre>
+                            </td>
+                            <td class="fragment">
+                                <h3>Python 5</h3>
+                                <pre><code>
+  >>> let adders = [
+  ...     x -> x + i
+  ...     for i in range(3)
+  ... ]
+
+  >>> [f(0) for f in adders]
+
+  [0, 1, 2]
+  </code></pre>
+                            </td>
+                        </tr>
+                    </table>
                 </section>
 
                 <section>
@@ -171,7 +201,7 @@ Haskell для питониста.
     $ python5 hello.hs
     Hello world!
                     </code></pre>
-                    <p>Невалидная программа не запустится</p>
+                    <p class="fragment">Невалидная программа не запустится</p>
                 </section>
 
                 <section>
@@ -185,21 +215,6 @@ Haskell для питониста.
     $ ls
     hello  hello.hs
                     </code></pre>
-                </section>
-
-                <section  data-background="#aa0000"
-                          data-background-transition="zoom">
-                    <h2>
-                        AttributeError:
-                        'NoneType' object has no attribute 'attribute'
-                    </h2>
-                    <h2 class="fragment">
-                        TypeError:
-                        can only concatenate list (not "tuple") to list
-                    </h2>
-                    <h2 class="fragment">
-                        500 Internal Server Error
-                    </h2>
                 </section>
 
                 <section>
@@ -257,23 +272,6 @@ Haskell для питониста.
                     </code></pre>
                 </section>
 
-                <section>
-                    <h2>Связывание имён</h2>
-                    <h3>Python 3</h3>
-                    <pre><code>
-    >>> adders = [lambda x: x + i for i in range(3)]
-    >>> [f(0) for f in adders]</code><code class="fragment">    [2, 2, 2]
-                    </code></pre>
-                    <div class="fragment">
-                        <h3>Python 5</h3>
-                        <pre><code>
-    >>> let adders = [\ x -> x + i | i &lt;- range(3)]
-    >>> [f(0) | f &lt;- adders]
-    [0, 1, 2]
-                        </code></pre>
-                    </div>
-                </section>
-
                 <!--
                 <section>
                     <h2>C Preprocessor</h2>
@@ -289,11 +287,6 @@ Haskell для питониста.
 
                 <section>
                     <h2>Спасибо!</h2>
-                    <p>
-                        <a href="https://github.com/cblp/python5">
-                            github.com/cblp/python5
-                        </a>
-                    </p>
                     <p>
                         Юрий Сыровецкий
                         <br>
