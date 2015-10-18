@@ -201,6 +201,30 @@ Haskell для питониста.
                 </section>
 
                 <section>
+                    <h2>Лямбды как блоки</h2>
+                    <table>
+                        <tr>
+                            <td>
+                                <h3>Python 3</h3>
+                                <pre><code>
+  with retry(n) as r:
+      @r
+      def _():
+          do_some()
+  </code></pre>
+                            </td>
+                            <td class="fragment">
+                                <h3>Python 5</h3>
+                                <pre><code class="python">
+  with_retry(n): ->
+      do_some()
+  </code></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </section>
+
+                <section>
                     <table>
                         <tr>
                             <td>
