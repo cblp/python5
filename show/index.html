@@ -24,7 +24,7 @@ Haskell для питониста.
     <head>
         <meta charset="utf-8">
 
-        <title></title>
+        <title>Python 5</title>
 
         <meta name="description" content="">
         <meta name="author" content="Yuriy Syrovetskiy">
@@ -264,9 +264,9 @@ Haskell для питониста.
 
                 <section>
                     <h2>Ненавязчивая статическая типизация</h2>
-                    <pre><code class="haskell">
+                    <pre>
 
-
+                    <code class="haskell">
     distance((x1, y1), (x2, y2)) =
         sqrt((x2 - x1) ^ 2 + (y2 - y1) ^ 2)
                     </code></pre>
@@ -274,8 +274,8 @@ Haskell для питониста.
 
                 <section>
                     <h2>Ненавязчивая статическая типизация</h2>
-                    <pre><code class="haskell">
-
+                    <pre>
+                    <code class="haskell">
     distance :: ((Double, Double), (Double, Double)) -> Double
     distance((x1, y1), (x2, y2)) =
         sqrt((x2 - x1) ^ 2 + (y2 - y1) ^ 2)
@@ -350,11 +350,11 @@ Haskell для питониста.
             // Full list of configuration options available at:
             // https://github.com/hakimel/reveal.js#configuration
             Reveal.initialize({
-                controls: true,
-                progress: true,
-                history: true,
                 center: true,
-
+                controls: false,
+                history: true,
+                progress: true,
+                slideNumber: true,
                 transition: 'fade', // none/fade/slide/convex/concave/zoom
 
                 // Optional reveal.js plugins
@@ -384,7 +384,7 @@ Haskell для питониста.
                     }
                   , { src: 'plugin/zoom-js/zoom.js', async: true }
                   , { src: 'plugin/notes/notes.js', async: true }
-                ]
+                  ]
             });
 
         </script>
