@@ -47,6 +47,9 @@ Haskell для питониста.
                 padding-top:    0 !important;
                 padding-bottom: 0 !important;
             }
+            code.error, code.error span {
+                color: #ff5555 !important;
+            }
             h1, h2, h3, h4, h5, h6 {
                 text-transform: none !important;
                 text-align:     center;
@@ -176,7 +179,7 @@ Haskell для питониста.
                                 <h3>Python 5</h3>
                                 <pre><code>
   numbers = [2, 4, 6, 8]
-  product &lt;- 1</code><code style="background: #760">  for numbers: n -></code><code>      product *= n
+  product &lt;- 1</code><code style="background: #776600">  for numbers: n -></code><code>      product *= n
   print(
       "The product is",
       product
@@ -303,10 +306,39 @@ Haskell для питониста.
         Blue
 
     def html_code(Red):   "#ff0000"
-    def html_code(Green): "#00ff00"</code><code class="fragment c">    # Error: html_code(Blue) is not defined</code><code>
-    print(html_code("Green"))</code><code class="c">    # Error: Couldn't match expected type ‘Color’
-    #                    with actual type ‘String’
+    def html_code(Green): "#00ff00"</code><code class="fragment error"> ❌ Error: html_code(Blue) is not defined</code>
+<code>
+    print(html_code("Green"))</code><code class="error"> ❌ Error: Couldn't match expected type ‘Color’
+                       with actual type ‘str’
                     </code></pre>
+                    <p class="fragment">Рефакторинг без боли!</p>
+                </section>
+
+                <section>
+                    {{ template_iterpolation_screenshot }}
+                </section>
+
+                <section>
+                    <pre><code>
+    Welcome to {{ eventname | escape }}!
+                    </code></pre>
+                    <blockquote class="fragment">
+                        Welcome to Python&amp;amp;Admin%20Party!
+                    </blockquote>
+                </section>
+
+                <section>
+                    <pre><code>
+    Welcome to {{ eventname }}!
+                    </code>
+                    <code class="fragment">
+    "Welcome to " + to_html(eventname) + "!"
+                    </code></pre>
+                    <ul class="fragment">
+                        <li><code>str</code> — <code>html_escape</code></li>
+                        <li><code>Markdown</code> — <code>render_markdown</code></li>
+                        <li><code>HTML</code> — как есть</li>
+                    </ul>
                 </section>
 
                 <section>
