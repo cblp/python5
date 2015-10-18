@@ -268,7 +268,7 @@ Haskell для питониста.
 
                     <code class="haskell">
     distance((x1, y1), (x2, y2)) =
-        sqrt((x2 - x1) ^ 2 + (y2 - y1) ^ 2)
+        sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)
                     </code></pre>
                 </section>
 
@@ -276,19 +276,19 @@ Haskell для питониста.
                     <h2>Ненавязчивая статическая типизация</h2>
                     <pre>
                     <code class="haskell">
-    distance :: ((Double, Double), (Double, Double)) -> Double
+    distance :: ((Float, Float), (Float, Float)) -> Float
     distance((x1, y1), (x2, y2)) =
-        sqrt((x2 - x1) ^ 2 + (y2 - y1) ^ 2)
+        sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)
                     </code></pre>
                 </section>
 
                 <section>
                     <h2>Ненавязчивая статическая типизация</h2>
                     <pre><code class="haskell">
-    type Point = (Double, Double)
-    distance :: (Point, Point) -> Double
+    type Point = (Float, Float)
+    distance :: (Point, Point) -> Float
     distance((x1, y1), (x2, y2)) =
-        sqrt((x2 - x1) ^ 2 + (y2 - y1) ^ 2)
+        sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)
                     </code></pre>
                 </section>
 
