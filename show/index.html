@@ -135,8 +135,48 @@ Haskell для питониста.
                                 <pre><code>
   numbers = [2, 4, 6, 8]
   product &lt;- 1
-  for numbers: n ->
+  for n in numbers:
       product *= n
+  print(
+      "The product is",
+      product
+  )
+  </code></pre>
+                                <hr>
+                                <pre><code>
+  The product is 384
+  </code></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </section>
+
+                <section>
+                    <h2>Блоки и лямбды</h2>
+                    <table>
+                        <tr>
+                            <td>
+                                <h3>Python 3</h3>
+                                <pre><code>
+  numbers = [2, 4, 6, 8]
+  product = 1
+  for n in numbers:
+      product *= n
+  print(
+      "The product is",
+      product
+  )
+  </code></pre>
+                                <hr>
+                                <pre><code>
+  The product is 384
+  </code></pre>
+                            </td>
+                            <td>
+                                <h3>Python 5</h3>
+                                <pre><code>
+  numbers = [2, 4, 6, 8]
+  product &lt;- 1</code><code style="background: #760">  for numbers: n -></code><code>      product *= n
   print(
       "The product is",
       product
