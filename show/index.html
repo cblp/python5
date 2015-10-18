@@ -267,6 +267,20 @@ Haskell для питониста.
                 </section>
 
                 <section>
+                    <pre><code>
+    class Color(Enum):
+        Red
+        Green
+        Blue
+
+    def html_code(Red):   "#ff0000"
+    def html_code(Green): "#00ff00"</code><code class="fragment c">    # Error: html_code(Blue) is not defined</code><code>
+    print(html_code("Green"))</code><code class="c">    # Error: Couldn't match expected type ‘Color’
+    #                    with actual type ‘String’
+                    </code></pre>
+                </section>
+
+                <section>
                     <h2>Ненавязчивая статическая типизация</h2>
                     <pre>
 
