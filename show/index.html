@@ -267,20 +267,6 @@ Haskell для питониста.
                 </section>
 
                 <section>
-                    <pre><code>
-    class Color(Enum):
-        Red
-        Green
-        Blue
-
-    def html_code(Red):   "#ff0000"
-    def html_code(Green): "#00ff00"</code><code class="fragment c">    # Error: html_code(Blue) is not defined</code><code>
-    print(html_code("Green"))</code><code class="c">    # Error: Couldn't match expected type ‘Color’
-    #                    with actual type ‘String’
-                    </code></pre>
-                </section>
-
-                <section>
                     <h2>Ненавязчивая статическая типизация</h2>
                     <pre>
 
@@ -311,23 +297,21 @@ Haskell для питониста.
                 </section>
 
                 <section>
-                    <pre><code class="haskell">
-    >>> [1, 2]
-    [1, 2]
+                    <pre><code>
+    class Color(Enum):
+        Red
+        Green
+        Blue
+
+    def html_code(Red):   "#ff0000"
+    def html_code(Green): "#00ff00"</code><code class="fragment c">    # Error: html_code(Blue) is not defined</code><code>
+    print(html_code("Green"))</code><code class="c">    # Error: Couldn't match expected type ‘Color’
+    #                    with actual type ‘String’
                     </code></pre>
-                    <pre class="fragment"><code class="haskell">
-    >>> [1, 2.0]
-    [1.0, 2.0]
-                    </code></pre>
-                    <pre class="fragment"><code class="haskell">
-    >>> ['1', "2"]
-    Error: Couldn't match expected type ‘Char’
-                       with actual type ‘String’
-                    </code></pre>
-                    <pre class="fragment"><code class="haskell">
-    >>> ('1', "2")
-    ('1', "2")
-                    </code></pre>
+                </section>
+
+                <section>
+                    <h2>Статическая типизация ускоряет разработку</h2>
                 </section>
 
                 <!--
