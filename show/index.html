@@ -314,8 +314,16 @@ Haskell для питониста.
                     <p class="fragment">Рефакторинг без боли!</p>
                 </section>
 
-                <section>
-                    {{ template_iterpolation_screenshot }}
+                <section data-markdown>
+## HTML и шаблонизация
+
+```
+
+    Welcome to {{ eventname }}!
+
+```
+
+TODO: Traceback
                 </section>
 
                 <section>
@@ -374,32 +382,34 @@ Haskell для питониста.
                     </ul>
                 </section>
 
-                <section>
-                    <h2>Python 5 или...</h2>
-                </section>
                 <section data-markdown>
-# Haskell
+## Python 5?
+                </section>
+
+                <section data-markdown>
+## Haskell
 
 * Похож на Python
+  * Отступы в 4 пробела
+  * Переменная создаётся при первом присваивании
+  * Необязательные аннотации типов
+  * Иерархическая система модулей
 * Разделение изменяемого и неизменяемого
 * Многострочные лямбды
 * Статическая типизация
-  * Мощная система типов
   * Автоматический вывод типов
+  * Мощная система типов
 * `runhaskell` для запуска через `#!` без явного создания бинарника
 * Нет GIL!
                 </section>
-                <section data-markdown>
-# Haskell
 
-* Огромное сообщество
-* Экосистема
-  * Инструменты
-  * Более 9000 пакетов в репозитории Hackage
-    * Генератор кода из шаблонов HTML
-    * Асинхронные вызовы, сопроцедуры и параллелизм
-    * Типизированные каналы
-    * Вставка кода на C
+                <section data-markdown>
+## Haskell
+
+* Генерация кода и статическая проверка шаблонов — shakespeare и другие библиотеки
+* Вызов функций на С — встроено в язык (Foregn Function Interface)
+* Вставка кода на С — библиотека inline-c
+* ...
                 </section>
 
                 <!--
