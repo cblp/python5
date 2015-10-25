@@ -312,25 +312,27 @@ Haskell для питониста.
                     <p class="fragment">Рефакторинг без боли!</p>
                 </section>
 
-                <section data-markdown>
-## HTML и шаблонизация
-
-```
-
+                <section>
+                    <h2>HTML и шаблонизация</h2>
+                    <pre><code>
     Welcome to {{ eventname }}!
-
-```
-
-TODO: Traceback
+                    </code></pre>
+                    <div class="fragment">
+                        <blockquote>
+                            Welcome to !
+                        </blockquote>
+                        (jinja2)
+                    </div>
                 </section>
 
                 <section>
                     <pre><code>
-    Welcome to {{ eventname | escape }}!
+    Welcome to {{ eventname }}!
+    </code> <code>
+    Traceback (most recent call last):
+      ...
+    KeyError: 'eventname'
                     </code></pre>
-                    <blockquote class="fragment">
-                        Welcome to Python&amp;amp;Admin%20Party!
-                    </blockquote>
                 </section>
 
                 <section>
