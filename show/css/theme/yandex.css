@@ -1,4 +1,3 @@
-@import url(../../lib/font/source-sans-pro/source-sans-pro.css);
 @import url(../fonts.css);
 /**
  * White theme for reveal.js. This is the opposite of the 'black' theme.
@@ -18,7 +17,6 @@ body {
 .reveal {
   font-family: Textbook New, Arial, sans-serif;
   font-size: 38px;
-  font-weight: normal;
   color: #222; }
 
 ::selection {
@@ -244,7 +242,9 @@ body {
  * PROGRESS BAR
  *********************************************/
 .reveal .progress {
-  background: rgba(0, 0, 0, 0.2); }
+  background: rgba(0, 0, 0, 0.2);
+  height: 0.2em;
+}
 
 .reveal .progress span {
   background: #ffcc00;
@@ -256,7 +256,9 @@ body {
  * SLIDE NUMBER
  *********************************************/
 .reveal .slide-number {
-  color: #2a76dd; }
+  color: #555555;
+  font-size: 0.5em;
+}
 
 /* Yandex Logo */
 .yandexlogo {
