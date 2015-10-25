@@ -45,7 +45,7 @@ Haskell для питониста.
             code.error, code.error span {
                 color: #ff5555 !important;
             }
-            h1, h2, h3, h4, h5, h6 {
+            h2, h3, h4, h5, h6 {
                 text-align: center;
             }
             hr {
@@ -60,16 +60,10 @@ Haskell для питониста.
                 margin: 0 !important;
                 width:  100%;
             }
-            .yandexlogo {
-                font-size: 400% !important;
-            }
-            .yandexlogo .firstletter {
-                color: red;
-            }
         </style>
 
         <!-- Code syntax highlighting -->
-        <link rel="stylesheet" href="lib/css/zenburn.css">
+        <link rel="stylesheet" href="lib/css/default.css">
 
         <!-- Printing and PDF exports -->
         <script>
@@ -92,12 +86,15 @@ Haskell для питониста.
             <!-- Any section element inside of this container is displayed as a slide -->
             <div class="slides">
                 <section>
-                    <div class="yandexlogo"><span class="firstletter">Я</span>ндекс</div>
+                    <div class="yandexlogo yandexlogo-big"></div>
                 </section>
 
                 <section>
-                    <h1>Now is <br> better <br> than never</h1>
-                    <p>Юрий Сыровецкий</p>
+                    <div class="titleslide">
+                        <p class="yandexlogo"></p>
+                        <h1>Now is better <br> than never</h1>
+                        <p>Юрий Сыровецкий, <br> питониста</p>
+                    </div>
                 </section>
 
                 <section>
@@ -310,9 +307,9 @@ Haskell для питониста.
         Blue
 
     def html_code(Red):   "#ff0000"
-    def html_code(Green): "#00ff00"</code><code class="fragment error"> ❌ Error: html_code(Blue) is not defined</code>
+    def html_code(Green): "#00ff00"</code><code class="fragment error">[x] Error: html_code(Blue) is not defined</code>
 <code>
-    print(html_code("Green"))</code><code class="error"> ❌ Error: Couldn't match expected type ‘Color’
+    print(html_code("Green"))</code><code class="error">[x] Error: Couldn't match expected type ‘Color’
                        with actual type ‘str’
                     </code></pre>
                     <p class="fragment">Рефакторинг без боли!</p>
@@ -430,10 +427,11 @@ TODO: Traceback
                 -->
 
                 <section>
-                    <h2>Спасибо!</h2>
+                    <h2>Контакты</h2>
                     <p>
-                        Юрий Сыровецкий
-                        <br>
+                        Юрий Сыровецкий,<br>питониста
+                    </p>
+                    <p>
                         <a href="http://cblp.su">cblp.su</a>
                         &middot;
                         <a href="https://fb.me/cblp.su">fb.me/cblp.su</a>

@@ -1,4 +1,5 @@
 @import url(../../lib/font/source-sans-pro/source-sans-pro.css);
+@import url(../fonts.css);
 /**
  * White theme for reveal.js. This is the opposite of the 'black' theme.
  *
@@ -141,8 +142,8 @@ body {
   overflow: auto;
   max-height: 400px;
   word-wrap: normal;
-  background: #3F3F3F;
-  color: #DCDCDC; }
+  background: #DCDCDC;
+  color: #3F3F3F; }
 
 .reveal table {
   margin: auto;
@@ -257,3 +258,22 @@ body {
  *********************************************/
 .reveal .slide-number {
   color: #2a76dd; }
+
+/* Yandex Logo */
+.yandexlogo {
+        font-family: YandexRu !important;
+}
+.yandexlogo-big {
+        font-size: 400% !important;
+}
+.yandexlogo:before {
+        color: red;
+        content: 'Я';
+}
+.yandexlogo:after {
+        content: 'ндекс';
+}
+
+.titleslide {
+        text-align: left;
+}
