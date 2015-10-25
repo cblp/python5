@@ -42,14 +42,14 @@ Haskell для питониста.
                 padding-top:    0 !important;
                 padding-bottom: 0 !important;
             }
+            code.emphasis {
+                background: #ffcc00 !important;
+            }
             code.error, code.error span {
                 color: red !important;
             }
             h2, h3, h4, h5, h6 {
                 text-align: center;
-            }
-            hr {
-                border-color: transparent;
             }
             pre {
                 box-shadow:     none  !important;
@@ -99,18 +99,26 @@ Haskell для питониста.
 
                 <section>
                     <h1>
-                        &nbsp; &nbsp; Python
+                        &nbsp; Python
                         <span class="fragment" style="font-size: 130%">5</span>
                     </h1>
                 </section>
 
                 <section>
                     <h2>Совместимость</h2>
-                    <p> Уважая традиции<span class="fragment">,
-                            <br> ломаем совместимость
-                            <br> во имя прогресса!
+                    <p> Уважая традиции<span class="fragment">,<br>
+                            ломаем совместимость<br>
+                            во имя прогресса!
                         </span>
                     </p>
+                </section>
+
+                <section>
+                    <pre><code class="python">
+    MAGIC_FLAG = 42
+                    </code> <code class="python fragment">
+    monkey.patch()
+                    </code></pre>
                 </section>
 
                 <section>
@@ -124,30 +132,20 @@ Haskell для питониста.
   product = 1
   for n in numbers:
       product *= n
-  print(
-      "The product is",
-      product
-  )
-  </code></pre>
-                                <hr>
-                                <pre><code>
+  print("The product is",
+        product)
+  </code> <code>
   The product is 384
   </code></pre>
                             </td>
                             <td class="fragment">
                                 <h3>Python 5</h3>
                                 <pre><code>
-  numbers = [2, 4, 6, 8]
-  product &lt;- 1
-  for n in numbers:
+  numbers = [2, 4, 6, 8]</code><code class="emphasis">  product &lt;- 1</code><code>  for n in numbers:
       product *= n
-  print(
-      "The product is",
-      product
-  )
-  </code></pre>
-                                <hr>
-                                <pre><code>
+  print("The product is",
+        product)
+  </code> <code>
   The product is 384
   </code></pre>
                             </td>
@@ -166,13 +164,9 @@ Haskell для питониста.
   product = 1
   for n in numbers:
       product *= n
-  print(
-      "The product is",
-      product
-  )
-  </code></pre>
-                                <hr>
-                                <pre><code>
+  print("The product is",
+        product)
+  </code> <code>
   The product is 384
   </code></pre>
                             </td>
@@ -180,14 +174,10 @@ Haskell для питониста.
                                 <h3>Python 5</h3>
                                 <pre><code>
   numbers = [2, 4, 6, 8]
-  product &lt;- 1</code><code style="background: #ffcc00">  for numbers: n -></code><code>      product *= n
-  print(
-      "The product is",
-      product
-  )
-  </code></pre>
-                                <hr>
-                                <pre><code>
+  product &lt;- 1</code><code class="python emphasis">  for numbers: n -></code><code>      product *= n
+  print("The product is",
+        product)
+  </code> <code>
   The product is 384
   </code></pre>
                             </td>
