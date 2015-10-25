@@ -47,6 +47,7 @@ Haskell для питониста.
             }
             code.error, code.error span {
                 color: red !important;
+                font-weight: bold;
             }
             h2, h3, h4, h5, h6 {
                 text-align: center;
@@ -114,9 +115,14 @@ Haskell для питониста.
                 </section>
 
                 <section>
+                    <h2>Как определить константу?</h2>
+                    <pre><code class="python fragment">
+    MAGIC = 42
+                    </code></pre>
+                </section>
+
+                <section>
                     <pre><code class="python">
-    MAGIC_FLAG = 42
-                    </code> <code class="python fragment">
     monkey.patch()
                     </code></pre>
                 </section>
@@ -202,20 +208,33 @@ Haskell для питониста.
                     <h2>Лямбды как блоки</h2>
                     <table>
                         <tr>
-                            <td>
+                            <td width="50%">
                                 <h3>Python 3</h3>
                                 <pre><code>
-  with retry(n) as r:
-      @r
+  def example1():
+      with context():
+          foo()
+          bar()
+  </code> <code class="fragment">
+  def example2():
+      @retry(n)
       def _():
-          do_some()
+          foo()
+          bar()
   </code></pre>
                             </td>
-                            <td class="fragment">
+                            <td class="fragment" width="50%">
                                 <h3>Python 5</h3>
-                                <pre><code class="python">
-  with_retry(n):
-      do_some()
+                                <pre><code>
+  def example1():
+      context():
+          foo()
+          bar()
+  </code> <code class="fragment">
+  def example2():
+      retry(n):
+          foo()
+          bar()
   </code></pre>
                             </td>
                         </tr>
@@ -234,12 +253,12 @@ Haskell для питониста.
   ... ]
 
   >>> [f(0) for f in adders]
-  </code><code class="fragment">  [2, 2, 2]
+  </code><code class="fragment python">  [2, 2, 2]
   </code></pre>
                             </td>
                             <td class="fragment">
                                 <h3>Python 5</h3>
-                                <pre><code>
+                                <pre><code class="python">
   >>> adders = [
   ...     x -> x + i
   ...     for i in range(3)
@@ -262,18 +281,7 @@ Haskell для питониста.
                 <section>
                     <h2>Ненавязчивая статическая типизация</h2>
                     <pre>
-
                     <code class="haskell">
-    distance((x1, y1), (x2, y2)) =
-        sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)
-                    </code></pre>
-                </section>
-
-                <section>
-                    <h2>Ненавязчивая статическая типизация</h2>
-                    <pre>
-                    <code class="haskell">
-    distance :: ((Float, Float), (Float, Float)) -> Float
     distance((x1, y1), (x2, y2)) =
         sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)
                     </code></pre>
@@ -282,8 +290,7 @@ Haskell для питониста.
                 <section>
                     <h2>Ненавязчивая статическая типизация</h2>
                     <pre><code class="haskell">
-    Point = (Float, Float)
-    distance :: (Point, Point) -> Float
+    distance :: ((Float, Float), (Float, Float)) -> Float
     distance((x1, y1), (x2, y2)) =
         sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)
                     </code></pre>

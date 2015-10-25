@@ -256,8 +256,7 @@ body {
  * SLIDE NUMBER
  *********************************************/
 .reveal .slide-number {
-  color: #555555;
-  font-size: 0.5em;
+  font-size: 18pt;
 }
 
 /* Yandex Logo */
