@@ -36,7 +36,6 @@ body {
 .reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
   margin: 0 0 20px 0;
   color: #222;
-  font-weight: 600;
   line-height: 1.2;
   letter-spacing: normal;
   text-shadow: none;
