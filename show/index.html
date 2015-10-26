@@ -379,7 +379,8 @@ Haskell для питониста.
 
                 <section>
                     <pre><code>
-    Welcome to {{ eventname }}!
+    print("Welcome to {eventname}!"
+          .format(event="Python&amp;Admin Party"))
     </code> <code>
     Traceback (most recent call last):
       ...
@@ -390,14 +391,14 @@ Haskell для питониста.
                 <section>
                     <pre><code>
     Welcome to {{ eventname }}!
-                    </code>
-                    <code class="fragment">
+                    </code> <code class="fragment">
     "Welcome to " + to_html(eventname) + "!"
                     </code></pre>
                     <ul class="fragment">
                         <li><code>str</code> — <code>html_escape</code></li>
                         <li><code>Markdown</code> — <code>render_markdown</code></li>
                         <li><code>HTML</code> — как есть</li>
+                        <li><code>NoneType</code> — ошибка!</li>
                     </ul>
                 </section>
 
