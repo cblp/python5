@@ -137,7 +137,7 @@ body {
   display: block;
   padding: 5px;
   overflow: auto;
-  max-height: 400px;
+  max-height: 95%;
   word-wrap: normal;
   background: #DCDCDC;
   color: #3F3F3F; }

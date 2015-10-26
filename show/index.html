@@ -279,6 +279,58 @@ Haskell для питониста.
                 </section>
 
                 <section>
+                    <img src="duck.jpg" alt="Duck">
+                </section>
+
+                <section>
+                    <pre><code class="haskell">
+    JavaRDD&lt;String> file = spark.textFile("hdfs://...");
+    JavaRDD&lt;String> words = file.flatMap(
+        new FlatMapFunction&lt;String, String>() {
+            public Iterable&lt;String> call(String s) {
+                return Arrays.asList(s.split(" "));
+            }
+        }
+    );
+    JavaPairRDD&lt;String, Integer> pairs = words.mapToPair(
+        new PairFunction&lt;String, String, Integer>() {
+            public Tuple2&lt;String, Integer> call(String s) {
+                return new Tuple2&lt;String, Integer>(s, 1);
+            }
+        }
+    );
+    JavaPairRDD&lt;String, Integer> counts = pairs.reduceByKey(
+        new Function2&lt;Integer, Integer>() {
+            public Integer call(Integer a, Integer b) {
+                return a + b;
+            }
+        }
+    );
+    counts.saveAsTextFile("hdfs://...");
+                    </code></pre>
+                </section>
+
+                <section>
+                    <pre><code class="python">
+    file = spark.textFile("hdfs://...")
+    words = file.flatMap(s -> s.split(" "))
+    pairs = words.mapToPair(s -> (s, 1))
+    counts = pairs.reduceByKey((a, b) -> a + b)
+    counts.saveAsTextFile("hdfs://...")
+                    </code></pre>
+                </section>
+
+                <section>
+                    <pre><code class="python">
+    file = spark.textFile("hdfs://...")
+    counts = (file.flatMap(s -> s.split(" "))
+                  .mapToPair(s -> (s, 1))
+                  .reduceByKey((a, b) -> a + b))
+    counts.saveAsTextFile("hdfs://...")
+                    </code></pre>
+                </section>
+
+                <section>
                     <h2>Ненавязчивая статическая типизация</h2>
                     <pre>
                     <code class="haskell">
@@ -406,7 +458,7 @@ Haskell для питониста.
                 <section data-markdown>
 ## Haskell
 
-* Генерация кода и статическая проверка шаблонов — shakespeare и другие библиотеки
+* Генерация кода из шаблонов со статической проверкой — shakespeare и другие библиотеки
 * Вызов функций на С — встроено в язык (Foregn Function Interface)
 * Вставка кода на С — библиотека inline-c
 * ...
