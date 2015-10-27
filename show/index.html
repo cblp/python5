@@ -234,18 +234,18 @@ Haskell для питониста.
       product *= n
   print("The product is",
         product)
-  </code> <code>
+  </code> <code class="nohighlight">
   The product is 384
   </code></pre>
                             </td>
                             <td class="fragment">
                                 <h3>Python 5</h3>
-                                <pre><code>
+                                <pre><code class="python">
   numbers = [2, 4, 6, 8]</code><code class="emphasis">  product &lt;- var 1</code><code>  for n in numbers:
       product *= n
   print("The product is",
         product)
-  </code> <code>
+  </code> <code class="nohighlight">
   The product is 384
   </code></pre>
                             </td>
@@ -274,6 +274,7 @@ Haskell для питониста.
                         и ничего не развалится.
 
                         "evil.py" с предыдущего слайда больше не будет работать.
+                        И это здорово!
                     </aside>
                 </section>
 
@@ -290,7 +291,7 @@ Haskell для питониста.
       product *= n
   print("The product is",
         product)
-  </code> <code>
+  </code> <code class="nohighlight">
   The product is 384
   </code></pre>
                             </td>
@@ -301,21 +302,41 @@ Haskell для питониста.
   product &lt;- var 1</code><code class="python emphasis">  for numbers: n -></code><code>      product *= n
   print("The product is",
         product)
-  </code> <code>
+  </code> <code class="nohighlight">
   The product is 384
   </code></pre>
                             </td>
                         </tr>
                     </table>
+
+                    <aside class="notes">
+                        Следующее маленькое изменение с большим значением.
+
+                        Давайте посмотрим, что будет,
+                        если сделать блок кода объектом первого класса.
+                        Он состоит из кода и принимает какие-то параметры.
+                        Да это же наша старая знакомая лямбда-абстракция!
+                        Синтаксис мы немножко изменим для удобочитаемости,
+                        вместо ключевого слово "lambda" пусть будет стрелочка,
+                        как видите, это намного удобнее.
+                    </aside>
                 </section>
 
                 <section>
                     <h2>Многострочные лямбды!</h2>
-                    <pre><code>
+                    <pre><code class="python">
     for numbers: n ->
         print("Current sub-product is", product)
         product *= n
                     </code></pre>
+
+                    <aside class="notes">
+                        А блок с отступом после стрелки — это тело лямбды.
+                        Да, ваши глаза вас не обманывают!
+                        Это многострочные лямбды,
+                        о которых так долго говорили большевики!
+                        Мы их ждали и наконец дождались!
+                    </aside>
                 </section>
 
                 <section>
@@ -583,7 +604,7 @@ Haskell для питониста.
 ## Haskell
 
 * Генерация кода из шаблонов со статической проверкой — shakespeare и другие библиотеки
-* Вызов функций на С — встроено в язык (Foregn Function Interface)
+* Вызов функций на С — встроено в язык (Foreign Function Interface)
 * Вставка кода на С — библиотека inline-c
 * ...
                 </section>
