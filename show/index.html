@@ -61,6 +61,9 @@ Haskell для питониста.
                 margin: 0 !important;
                 width:  100%;
             }
+            .contacts, .contacts h2 {
+                text-align: left;
+            }
         </style>
 
         <!-- Code syntax highlighting -->
@@ -436,6 +439,7 @@ Haskell для питониста.
             returns an even more sepulcable item. """
         ...
                     </code></pre>
+                    <p class="fragment">...</p>
                 </section>
 
                 <section>
@@ -498,19 +502,9 @@ Haskell для питониста.
                 </section>
 
                 <section>
-                    <pre><code class="python">
-    file = spark.textFile("hdfs://...")
-    counts = (file.flatMap(s -> s.split(" "))
-                  .mapToPair(s -> (s, 1))
-                  .reduceByKey((a, b) -> a + b))
-    counts.saveAsTextFile("hdfs://...")
-                    </code></pre>
-                </section>
-
-                <section>
                     <h2>Ненавязчивая статическая типизация</h2>
                     <pre>
-                    <code class="haskell">
+                    <code>
     def distance((x1, y1), (x2, y2)):
         return sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)
                     </code></pre>
@@ -518,9 +512,8 @@ Haskell для питониста.
 
                 <section>
                     <h2>Ненавязчивая статическая типизация</h2>
-                    <pre><code class="haskell">
-    distance :: ((Float, Float), (Float, Float)) -> Float
-    def distance((x1, y1), (x2, y2)):
+                    <pre><code>
+    distance :: ((Float, Float), (Float, Float)) -> Float</code><code>    def distance((x1, y1), (x2, y2)):
         return sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)
                     </code></pre>
                 </section>
@@ -639,30 +632,16 @@ Haskell для питониста.
   * Автоматический вывод типов
   * Мощная система типов
 * `runhaskell` для запуска через `#!` без явного создания бинарника
+* Генерация кода из шаблонов со статической проверкой — shakespeare и другие библиотеки
 * Нет GIL!
                 </section>
 
-                <section data-markdown>
-## Haskell
-
-* Генерация кода из шаблонов со статической проверкой — shakespeare и другие библиотеки
-* Вызов функций на С — встроено в язык (Foreign Function Interface)
-* Вставка кода на С — библиотека inline-c
-* ...
-                </section>
-
-                <section>
+                <section class="contacts">
                     <h2>Контакты</h2>
-                    <p>
-                        Юрий Сыровецкий,<br>питонист
-                    </p>
-                    <p>
-                        <a href="http://cblp.su">cblp.su</a>
-                        &middot;
-                        <a href="https://fb.me/cblp.su">fb.me/cblp.su</a>
-                        &middot;
-                        <a href="https://twitter.com/cblp_su">@cblp_su</a>
-                    </p>
+                    <p>Юрий Сыровецкий,<br> питонист</p>
+                    <p>cblp@cblp.su</p>
+                    <p>fb.me/cblp.su</p>
+                    <p>@cblp_su</p>
                 </section>
 
             </div>
