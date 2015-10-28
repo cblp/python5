@@ -426,10 +426,10 @@ Haskell для питониста.
                 <section>
                     <pre><code>
     def sepulcize(sepulca_tree):
-        return make_sepulcarium(sepulca_tree, try_hard=True)
+        return make_sepulcarium(sepulca_tree, bar=baz)
                     </code> <code class="fragment">
-    def make_sepulcarium(sepulcas):
-        return foo(baz(sepulca) for sepulca in sepulcas)
+    def make_sepulcarium(sepulcas, bar):
+        return foo(bar(sepulca) for sepulca in sepulcas)
                     </code> <code class="fragment">
     def foo(collection):
         """ Fooize a collection """
@@ -464,8 +464,9 @@ Haskell для питониста.
                     <h2>Автоматический вывод типов</h2>
                     <pre><code>
     def sepulcize(sepulca_tree):
-        return make_sepulcarium(sepulca_tree)
+        ...
                     </code> <code>
+    >>> from sepulcatools import *
     >>> type(sepulcize)
     yandex.util.collections.Tree[Sepulca]
         -> Optional[Sepulcarium]
