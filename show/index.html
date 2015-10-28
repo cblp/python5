@@ -420,49 +420,34 @@ Haskell для питониста.
                 </section>
 
                 <section>
-                    <table>
-                        <tr>
-                            <td>
-                                <h3>Python 3</h3>
-                                <pre><code>
-  >>> adders = [
-  ...     lambda x: x + i
-  ...     for i in range(3)
-  ... ]
+                    <pre><code>
+    def sepulcize(sepulca_tree):
+        return make_sepulcarium(sepulca_tree)
+                    </code> <code class="fragment">
+    def make_sepulcarium(sepulcas):
+        return foo(bar(sepulca) for sepulca in sepulcas)
+                    </code> <code class="fragment">
+    def foo(collection):
+        """ Foobarize a collection """
+        ...
 
-  >>> [f(0) for f in adders]
-  </code><code class="fragment python">  [2, 2, 2]
-  </code></pre>
-                            </td>
-                            <td class="fragment">
-                                <h3>Python 5</h3>
-                                <pre><code class="python">
-  >>> adders = [
-  ...     x -> x + i
-  ...     for i in range(3)
-  ... ]
+    def bar(sepulcable):
+        """ Takes sepulcable item and
+            returns an even more sepulcable item. """
+        ...
+                    </code></pre>
+                </section>
 
-  >>> [f(0) for f in adders]
-
-  [0, 1, 2]
-  </code></pre>
-                            </td>
-                        </tr>
-                    </table>
-
-                    <aside class="notes">
-                        Вот вам задачка.
-                        Не заглядывая в ноутбук, скажите,
-                        какой результат вычисления этого выражения?
-                        Я думаю, что ноль-один-два. Кто согласен со мной?
-                        (поднимают руки)
-                        Кто имеет другое мнение?
-                        (поднимают руки)
-
-                        [ответ]
-
-                        Правильный ответ — два-два-два.
-                    </aside>
+                <section>
+                    <h2>Автоматический вывод типов</h2>
+                    <pre><code>
+    def sepulcize(sepulca_tree):
+        return make_sepulcarium(sepulca_tree)
+                    </code> <code>
+    >>> type(sepulcize)
+    yandex.util.collections.Tree[Sepulca]
+        -> Optional[Sepulcarium]
+                    </code></pre>
                 </section>
 
                 <section>
@@ -594,8 +579,12 @@ Haskell для питониста.
                     </ul>
                 </section>
 
-                <section>
-                    <h2>Статическая типизация ускоряет разработку</h2>
+                <section data-markdown>
+## Статическая типизация ускоряет разработку
+
+* Позволяет находить ошибки быстро
+* Позволяет спать спокойно
+* Делает код самодокументируемым, упрощая чтение кода
                 </section>
 
                 <section>
