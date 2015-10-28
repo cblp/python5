@@ -64,6 +64,22 @@ Haskell для питониста.
             .contacts, .contacts h2 {
                 text-align: left;
             }
+            .reveal .contacts img {
+                border: none;
+            }
+            .contacts .contact {
+                background-repeat: no-repeat;
+                padding-left: 50px;
+            }
+            .contacts .contact-mail {
+                background-image: url('mail.png');
+            }
+            .contacts .contact-facebook {
+                background-image: url('facebook.png');
+            }
+            .contacts .contact-twitter {
+                background-image: url('twitter.png');
+            }
         </style>
 
         <!-- Code syntax highlighting -->
@@ -542,12 +558,9 @@ Haskell для питониста.
                     <pre><code>
     Welcome to {{ eventname }}!
                     </code></pre>
-                    <div class="fragment">
-                        <blockquote>
-                            Welcome to !
-                        </blockquote>
-                        (jinja2)
-                    </div>
+                    <blockquote class="fragment">
+                        Welcome to !
+                    </blockquote>
                 </section>
 
                 <section>
@@ -580,7 +593,7 @@ Haskell для питониста.
 
 * Позволяет находить ошибки быстро
 * Позволяет спать спокойно
-* Делает код самодокументируемым, упрощая чтение кода
+* Делает код самодокументируемым, упрощая чтение
                 </section>
 
                 <section>
@@ -617,24 +630,23 @@ Haskell для питониста.
                 </section>
 
                 <section data-markdown>
-## Haskell
+## Haskell похож на Python
 
-* Похож на Python
-  * Отступы в 4 пробела
-  * Переменная создаётся при первом присваивании
-  * Необязательные аннотации типов
-  * Иерархическая система модулей
+* Отступы в 4 пробела
+* Переменная создаётся при первом присваивании
+* Необязательные аннотации типов
+* Иерархическая система модулей
                 </section>
 
                 <section data-markdown>
-## Haskell
+## Haskell — то, о чём я мечтал
 
 * Разделение изменяемого и неизменяемого
 * Многострочные лямбды
 * Статическая типизация
   * Автоматический вывод типов
   * Мощная система типов
-* `runhaskell` для запуска через `#!` без явного создания бинарника
+* `runhaskell` для запуска скриптов
 * Генерация кода из шаблонов со статической проверкой — shakespeare и другие библиотеки
 * Нет GIL!
                 </section>
@@ -642,9 +654,9 @@ Haskell для питониста.
                 <section class="contacts">
                     <h2>Контакты</h2>
                     <p>Юрий Сыровецкий,<br> питонист</p>
-                    <p>cblp@cblp.su</p>
-                    <p>fb.me/cblp.su</p>
-                    <p>@cblp_su</p>
+                    <p class="contact contact-mail">cblp@cblp.su</p>
+                    <p class="contact contact-facebook">fb.me/cblp.su</p>
+                    <p class="contact contact-twitter">@cblp_su</p>
                 </section>
 
             </div>
