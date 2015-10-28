@@ -277,3 +277,26 @@ body {
 .titleslide {
         text-align: left;
 }
+
+.contacts, .contacts h2 {
+        text-align: left;
+}
+.reveal .contacts img {
+        border: none;
+}
+.contacts .contact {
+        background-repeat: no-repeat;
+        padding-left: 50px;
+}
+.contacts .contact-mail {
+        background-image: url('yandex/mail.png');
+}
+.contacts .contact-facebook {
+        background-image: url('yandex/facebook.png');
+}
+.contacts .contact-twitter {
+        background-image: url('yandex/twitter.png');
+}
+.backgrounds .keyslide {
+        background-color: #ffcc00;
+}
