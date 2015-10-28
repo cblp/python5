@@ -444,21 +444,38 @@ Haskell для питониста.
                 <section>
                     <pre><code>
     def sepulcize(sepulca_tree):
-        return make_sepulcarium(sepulca_tree)
+        return make_sepulcarium(sepulca_tree, try_hard=True)
                     </code> <code class="fragment">
     def make_sepulcarium(sepulcas):
-        return foo(bar(sepulca) for sepulca in sepulcas)
+        return foo(baz(sepulca) for sepulca in sepulcas)
                     </code> <code class="fragment">
     def foo(collection):
-        """ Foobarize a collection """
+        """ Fooize a collection """
         ...
 
-    def bar(sepulcable):
-        """ Takes sepulcable item and
-            returns an even more sepulcable item. """
+    def baz(bazable):
+        """ Increases bazability.
+            Takes a bazable item and
+            returns an even more bazable item. """
         ...
                     </code></pre>
-                    <p class="fragment">...</p>
+                    <p class="fragment">и так далее...</p>
+
+                    <aside class="notes">
+                        Ещё одна проблема,
+                        мешающая мне жить и продуктивно работать.
+                        Как выглядит
+                        типичная относительно сложная программа на Питоне,
+                        которую писали не вы?
+                        Вот примерно так.
+                        Вот функция,
+                        видно, что в ней заключено какое-то ценное знание.
+                        И, зная предметную область,
+                        можно примерно понять, что она делает.
+                        Но передо мной стоит более важная задача —
+                        понять, как эту функцию запрягать, —
+                        что ей подавать на вход, и что она возвращает.
+                    </aside>
                 </section>
 
                 <section>
