@@ -38,6 +38,10 @@ Haskell для питониста.
         <link rel="stylesheet" href="css/theme/yandex.css" id="theme">
 
         <style type="text/css">
+            /*.reveal aside.notes {
+                display: block;
+                font-size: 14pt;
+            }*/
             code {
                 padding-top:    0 !important;
                 padding-bottom: 0 !important;
@@ -231,25 +235,25 @@ Haskell для питониста.
                             <td>
                                 <h3>Python 3</h3>
                                 <pre><code>
-  numbers = [2, 4, 6, 8]
-  product = 1
-  for n in numbers:
-      product *= n
-  print("The product is",
-        product)
+numbers = [2, 4, 6, 8]
+product = 1
+for n in numbers:
+    product *= n
+print("The product is",
+      product)
   </code> <code class="nohighlight">
-  The product is 384
+The product is 384
   </code></pre>
                             </td>
                             <td class="fragment">
                                 <h3>Python 5</h3>
                                 <pre><code class="python">
-  numbers = [2, 4, 6, 8]</code><code class="emphasis">  product &lt;- var 1</code><code>  for n in numbers:
-      product *= n
-  print("The product is",
-        product)
+numbers = [2, 4, 6, 8]</code><code class="emphasis">product &lt;- var 1</code><code>for n in numbers:
+    product *= n
+print("The product is",
+      product)
   </code> <code class="nohighlight">
-  The product is 384
+The product is 384
   </code></pre>
                             </td>
                         </tr>
@@ -288,25 +292,25 @@ Haskell для питониста.
                             <td>
                                 <h3>Python 3</h3>
                                 <pre><code>
-  numbers = [2, 4, 6, 8]
-  product = 1
-  for n in numbers:
-      product *= n
-  print("The product is",
-        product)
+numbers = [2, 4, 6, 8]
+product = 1
+for n in numbers:
+    product *= n
+print("The product is",
+      product)
   </code> <code class="nohighlight">
-  The product is 384
+The product is 384
   </code></pre>
                             </td>
                             <td>
                                 <h3>Python 5</h3>
                                 <pre><code>
-  numbers = [2, 4, 6, 8]
-  product &lt;- var 1</code><code class="python emphasis">  for numbers: n -></code><code>      product *= n
-  print("The product is",
-        product)
+numbers = [2, 4, 6, 8]
+product &lt;- var 1</code><code class="python emphasis">for numbers: n -></code><code>    product *= n
+print("The product is",
+      product)
   </code> <code class="nohighlight">
-  The product is 384
+The product is 384
   </code></pre>
                             </td>
                         </tr>
@@ -328,9 +332,9 @@ Haskell для питониста.
                 <section>
                     <h2>Многострочные лямбды!</h2>
                     <pre><code class="python">
-    for numbers: n ->
-        print("Current sub-product is", product)
-        product *= n
+  for numbers: n ->
+      print("Current sub-product is", product)
+      product *= n
                     </code></pre>
 
                     <aside class="notes">
@@ -357,30 +361,29 @@ Haskell для питониста.
                             <td width="50%">
                                 <h3>Python 3</h3>
                                 <pre><code>
-  def example1():
-      with context() as c:
-          foo(c)
-          bar(c)
-  </code> <code class="fragment">
-  def example2():
-      @retry(n)
-      def _():
-          foo()
-          bar()
+ def example1():
+     with context() as c:
+         foo(c)
+         bar(c)
+  </code><code class="fragment"> def example2():
+     @retry(n)
+     def _():
+         foo()
+         bar()
   </code></pre>
                             </td>
                             <td class="fragment" width="50%">
                                 <h3>Python 5</h3>
                                 <pre><code class="python">
-  def example1():
-      context(): c ->
-          foo(c)
-          bar(c)
-  </code> <code>
-  def example2():
-      retry(n):
-          foo()
-          bar()
+ def example1():
+     context(): c ->
+         foo(c)
+         bar(c)
+
+ def example2():
+     retry(n):
+         foo()
+         bar()
   </code></pre>
                             </td>
                         </tr>
@@ -424,22 +427,21 @@ Haskell для питониста.
 
                 <section>
                     <pre><code>
-    def sepulcize(sepulcas):
-        return make_sepulcarium(sepulcas, bar=baz)
-    </code><code class="fragment">    def make_sepulcarium(sepulcas, bar):
-        return foo(bar(sepulca)
-                   for sepulca in walk_tree(sepulcas))
-    </code><code class="fragment">    def foo(collection):
-        """ Fooize a collection """
-        ...
+  def sepulcize(sepulcas):
+      return make_sepulcarium(sepulcas, bar=baz)
+  </code><code class="fragment">  def make_sepulcarium(sepulcas, bar):
+      return foo(bar(sepulca)
+          for sepulca in walk_tree(sepulcas))
+  </code><code class="fragment">  def foo(collection):
+      """ Fooize a collection """
+      ...
 
-    def baz(bazable):
-        """ Increases bazability.
-            Takes a bazable item and
-            returns an even more bazable item. """
-        ...
+  def baz(bazable):
+      """ Increases bazability.
+          Takes a bazable item and
+          returns an even more bazable item. """
+      ...
                     </code></pre>
-                    <p class="fragment">и так далее...</p>
 
                     <aside class="notes">
                         Ещё одна проблема,
@@ -498,13 +500,14 @@ Haskell для питониста.
                 <section>
                     <h2>Автоматический вывод типов</h2>
                     <pre><code>
-    def sepulcize(sepulcas):
-        ...
+  def sepulcize(sepulcas):
+      ...
                     </code> <code>
-    >>> from sepulcatools import *
-    >>> type(sepulcize)
-    sepulcize: yandex.util.collections.Tree[Sepulca]
-                 -> Optional[Sepulcarium]
+  >>> from sepulcatools import *
+  >>> type(sepulcize)
+  sepulcize:
+      yandex.util.collections.Tree[Sepulca]
+        -> Optional[Sepulcarium]
                     </code></pre>
 
                     <aside class="notes">
@@ -556,58 +559,60 @@ Haskell для питониста.
                 </section>
 
                 <section>
-                    <pre><code class="haskell">
-    JavaRDD&lt;String> file = spark.textFile("hdfs://...");
-    JavaRDD&lt;String> words = file.flatMap(
-        new FlatMapFunction&lt;String, String>() {
-            public Iterable&lt;String> call(String s) {
-                return Arrays.asList(s.split(" "));
-            }
-        }
-    );
-    JavaPairRDD&lt;String, Integer> pairs = words.mapToPair(
-        new PairFunction&lt;String, String, Integer>() {
-            public Tuple2&lt;String, Integer> call(String s) {
-                return new Tuple2&lt;String, Integer>(s, 1);
-            }
-        }
-    );
-    JavaPairRDD&lt;String, Integer> counts = pairs.reduceByKey(
-        new Function2&lt;Integer, Integer>() {
-            public Integer call(Integer a, Integer b) {
-                return a + b;
-            }
-        }
-    );
-    counts.saveAsTextFile("hdfs://...");
-                    </code></pre>
+                    <pre style="font-size: 0.6em;"><code class="haskell">  JavaRDD&lt;String> file = spark.textFile("hdfs://...");
+  JavaRDD&lt;String> words = file.flatMap(
+      new FlatMapFunction&lt;String, String>() {
+          public Iterable&lt;String> call(String s) {
+              return Arrays.asList(s.split(" "));
+          }
+      }
+  );
+  JavaPairRDD&lt;String, Integer> pairs = words.mapToPair(
+      new PairFunction&lt;String, String, Integer>() {
+          public Tuple2&lt;String, Integer> call(String s) {
+              return new Tuple2&lt;String, Integer>(s, 1);
+          }
+      }
+  );
+  JavaPairRDD&lt;String, Integer> counts = pairs.reduceByKey(
+      new Function2&lt;Integer, Integer>() {
+          public Integer call(Integer a, Integer b) {
+              return a + b;
+          }
+      }
+  );
+  counts.saveAsTextFile("hdfs://...");</code></pre>
                 </section>
 
                 <section>
                     <h2>Статическая типизация не обязана быть навязчивой</h2>
                     <pre><code class="python">
-    file = spark.textFile("hdfs://...")
-    words = file.flatMap(s -> s.split(" "))
-    pairs = words.mapToPair(s -> (s, 1))
-    counts = pairs.reduceByKey((a, b) -> a + b)
-    counts.saveAsTextFile("hdfs://...")
+  file = spark.textFile("hdfs://...")
+  words = file.flatMap(s -> s.split(" "))
+  pairs = words.mapToPair(s -> (s, 1))
+  counts = pairs.reduceByKey((a, b) -> a + b)
+  counts.saveAsTextFile("hdfs://...")
                     </code></pre>
                 </section>
 
                 <section>
                     <h2>Типизация по желанию</h2>
                     <pre>
+
                     <code>
-    def distance((x1, y1), (x2, y2)):
-        return sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)
+  def distance((x1, y1), (x2, y2)):
+      return sqrt((x2 - x1) ** 2
+                + (y2 - y1) ** 2)
                     </code></pre>
                 </section>
 
                 <section>
                     <h2>Типизация по желанию</h2>
                     <pre><code>
-    distance :: ((Float, Float), (Float, Float)) -> Float</code><code>    def distance((x1, y1), (x2, y2)):
-        return sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)
+  distance:
+      ((Float, Float), (Float, Float)) -> Float</code><code>  def distance((x1, y1), (x2, y2)):
+      return sqrt((x2 - x1) ** 2
+                + (y2 - y1) ** 2)
                     </code></pre>
                 </section>
 
@@ -774,6 +779,7 @@ Haskell для питониста.
                 center: true,
                 controls: false,
                 history: true,
+                margin: 0,
                 progress: true,
                 slideNumber: true,
                 transition: 'fade', // none/fade/slide/convex/concave/zoom
