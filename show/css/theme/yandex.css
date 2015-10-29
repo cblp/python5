@@ -243,7 +243,7 @@ body {
  *********************************************/
 .reveal .progress {
   background: rgba(0, 0, 0, 0.2);
-  height: 0.2em;
+  height: 0.3em;
 }
 
 .reveal .progress span {
@@ -286,7 +286,7 @@ body {
 }
 .contacts .contact {
         background-repeat: no-repeat;
-        padding-left: 50px;
+        padding-left: 60px;
 }
 .contacts .contact-mail {
         background-image: url('yandex/mail.png');
@@ -297,6 +297,7 @@ body {
 .contacts .contact-twitter {
         background-image: url('yandex/twitter.png');
 }
+
 .backgrounds .keyslide {
         background-color: #ffcc00;
 }
