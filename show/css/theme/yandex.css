@@ -274,6 +274,13 @@ body {
         content: 'ндекс';
 }
 
+.yandexdirectlogo-rus {
+        background-image: url('yandex/yandex.direct_rus.png');
+        background-repeat: no-repeat;
+        background-size: 500pt;
+        min-height: 55pt;
+}
+
 .titleslide {
         text-align: left;
 }
