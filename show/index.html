@@ -424,13 +424,12 @@ Haskell для питониста.
 
                 <section>
                     <pre><code>
-    def sepulcize(sepulca_tree):
-        return make_sepulcarium(sepulca_tree, bar=baz)
-                    </code> <code class="fragment">
-    def make_sepulcarium(sepulcas, bar):
-        return foo(bar(sepulca) for sepulca in sepulcas)
-                    </code> <code class="fragment">
-    def foo(collection):
+    def sepulcize(sepulcas):
+        return make_sepulcarium(sepulcas, bar=baz)
+    </code><code class="fragment">    def make_sepulcarium(sepulcas, bar):
+        return foo(bar(sepulca)
+                   for sepulca in walk_tree(sepulcas))
+    </code><code class="fragment">    def foo(collection):
         """ Fooize a collection """
         ...
 
@@ -462,13 +461,13 @@ Haskell для питониста.
                 <section>
                     <h2>Автоматический вывод типов</h2>
                     <pre><code>
-    def sepulcize(sepulca_tree):
+    def sepulcize(sepulcas):
         ...
                     </code> <code>
     >>> from sepulcatools import *
     >>> type(sepulcize)
-    yandex.util.collections.Tree[Sepulca]
-        -> Optional[Sepulcarium]
+    sepulcize: yandex.util.collections.Tree[Sepulca]
+                 -> Optional[Sepulcarium]
                     </code></pre>
                 </section>
 
@@ -514,6 +513,7 @@ Haskell для питониста.
                 </section>
 
                 <section>
+                    <h2>Статическая типизация не обязана быть навязчивой</h2>
                     <pre><code class="python">
     file = spark.textFile("hdfs://...")
     words = file.flatMap(s -> s.split(" "))
@@ -524,7 +524,7 @@ Haskell для питониста.
                 </section>
 
                 <section>
-                    <h2>Ненавязчивая статическая типизация</h2>
+                    <h2>Типизация по желанию</h2>
                     <pre>
                     <code>
     def distance((x1, y1), (x2, y2)):
@@ -533,7 +533,7 @@ Haskell для питониста.
                 </section>
 
                 <section>
-                    <h2>Ненавязчивая статическая типизация</h2>
+                    <h2>Типизация по желанию</h2>
                     <pre><code>
     distance :: ((Float, Float), (Float, Float)) -> Float</code><code>    def distance((x1, y1), (x2, y2)):
         return sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)
@@ -547,8 +547,8 @@ Haskell для питониста.
         Green
         Blue
 
-    def html_code(Red):   "#ff0000"
-    def html_code(Green): "#00ff00"</code><code class="fragment error"> Error: html_code(Blue) is not defined</code>
+    def html_code(Red):   return "#ff0000"
+    def html_code(Green): return "#00ff00"</code><code class="fragment error"> Error: html_code(Blue) is not defined</code>
 <code>
     print(html_code("Green"))</code><code class="error"> Error: Couldn't match expected type ‘Color’
                     with actual type ‘str’
