@@ -600,7 +600,7 @@ The product is 384
                     <pre>
 
                     <code>
-  def distance((x1, y1), (x2, y2)):
+  def dist((x1, y1), (x2, y2)):
       return sqrt((x2 - x1) ** 2
                 + (y2 - y1) ** 2)
                     </code></pre>
@@ -609,8 +609,7 @@ The product is 384
                 <section>
                     <h2>Типизация по желанию</h2>
                     <pre><code>
-  distance:
-      ((Float, Float), (Float, Float)) -> Float</code><code>  def distance((x1, y1), (x2, y2)):
+  dist: ((Float, Float), (Float, Float)) -> Float</code><code>  def dist((x1, y1), (x2, y2)):
       return sqrt((x2 - x1) ** 2
                 + (y2 - y1) ** 2)
                     </code></pre>
